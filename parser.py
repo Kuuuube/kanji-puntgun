@@ -6,19 +6,19 @@ def parse_radkfilex():
     radkfile_lines = list(map(str.strip, open("./assets/radkfilex", "r", encoding = "euc_jisx0213").readlines()))
 
     header = ""
-    radicals_dict = {}
+    components_dict = {}
     for radkfile_line in radkfile_lines:
         if len(radkfile_line) <= 0 or radkfile_line[0] == "#":
             continue
         if radkfile_line[0] == "$":
             header = radkfile_line.split()[1]
-            radicals_dict[header] = {"kanji": [], "stroke_count": radkfile_line.split()[2]}
+            components_dict[header] = {"kanji": [], "stroke_count": radkfile_line.split()[2]}
             continue
 
-        radicals_dict[header]["kanji"] += list(radkfile_line)
-        radicals_dict[header]["kanji"].sort(key = lambda x: kanji_stroke_counts[x])
+        components_dict[header]["kanji"] += list(radkfile_line)
+        components_dict[header]["kanji"].sort(key = lambda x: kanji_stroke_counts[x])
 
-    json_string = json.dumps(radicals_dict, ensure_ascii = False, indent = 4)
+    json_string = json.dumps(components_dict, ensure_ascii = False, indent = 4)
     with open("./assets/radkfilex.json", "w", encoding = "utf8") as radkfilex_json:
         radkfilex_json.write(json_string)
     with open("./assets/radkfilex.js", "w", encoding = "utf8") as radkfilex_js:
