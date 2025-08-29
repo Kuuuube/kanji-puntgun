@@ -1,3 +1,4 @@
+let selected_radical = -1;
 let selected_components = [];
 let selected_four_corners = {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1};
 const ALL_KANJI = get_all_kanji();
@@ -28,7 +29,7 @@ function prepare_components_selection() {
             if (data.stroke_count !== 0) {
                 components_selection_innerHTML_string += "</div>";
             }
-            components_selection_innerHTML_string += "<div id=\"count-" + current_stroke_count + "\">";
+            components_selection_innerHTML_string += "<div id=\"component-count-" + current_stroke_count + "\">";
         }
         components_selection_innerHTML_string += "<span>" + component + "</span>";
     }
@@ -47,6 +48,59 @@ function prepare_components_selection() {
         } else {
             selected_components.splice(selected_components.indexOf(component), 1);
             e.target.style.color = "";
+        }
+
+        find_possible_kanji();
+    });
+}
+
+function prepare_radicals_selection() {
+    const radicals_selection = document.querySelector("#radicals-selection");
+
+    let current_stroke_count = 1;
+    let radicals_selection_innerHTML_string = "";
+    let radical_characters = [];
+    for (const [radical_id, data] of Object.entries(RADICALS)) {
+        for (const radical_character of data.radical_characters) {
+            radical_characters.push({character: radical_character.character, radical_id: radical_id, stroke_count: radical_character.stroke_count});
+        }
+    }
+    radical_characters.sort((a, b) => a.stroke_count - b.stroke_count);
+
+    for (const radical_character of radical_characters) {
+        if (radical_character.stroke_count !== current_stroke_count) {
+            current_stroke_count = radical_character.stroke_count;
+            if (radical_character.stroke_count !== 0) {
+                radicals_selection_innerHTML_string += "</div>";
+            }
+            radicals_selection_innerHTML_string += "<div id=\"radical-count-" + current_stroke_count + "\">";
+        }
+        radicals_selection_innerHTML_string += "<span class=\"radical-id-" + radical_character.radical_id + "\">" + radical_character.character + "</span>";
+    }
+    radicals_selection_innerHTML_string += "</div>"
+    radicals_selection.innerHTML = radicals_selection_innerHTML_string;
+
+    radicals_selection.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        let radical = -1;
+        for (const classItem of e.target.classList) {
+            if (classItem.includes("radical-id-")) {
+                radical = classItem.replace("radical-id-", "");
+            }
+        }
+        if (radical === -1) { return; }
+        for (const radical_selection of e.target.parentNode.parentNode.children) {
+            for (const radical_selection_child of radical_selection.children) {
+                radical_selection_child.style.color = "";
+            }
+        }
+        if (selected_radical === radical) {
+            selected_radical = -1;
+        } else {
+            selected_radical = radical;
+            e.target.style.color = "red";
         }
 
         find_possible_kanji();
@@ -89,11 +143,15 @@ function find_possible_kanji() {
         possible_kanji = possible_kanji.filter((x) => FOUR_CORNER[corner][shape].includes(x))
     }
 
+    if (selected_radical !== -1) {
+        possible_kanji = possible_kanji.filter((x) => RADICALS[selected_radical]["kanji"].includes(x));
+    }
+
 
     document.querySelector("#kanji").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
 }
 
-
+prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
 find_possible_kanji();

@@ -70,5 +70,37 @@ def parse_kanjidic_four_corner():
     with open("./assets/four_corner.js", "w", encoding = "utf8") as four_corner_js:
         four_corner_js.write("const FOUR_CORNER = " + json_string)
 
+def parse_kanjidic_radicals():
+    radicals_dict = {}
+
+    radicals_info = json.loads(open("./assets/radicals_info.json").read())
+    for radical_info in radicals_info:
+        radical_id = radical_info["radical_id"]
+        if radical_id not in radicals_dict.keys():
+            radicals_dict[radical_info["radical_id"]] = {
+                "kanji": [], "radical_characters": [
+                    {
+                        "character": radical_info["character"], "stroke_count": radical_info["stroke_count"]
+                    }
+                ]
+            }
+        else:
+            radicals_dict[radical_info["radical_id"]]["radical_characters"].append({"character": radical_info["character"], "stroke_count": radical_info["stroke_count"]})
+
+    kanjidic = open("./assets/kanjidic2.xml").read().replace("\n", "").replace("\r", "")
+    for character_data in re.findall("<character>.*?</character>", kanjidic):
+        character = re.search(r"(?<=<literal>).*?(?=</literal>)", character_data)[0]
+        radical = re.search(r"(?<=<rad_value rad_type=\"classical\">).*?(?=</rad_value>)", character_data)
+        if radical:
+            radical_id = int(radical[0])
+            radicals_dict[radical_id]["kanji"].append(character)
+
+    json_string = json.dumps(radicals_dict, ensure_ascii = False, indent = 4)
+    with open("./assets/radicals.json", "w", encoding = "utf8") as radicals_json:
+        radicals_json.write(json_string)
+    with open("./assets/radicals.js", "w", encoding = "utf8") as radicals_js:
+        radicals_js.write("const RADICALS = " + json_string)
+
 parse_kanjidic_four_corner()
 parse_radkfilex()
+parse_kanjidic_radicals()
