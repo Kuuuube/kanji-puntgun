@@ -12,11 +12,11 @@ def parse_radkfilex():
             continue
         if radkfile_line[0] == "$":
             header = radkfile_line.split()[1]
-            radicals_dict[header] = []
+            radicals_dict[header] = {"kanji": [], "stroke_count": radkfile_line.split()[2]}
             continue
 
-        radicals_dict[header] += list(radkfile_line)
-        radicals_dict[header].sort(key = lambda x: kanji_stroke_counts[x])
+        radicals_dict[header]["kanji"] += list(radkfile_line)
+        radicals_dict[header]["kanji"].sort(key = lambda x: kanji_stroke_counts[x])
 
     json_string = json.dumps(radicals_dict, ensure_ascii = False, indent = 4)
     with open("./assets/radkfilex.json", "w", encoding = "utf8") as radkfilex_json:
