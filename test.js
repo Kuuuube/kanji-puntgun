@@ -91,18 +91,22 @@ function prepare_radicals_selection() {
             }
         }
         if (radical === -1) { return; }
-        for (const radical_selection of e.target.parentNode.parentNode.children) {
-            for (const radical_selection_child of radical_selection.children) {
-                radical_selection_child.style.color = "";
-            }
-        }
         if (selected_radical === radical) {
             selected_radical = -1;
         } else {
             selected_radical = radical;
-            e.target.style.color = "red";
         }
-
+        for (const radical_selection of e.target.parentNode.parentNode.children) {
+            for (const radical_selection_child of radical_selection.children) {
+                radical_selection_child.style.color = "";
+                if (selected_radical === -1) { continue; }
+                for (const classItem of radical_selection_child.classList) {
+                    if (classItem.includes("radical-id-" + radical)) {
+                        radical_selection_child.style.color = "red";
+                    }
+                }
+            }
+        }
         find_possible_kanji();
     });
 }
