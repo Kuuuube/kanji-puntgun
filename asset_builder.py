@@ -67,6 +67,11 @@ def generate_four_corner_file():
 
     write_js_json(four_corner_codes_dict, "four_corner")
 
+    with open("./assets/generated/four_corner.js", "a") as four_corner_js_output:
+        four_corner_js_output.write("\n")
+        four_corner_js_output.write("const FOUR_CORNER_INFO = ")
+        four_corner_js_output.write(open("./assets/static_data/four_corner_info.json").read())
+
 def generate_radicals_file():
     radicals_dict = {}
 

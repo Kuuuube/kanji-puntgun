@@ -1,0 +1,42 @@
+{
+    "0": {
+        "name": "lid",
+        "character": "亠"
+    },
+    "1": {
+        "name": "horizontal line",
+        "character": "一"
+    },
+    "2": {
+        "name": "vertical line",
+        "character": "｜"
+    },
+    "3": {
+        "name": "dot",
+        "character": "丶"
+    },
+    "4": {
+        "name": "cross",
+        "character": "十"
+    },
+    "5": {
+        "name": "skewer",
+        "character": "キ"
+    },
+    "6": {
+        "name": "box",
+        "character": "口"
+    },
+    "7": {
+        "name": "angle",
+        "character": "厂"
+    },
+    "8": {
+        "name": "hachi",
+        "character": "八"
+    },
+    "9": {
+        "name": "chiisai",
+        "character": "小"
+    }
+}
