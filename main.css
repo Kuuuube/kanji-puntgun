@@ -404,6 +404,10 @@ input, #header-input-mirror {
     user-select: none;
 }
 
+#reset-all {
+    flex-shrink: 0;
+}
+
 a {
     color: var(--bs-link-color);
     transition: color var(--fast-fade);
