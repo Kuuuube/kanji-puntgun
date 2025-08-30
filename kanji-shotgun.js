@@ -5,13 +5,16 @@ const ALL_KANJI = get_all_kanji();
 
 function get_all_kanji() {
     let all_kanji = new Set([]);
-    for (const value of Object.values(RADKFILEX)) {
-        value.kanji.forEach(x => all_kanji.add(x));
+    for (const component_value of Object.values(COMPONENTS)) {
+        component_value.kanji.forEach(x => all_kanji.add(x));
     }
     for (const corner of Object.values(FOUR_CORNER)) {
         for (const shape of Object.values(corner)) {
             shape.forEach(x => all_kanji.add(x));
         }
+    }
+    for (const radical_value of Object.values(RADICALS)) {
+        radical_value.kanji.forEach(x => all_kanji.add(x));
     }
     let all_kanji_array = Array.from(all_kanji)
     all_kanji_array.sort((a, b) => KANJI_STROKE_COUNTS[a] - KANJI_STROKE_COUNTS[b]);
@@ -23,7 +26,7 @@ function prepare_components_selection() {
 
     let current_stroke_count = 1;
     let components_selection_innerHTML_string = "";
-    for (const [component, data] of Object.entries(RADKFILEX)) {
+    for (const [component, data] of Object.entries(COMPONENTS)) {
         if (data.stroke_count !== current_stroke_count) {
             current_stroke_count = data.stroke_count;
             if (data.stroke_count !== 0) {
@@ -140,7 +143,7 @@ function prepare_four_corners_selection() {
 function find_possible_kanji() {
     let possible_kanji = ALL_KANJI;
     for (let i = 0; i < selected_components.length; i++) {
-        possible_kanji = possible_kanji.filter((x) => RADKFILEX[selected_components[i]]["kanji"].includes(x))
+        possible_kanji = possible_kanji.filter((x) => COMPONENTS[selected_components[i]]["kanji"].includes(x))
     }
     for (const [corner, shape] of Object.entries(selected_four_corners)) {
         if (shape === -1) { continue; }

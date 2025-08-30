@@ -19,10 +19,10 @@ def parse_radkfilex():
         components_dict[header]["kanji"].sort(key = lambda x: kanji_stroke_counts[x])
 
     json_string = json.dumps(components_dict, ensure_ascii = False, indent = 4)
-    with open("./assets/radkfilex.json", "w", encoding = "utf8") as radkfilex_json:
-        radkfilex_json.write(json_string)
-    with open("./assets/radkfilex.js", "w", encoding = "utf8") as radkfilex_js:
-        radkfilex_js.write("const RADKFILEX = " + json_string)
+    with open("./assets/components.json", "w", encoding = "utf8") as components_json:
+        components_json.write(json_string)
+    with open("./assets/components.js", "w", encoding = "utf8") as components_js:
+        components_js.write("const COMPONENTS = " + json_string)
 
 def parse_kanjidic_stroke_count():
     kanji_stroke_counts = {}
