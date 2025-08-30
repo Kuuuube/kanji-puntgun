@@ -7,7 +7,7 @@ let stroke_count_filter = 0;
 const ALL_KANJI = get_all_kanji();
 
 function prevent_double_triple_click_select(e) {
-    if (e.detail > 1) {
+    if (e.detail > 1 && e.button === 0) {
         e.preventDefault();
     }
 }
