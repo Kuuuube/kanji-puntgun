@@ -4,6 +4,7 @@
 
 body {
     font-family: sans-serif;
+    margin-top: 0;
 }
 
 #kanji-results {
@@ -38,4 +39,11 @@ body {
 
 .selected {
     color: red;
+}
+
+#sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding-top: 8px;
 }
