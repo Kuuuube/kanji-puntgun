@@ -355,6 +355,7 @@ input {
 
 #jisho-search {
     align-items: center;
+    text-align: center;
 }
 
 #header-search-flexbox {
