@@ -1,8 +1,10 @@
 mkdir -p ./assets/data
-wget -nc "ftp.edrdg.org/pub/Nihongo/kanjidic2.xml.gz"
-wget -nc "ftp.edrdg.org/pub/Nihongo/kradzip.zip"
+mkdir -p ./assets/downloaded
 
-gunzip -c "kanjidic2.xml.gz" > "./assets/data/kanjidic2.xml"
-unzip -o "kradzip.zip" -d "./assets/data/"
+wget -nc -P "./assets/downloaded/" "ftp.edrdg.org/pub/Nihongo/kanjidic2.xml.gz"
+wget -nc -P "./assets/downloaded/" "ftp.edrdg.org/pub/Nihongo/kradzip.zip"
+
+gunzip -c "./assets/downloaded/kanjidic2.xml.gz" > "./assets/data/kanjidic2.xml"
+unzip -o "./assets/downloaded/kradzip.zip" -d "./assets/data/"
 
 python asset_builder.py
