@@ -188,7 +188,6 @@ function prepare_partial_word() {
         });
         word_part_input.addEventListener("change", (e) => {
             const value = e.target.value;
-            console.log(word_parts);
             if (value.length !== 1) {
                 word_parts[word_part_id.replace("word-part-", "")] = "";
             } else {
