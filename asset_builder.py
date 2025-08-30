@@ -8,9 +8,16 @@ data_assets_dir = assets_dir + "data/"
 generated_assets_dir = assets_dir + "generated/"
 static_assets_dir = assets_dir + "static_data/"
 
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        # convert sets into lists
+        if isinstance(obj, set):
+            return list(obj)
+        return json.JSONEncoder.default(self, obj)
+
 def write_js_json(json_object, name):
     os.makedirs(generated_assets_dir, exist_ok = True)
-    json_string = json.dumps(json_object, ensure_ascii = False, indent = 4)
+    json_string = json.dumps(json_object, ensure_ascii = False, indent = 4, cls = CustomJSONEncoder)
     with open(generated_assets_dir + name + ".json", "w", encoding = "utf8") as components_json:
         components_json.write(json_string)
     with open(generated_assets_dir + name + ".js", "w", encoding = "utf8") as components_js:
@@ -153,9 +160,9 @@ def validate_word(string):
 
 def generate_word_list():
     words = {
-        2: [],
-        3: [],
-        4: [],
+        2: set([]),
+        3: set([]),
+        4: set([]),
     }
     with open(data_assets_dir + "JMdict.xml") as jmdict_raw:
         for line in jmdict_raw:
@@ -164,7 +171,7 @@ def generate_word_list():
                 headword_string = headword_with_kanji[0]
                 if not validate_word(headword_string):
                     continue
-                words[len(headword_string)].append(headword_string)
+                words[len(headword_string)].add(headword_string)
 
     write_js_json(words, "words_list")
 
