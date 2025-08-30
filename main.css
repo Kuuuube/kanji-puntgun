@@ -252,7 +252,7 @@ body {
 #kanji-results {
     white-space: nowrap;
     overflow-x: scroll;
-    line-height: 1.25;
+    line-height: 1.35;
 }
 
 .no-select {
