@@ -249,6 +249,34 @@ body {
     background-color: var(--bs-body-bg);
 }
 
+.flexbox {
+    display: flex;
+}
+
+.flexbox > * {
+    flex: 1;
+    text-align: center;
+}
+
+.flexbox-vertical {
+    flex-direction: column;
+}
+
+.flexbox-horizontal {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 400px);
+    justify-content: center;
+}
+
+#radicals-selection, #components-selection {
+    text-align: left;
+}
+
 #kanji-results {
     white-space: nowrap;
     overflow-x: scroll;

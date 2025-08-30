@@ -17,56 +17,64 @@
             <div id="kanji-results" class="hide-scrollbar">&nbsp;</div>
             <hr>
         </div>
-        <div id="radicals-container">
-            <h3>Radicals</h3>
-            <div id="radicals-selection" class="no-select"></div>
-        </div>
-        <div id="components-container">
-            <h3>Components</h3>
-            <div id="components-selection" class="no-select"></div>
-        </div>
-        <div id="four-corner-container">
-            <h3>Four Corner</h3>
-            <div class="no-select">
-                <div>◰: <span id="four-corners-top-left"></span></div>
-                <div>◳: <span id="four-corners-top-right"></span></div>
-                <div>◱: <span id="four-corners-bottom-left"></span></div>
-                <div>◲: <span id="four-corners-bottom-right"></span></div>
-                <div>＋: <span id="four-corners-extra"></span></div>
-            </div>
-        </div>
-        <div id="skip-container">
-            <h3>SKIP Code</h3>
-            <div>
-                Part 1
-                <div id="skip-part-1" class="no-select">
-                    <span class="skip-part-1-val-1 table-item">｜</span>
-                    <span class="skip-part-1-val-2 table-item">一</span>
-                    <span class="skip-part-1-val-3 table-item">口</span>
-                    <span class="skip-part-1-val-4 table-item">🛇</span>
+        <div id="main-container" class="flexbox flexbox-vertical">
+            <div class="flexbox flexbox-horizontal">
+                <div id="radicals-container">
+                    <h3>Radicals</h3>
+                    <div id="radicals-selection" class="no-select"></div>
                 </div>
-                Part 2
-                <div id="skip-part-2">
-                    <input id="skip-part-2-input" type="number" value="0" min="0">
-                    ±&nbsp;<input id="skip-part-2-input-deviation" type="number" value="0" min="0">
-                </div>
-                Part 3
-                <div id="skip-part-3">
-                    <input id="skip-part-3-input" type="number" value="0" min="0">
-                    ±&nbsp;<input id="skip-part-3-input-deviation" type="number" value="0" min="0">
+                <div id="components-container">
+                    <h3>Components</h3>
+                    <div id="components-selection" class="no-select"></div>
                 </div>
             </div>
-        </div>
-        <div id="partial-word-container">
-            <h3>Partial Word</h3>
-            <input type="text" maxlength="5" id="word-part-1">
-            <input type="text" maxlength="5" id="word-part-2">
-            <input type="text" maxlength="5" id="word-part-3">
-            <input type="text" maxlength="5" id="word-part-4">
-        </div>
-        <div id="stroke-count-container">
-            <h3>Stroke Count</h3>
-            <input id="stroke-count-input" type="number" value="0" min="0">
+            <div class="grid-container">
+                <div id="four-corner-container">
+                    <h3>Four Corner</h3>
+                    <div class="no-select">
+                        <div>◰: <span id="four-corners-top-left"></span></div>
+                        <div>◳: <span id="four-corners-top-right"></span></div>
+                        <div>◱: <span id="four-corners-bottom-left"></span></div>
+                        <div>◲: <span id="four-corners-bottom-right"></span></div>
+                        <div>＋: <span id="four-corners-extra"></span></div>
+                    </div>
+                </div>
+                <div id="skip-container">
+                    <h3>SKIP Code</h3>
+                    <div>
+                        Part 1
+                        <div id="skip-part-1" class="no-select">
+                            <span class="skip-part-1-val-1 table-item">｜</span>
+                            <span class="skip-part-1-val-2 table-item">一</span>
+                            <span class="skip-part-1-val-3 table-item">口</span>
+                            <span class="skip-part-1-val-4 table-item">🛇</span>
+                        </div>
+                        Part 2
+                        <div id="skip-part-2">
+                            <input id="skip-part-2-input" type="number" value="0" min="0">
+                            ±&nbsp;<input id="skip-part-2-input-deviation" type="number" value="0" min="0">
+                        </div>
+                        Part 3
+                        <div id="skip-part-3">
+                            <input id="skip-part-3-input" type="number" value="0" min="0">
+                            ±&nbsp;<input id="skip-part-3-input-deviation" type="number" value="0" min="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="flexbox flexbox-vertical">
+                    <div id="partial-word-container">
+                        <h3>Partial Word</h3>
+                        <input type="text" maxlength="5" id="word-part-1">
+                        <input type="text" maxlength="5" id="word-part-2">
+                        <input type="text" maxlength="5" id="word-part-3">
+                        <input type="text" maxlength="5" id="word-part-4">
+                    </div>
+                    <div id="stroke-count-container">
+                        <h3>Stroke Count</h3>
+                        <input id="stroke-count-input" type="number" value="0" min="0">
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="./main.js"></script>
     </body>
