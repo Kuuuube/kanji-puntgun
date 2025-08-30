@@ -1,3 +1,7 @@
+:root {
+    font-size: 22px;
+}
+
 body {
     font-family: sans-serif;
 }
@@ -14,4 +18,15 @@ body {
 #skip-part-2 > input[type="number"],
 #skip-part-3 > input[type="number"] {
     width: 5em;
+}
+
+.stroke-count {
+    background-color: lightgray;
+}
+
+.table-item {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    text-align: center;
 }

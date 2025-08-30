@@ -25,19 +25,19 @@ function get_all_kanji() {
 function prepare_components_selection() {
     const components_selection = document.querySelector("#components-selection");
 
-    let current_stroke_count = 1;
+    let current_stroke_count = 0;
     let components_selection_innerHTML_string = "";
     for (const [component, data] of Object.entries(COMPONENTS)) {
         if (data.stroke_count !== current_stroke_count) {
             current_stroke_count = data.stroke_count;
             if (data.stroke_count !== 0) {
-                components_selection_innerHTML_string += "</div>";
+                components_selection_innerHTML_string += "</span><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
             }
-            components_selection_innerHTML_string += "<div id=\"component-count-" + current_stroke_count + "\">";
+            components_selection_innerHTML_string += "<span id=\"component-count-" + current_stroke_count + "\">";
         }
-        components_selection_innerHTML_string += "<span>" + component + "</span>";
+        components_selection_innerHTML_string += "<span class=\"table-item\">" + component + "</span>";
     }
-    components_selection_innerHTML_string += "</div>"
+    components_selection_innerHTML_string += "</span>"
     components_selection.innerHTML = components_selection_innerHTML_string;
 
     components_selection.addEventListener("click", (e) => {
@@ -61,7 +61,7 @@ function prepare_components_selection() {
 function prepare_radicals_selection() {
     const radicals_selection = document.querySelector("#radicals-selection");
 
-    let current_stroke_count = 1;
+    let current_stroke_count = 0;
     let radicals_selection_innerHTML_string = "";
     let radical_characters = [];
     for (const [radical_id, data] of Object.entries(RADICALS)) {
@@ -75,13 +75,13 @@ function prepare_radicals_selection() {
         if (radical_character.stroke_count !== current_stroke_count) {
             current_stroke_count = radical_character.stroke_count;
             if (radical_character.stroke_count !== 0) {
-                radicals_selection_innerHTML_string += "</div>";
+                radicals_selection_innerHTML_string += "</span><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
             }
-            radicals_selection_innerHTML_string += "<div id=\"radical-count-" + current_stroke_count + "\">";
+            radicals_selection_innerHTML_string += "<span id=\"radical-count-" + current_stroke_count + "\">";
         }
-        radicals_selection_innerHTML_string += "<span class=\"radical-id-" + radical_character.radical_id + "\">" + radical_character.character + "</span>";
+        radicals_selection_innerHTML_string += "<span class=\"table-item radical-id-" + radical_character.radical_id + "\">" + radical_character.character + "</span>";
     }
-    radicals_selection_innerHTML_string += "</div>"
+    radicals_selection_innerHTML_string += "</span>"
     radicals_selection.innerHTML = radicals_selection_innerHTML_string;
 
     radicals_selection.addEventListener("click", (e) => {
