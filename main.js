@@ -292,7 +292,7 @@ function find_possible_kanji() {
     }
 
     const result_item_class = "table-item";
-    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "&nbsp;";
+    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
 }
 
 function prepare_jisho_search() {
