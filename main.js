@@ -6,6 +6,7 @@ const DEFAULTS = {
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: 0,
 }
+const KANJI_RESULTS_LIMIT = 100;
 
 let selected_radical = structuredClone(DEFAULTS.radical);
 let selected_components = structuredClone(DEFAULTS.components);
@@ -301,7 +302,7 @@ function find_possible_kanji() {
     }
 
     const result_item_class = "table-item";
-    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
+    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.slice(0, KANJI_RESULTS_LIMIT).join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
 }
 
 function prepare_jisho_search() {
