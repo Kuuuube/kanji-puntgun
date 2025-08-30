@@ -3,6 +3,7 @@ let selected_components = [];
 let selected_four_corners = {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1};
 let selected_skip = {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0};
 let word_parts = {"1": "", "2": "", "3": "", "4": ""};
+let stroke_count_filter = 0;
 const ALL_KANJI = get_all_kanji();
 
 function get_all_kanji() {
@@ -198,6 +199,18 @@ function prepare_partial_word() {
     }
 }
 
+function prepare_stroke_count() {
+    const stroke_count_input = document.querySelector("#stroke-count-input");
+    stroke_count_input.addEventListener("change", (e) => {
+        if (e.target.value.length === 0) {
+            stroke_count_filter = 0;
+        } else {
+            stroke_count_filter = Number(e.target.value);
+        }
+        find_possible_kanji();
+    });
+}
+
 function find_possible_kanji() {
     let possible_kanji = ALL_KANJI;
 
@@ -262,6 +275,16 @@ function find_possible_kanji() {
         possible_kanji = possible_kanji.filter((x) => word_parts_kanji.has(x));
     }
 
+    if (stroke_count_filter > 0) {
+        let matching_stroke_counts = [];
+        for (const [kanji, stroke_count] of Object.entries(KANJI_STROKE_COUNTS)) {
+            if (stroke_count === stroke_count_filter) {
+                matching_stroke_counts.push(kanji);
+            }
+        }
+        possible_kanji = possible_kanji.filter((x) => matching_stroke_counts.includes(x));
+    }
+
     document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
 }
 
@@ -270,4 +293,5 @@ prepare_components_selection();
 prepare_four_corners_selection();
 prepare_skip_selection();
 prepare_partial_word();
+prepare_stroke_count();
 find_possible_kanji();
