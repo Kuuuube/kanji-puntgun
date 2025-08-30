@@ -119,11 +119,16 @@ function prepare_four_corners_selection() {
     for (let i = 0; i < four_corners_ids.length; i++) {
         const four_corners_element = document.querySelector("#" + four_corners_ids[i]);
         for (let j = 0; j < 10; j++) {
-            four_corners_element.innerHTML += "<span>" + j + "</span>";
+            four_corners_element.innerHTML += "<span class=\"four-corner-id-" + j + "\">" + FOUR_CORNER_INFO[j].character + "</span>";
         }
         four_corners_element.addEventListener("click", (e) => {
-            const corner_selection = e.target.innerHTML;
-            if (corner_selection.length > 1) { return; }
+            let corner_selection = -1;
+            for (const classItem of e.target.classList) {
+                if (classItem.includes("four-corner-id-")) {
+                    corner_selection = classItem.replace("four-corner-id-", "");
+                }
+            }
+            if (corner_selection === -1) { return; }
             for (const corner_selector of e.target.parentNode.children) {
                 corner_selector.style.color = "";
             }
