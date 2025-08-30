@@ -375,7 +375,8 @@ input, #header-input-mirror {
 #jisho-search {
     align-items: center;
     text-align: center;
-    margin-right: 10px;
+    margin-right: 2.5px;
+    font-size: 0.75rem;
 }
 
 #header-search-flexbox {
