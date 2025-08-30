@@ -403,3 +403,12 @@ input, #header-input-mirror {
     display: inline-block;
     user-select: none;
 }
+
+a {
+    color: var(--bs-link-color);
+    transition: color var(--fast-fade);
+    text-decoration: var(--bs-link-decoration);
+}
+a:hover {
+    color: var(--bs-link-hover-color);
+}
