@@ -370,6 +370,8 @@ input, #header-input-mirror {
 #header-input-mirror {
     flex-basis: 40%;
     line-height: 1.45;
+    white-space: nowrap;
+    overflow-x: scroll;
 }
 
 #jisho-search {
