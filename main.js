@@ -104,7 +104,7 @@ function prepare_radicals_selection() {
                 radical_selection_child.style.color = "";
                 if (selected_radical === -1) { continue; }
                 for (const classItem of radical_selection_child.classList) {
-                    if (classItem.includes("radical-id-" + radical)) {
+                    if (classItem === "radical-id-" + radical) {
                         radical_selection_child.style.color = "red";
                     }
                 }
