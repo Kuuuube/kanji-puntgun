@@ -1,1 +1,4 @@
-assets/
+assets/data/
+assets/generated/
+kanjidic2.xml.gz
+kradzip.zip
