@@ -299,6 +299,9 @@ function prepare_jisho_search() {
 function prepare_header_results_selector() {
     const kanji_results = document.querySelector("#kanji-results");
     const header_input = document.querySelector("#header-input");
+    kanji_results.addEventListener("mousedown", (e) => {
+        if (e.detail > 1) { e.preventDefault(); } // prevent double and tripleclick from causing a selection
+    });
     kanji_results.addEventListener("click", (e) => {
         if (e.target.textContent.length > 1) { return; }
         header_input.value += e.target.textContent;
