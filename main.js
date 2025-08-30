@@ -345,25 +345,28 @@ function deselect_table_items(parent_element) {
 }
 
 function prepare_reset_buttons() {
-    document.querySelector("#radicals-reset").addEventListener("click", () => {
+    function reset_radicals() {
         selected_radical = structuredClone(DEFAULTS.radical);
         deselect_table_items(document.querySelector("#radicals-container"));
         find_possible_kanji();
-    });
+    }
+    document.querySelector("#radicals-reset").addEventListener("click", reset_radicals);
 
-    document.querySelector("#components-reset").addEventListener("click", () => {
+    function reset_components() {
         selected_components = structuredClone(DEFAULTS.components);
         deselect_table_items(document.querySelector("#components-container"));
         find_possible_kanji();
-    });
+    }
+    document.querySelector("#components-reset").addEventListener("click", reset_components);
 
-    document.querySelector("#four-corner-reset").addEventListener("click", () => {
+    function reset_four_corner() {
         selected_four_corners = structuredClone(DEFAULTS.four_corners);
         deselect_table_items(document.querySelector("#four-corner-container"));
         find_possible_kanji();
-    });
+    }
+    document.querySelector("#four-corner-reset").addEventListener("click", reset_four_corner);
 
-    document.querySelector("#skip-reset").addEventListener("click", () => {
+    function reset_skip() {
         selected_skip = structuredClone(DEFAULTS.skip);
         deselect_table_items(document.querySelector("#skip-container"));
         document.querySelector("#skip-part-2-input").value = 0;
@@ -371,22 +374,25 @@ function prepare_reset_buttons() {
         document.querySelector("#skip-part-3-input").value = 0;
         document.querySelector("#skip-part-3-input-deviation").value = 0;
         find_possible_kanji();
-    });
+    }
+    document.querySelector("#skip-reset").addEventListener("click", reset_skip);
 
-    document.querySelector("#partial-word-reset").addEventListener("click", () => {
+    function reset_partial_word() {
         word_parts = structuredClone(DEFAULTS.word_parts);
         document.querySelector("#word-part-1").value = "";
         document.querySelector("#word-part-2").value = "";
         document.querySelector("#word-part-3").value = "";
         document.querySelector("#word-part-4").value = "";
         find_possible_kanji();
-    });
+    }
+    document.querySelector("#partial-word-reset").addEventListener("click", reset_partial_word);
 
-    document.querySelector("#stroke-count-reset").addEventListener("click", () => {
+    function reset_stroke_count() {
         stroke_count_filter = structuredClone(DEFAULTS.stroke_count);
         document.querySelector("#stroke-count-input").value = 0;
         find_possible_kanji();
-    });
+    }
+    document.querySelector("#stroke-count-reset").addEventListener("click", reset_stroke_count);
 }
 
 prepare_radicals_selection();
