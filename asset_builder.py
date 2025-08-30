@@ -11,8 +11,8 @@ def write_js_json(json_object, name):
     with open(output_dir + name + ".js", "w", encoding = "utf8") as components_js:
         components_js.write("const " + name.upper() + " = " + json_string)
 
-def parse_radkfilex():
-    kanji_stroke_counts = parse_kanjidic_stroke_count()
+def generate_components_file():
+    kanji_stroke_counts = generate_kanjidic_stroke_count()
     radkfile_lines = list(map(str.strip, open("./assets/data/radkfilex", "r", encoding = "euc_jisx0213").readlines()))
 
     header = ""
@@ -30,7 +30,7 @@ def parse_radkfilex():
 
     write_js_json(components_dict, "components")
 
-def parse_kanjidic_stroke_count():
+def generate_kanjidic_stroke_count():
     kanji_stroke_counts = {}
 
     kanjidic = open("./assets/data/kanjidic2.xml").read().replace("\n", "").replace("\r", "")
@@ -44,7 +44,7 @@ def parse_kanjidic_stroke_count():
     write_js_json(kanji_stroke_counts, "kanji_stroke_counts")
     return kanji_stroke_counts
 
-def parse_kanjidic_four_corner():
+def generate_four_corner_file():
     four_corner_codes_dict = {
         "top_left": {"0": [], "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": []},
         "top_right": {"0": [], "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": []},
@@ -67,7 +67,7 @@ def parse_kanjidic_four_corner():
 
     write_js_json(four_corner_codes_dict, "four_corner")
 
-def parse_kanjidic_radicals():
+def generate_radicals_file():
     radicals_dict = {}
 
     radicals_info = json.loads(open("./assets/radicals_info.json").read())
@@ -94,6 +94,6 @@ def parse_kanjidic_radicals():
 
     write_js_json(radicals_dict, "radicals")
 
-parse_kanjidic_four_corner()
-parse_radkfilex()
-parse_kanjidic_radicals()
+generate_radicals_file()
+generate_components_file()
+generate_four_corner_file()
