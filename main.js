@@ -6,6 +6,12 @@ let word_parts = {"1": "", "2": "", "3": "", "4": ""};
 let stroke_count_filter = 0;
 const ALL_KANJI = get_all_kanji();
 
+function prevent_double_triple_click_select(e) {
+    if (e.detail > 1) {
+        e.preventDefault();
+    }
+}
+
 function get_all_kanji() {
     let all_kanji = new Set([]);
     for (const component_value of Object.values(COMPONENTS)) {
@@ -299,9 +305,6 @@ function prepare_jisho_search() {
 function prepare_header_results_selector() {
     const kanji_results = document.querySelector("#kanji-results");
     const header_input = document.querySelector("#header-input");
-    kanji_results.addEventListener("mousedown", (e) => {
-        if (e.detail > 1) { e.preventDefault(); } // prevent double and tripleclick from causing a selection
-    });
     kanji_results.addEventListener("click", (e) => {
         if (e.target.textContent.length > 1) { return; }
         header_input.value += e.target.textContent;
@@ -309,6 +312,13 @@ function prepare_header_results_selector() {
     header_input.addEventListener("input", (e) => {
         kana_ime_on_search(header_input, e);
     });
+}
+
+function prepare_no_select() {
+    const no_select_elements = document.querySelectorAll(".no-click-select");
+    for (const no_select_element of no_select_elements) {
+        no_select_element.addEventListener("mousedown", prevent_double_triple_click_select);
+    }
 }
 
 prepare_radicals_selection();
@@ -319,4 +329,5 @@ prepare_partial_word();
 prepare_stroke_count();
 prepare_jisho_search();
 prepare_header_results_selector();
+prepare_no_select();
 find_possible_kanji();
