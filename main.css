@@ -395,3 +395,11 @@ input, #header-input-mirror {
 #partial-word-container > input {
     width: 2em;
 }
+
+.reset-button {
+    border: 2px solid var(--bs-gray-700);
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+    user-select: none;
+}
