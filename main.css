@@ -248,8 +248,9 @@ body {
 }
 
 #kanji-results {
-    white-space:nowrap;
-    overflow-x:scroll;
+    white-space: nowrap;
+    overflow-x: scroll;
+    line-height: 1.25;
 }
 
 .no-select {
