@@ -29,6 +29,7 @@ body {
     height: 1.5rem;
     display: inline-block;
     text-align: center;
+    align-content: center;
 }
 
 .table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
