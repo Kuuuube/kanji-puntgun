@@ -1,6 +1,7 @@
 let selected_radical = -1;
 let selected_components = [];
 let selected_four_corners = {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1};
+let selected_skip = {part_one: -1, part_two: -1, part_two_deviation: -1, part_three: -1, part_three_deviation: -1};
 const ALL_KANJI = get_all_kanji();
 
 function get_all_kanji() {
@@ -145,6 +146,41 @@ function prepare_four_corners_selection() {
     }
 }
 
+function prepare_skip_selection() {
+    const skip_part_one_element = document.querySelector("#skip-part-1");
+    for (const skip_part_one_child of skip_part_one_element.children) {
+        skip_part_one_child.addEventListener("click", (e) => {
+            for (const target_siblings of e.target.parentNode.children) {
+                target_siblings.style.color = "";
+            }
+            let skip_part_one_selection = -1;
+            for (const classItem of e.target.classList) {
+                if (classItem.includes("skip-part-1-val-")) {
+                    skip_part_one_selection = classItem.replace("skip-part-1-val-", "");
+                }
+            }
+            if (skip_part_one_selection === -1) { return; }
+            if (selected_skip.part_one === skip_part_one_selection) {
+                skip_part_one_selection = -1;
+            } else {
+                selected_skip.part_one = skip_part_one_selection;
+                e.target.style.color = "red";
+            }
+
+            find_possible_kanji();
+        });
+    }
+    const skip_part_two_input = document.querySelector("#skip-part-2-input");
+    const skip_part_two_deviation_input = document.querySelector("#skip-part-2-input");
+    skip_part_two_input.addEventListener("change", (e) => {selected_skip.part_two = e.target.value; find_possible_kanji();});
+    skip_part_two_deviation_input.addEventListener("change", (e) => {selected_skip.part_two_deviation = e.target.value; find_possible_kanji();});
+
+    const skip_part_three_input = document.querySelector("#skip-part-3-input");
+    const skip_part_three_deviation_input = document.querySelector("#skip-part-3-input");
+    skip_part_three_input.addEventListener("change", (e) => {selected_skip.part_three = e.target.value; find_possible_kanji();});
+    skip_part_three_deviation_input.addEventListener("change", (e) => {selected_skip.part_three_deviation = e.target.value; find_possible_kanji();});
+}
+
 function find_possible_kanji() {
     let possible_kanji = ALL_KANJI;
     for (let i = 0; i < selected_components.length; i++) {
@@ -154,9 +190,17 @@ function find_possible_kanji() {
         if (shape === -1) { continue; }
         possible_kanji = possible_kanji.filter((x) => FOUR_CORNER[corner][shape].includes(x))
     }
-
     if (selected_radical !== -1) {
         possible_kanji = possible_kanji.filter((x) => RADICALS[selected_radical]["kanji"].includes(x));
+    }
+    if (selected_skip.part_one !== -1) {
+        possible_kanji = possible_kanji.filter((x) => SKIP.part_one[selected_skip.part_one].includes(x));
+        if (selected_skip.part_two > 0) {
+            possible_kanji = possible_kanji.filter((x) => SKIP.part_two[selected_skip.part_two].includes(x));
+        }
+        if (selected_skip.part_three > 0) {
+            possible_kanji = possible_kanji.filter((x) => SKIP.part_three[selected_skip.part_three].includes(x));
+        }
     }
 
 
@@ -166,4 +210,5 @@ function find_possible_kanji() {
 prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
+prepare_skip_selection();
 find_possible_kanji();

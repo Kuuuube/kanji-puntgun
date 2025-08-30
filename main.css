@@ -10,3 +10,8 @@ body {
 .no-select {
     user-select: none;
 }
+
+#skip-part-2 > input[type="number"],
+#skip-part-3 > input[type="number"] {
+    width: 5em;
+}

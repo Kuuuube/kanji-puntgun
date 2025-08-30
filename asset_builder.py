@@ -103,6 +103,38 @@ def generate_radicals_file():
 
     write_js_json(radicals_dict, "radicals")
 
+def generate_skip_file():
+    skip_codes_dict = {
+        "part_one": {},
+        "part_two": {},
+        "part_three": {},
+    }
+
+    kanjidic = open(data_assets_dir + "kanjidic2.xml").read().replace("\n", "").replace("\r", "")
+    for character_data in re.findall("<character>.*?</character>", kanjidic):
+        character = re.search(r"(?<=<literal>).*?(?=</literal>)", character_data)[0]
+        skip_code = re.search(r"(?<=<q_code qc_type=\"skip\">).*?(?=</q_code>)", character_data)
+        if skip_code:
+            skip_code = list(map(int, skip_code[0].split("-"))) # remove random inconsistent zero padding
+            if (skip_code[0] in skip_codes_dict["part_one"].keys()):
+                skip_codes_dict["part_one"][skip_code[0]].append(character)
+            else:
+                skip_codes_dict["part_one"][skip_code[0]] = [character]
+
+            if (skip_code[1] in skip_codes_dict["part_two"].keys()):
+                skip_codes_dict["part_two"][skip_code[1]].append(character)
+            else:
+                skip_codes_dict["part_two"][skip_code[1]] = [character]
+
+            if (skip_code[2] in skip_codes_dict["part_three"].keys()):
+                skip_codes_dict["part_three"][skip_code[2]].append(character)
+            else:
+                skip_codes_dict["part_three"][skip_code[2]] = [character]
+
+
+    write_js_json(skip_codes_dict, "skip")
+
 generate_radicals_file()
 generate_components_file()
 generate_four_corner_file()
+generate_skip_file()
