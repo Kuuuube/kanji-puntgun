@@ -245,11 +245,17 @@ function find_possible_kanji() {
         for (const word_length of word_lengths) {
             for (const word of WORDS_LIST[word_length]) {
                 const word_indexable = [...word];
+                let matched = true;
                 for (let i = 0; i < word_parts_values.length; i++) {
                     const word_part_value = word_parts_values[i];
-                    if (word_part_value.length === 1 && word_indexable[i] === word_part_value) {
-                        word_indexable.forEach(x => word_parts_kanji.add(x));
+                    if (word_part_value.length !== 1) { continue; }
+                    if (word_indexable[i] !== word_part_value) {
+                        matched = false;
+                        break;
                     }
+                }
+                if (matched) {
+                    word_indexable.forEach(x => word_parts_kanji.add(x));
                 }
             }
         }
