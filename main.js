@@ -120,7 +120,7 @@ function prepare_four_corners_selection() {
     for (let i = 0; i < four_corners_ids.length; i++) {
         const four_corners_element = document.querySelector("#" + four_corners_ids[i]);
         for (let j = 0; j < 10; j++) {
-            four_corners_element.innerHTML += "<span class=\"four-corner-id-" + j + "\">" + FOUR_CORNER_INFO[j].character + "</span>";
+            four_corners_element.innerHTML += "<span class=\"table-item four-corner-id-" + j + "\">" + FOUR_CORNER_INFO[j].character + "</span>";
         }
         four_corners_element.addEventListener("click", (e) => {
             let corner_selection = -1;
