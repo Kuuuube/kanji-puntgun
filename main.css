@@ -251,6 +251,7 @@ body {
     font-family: sans-serif;
     margin-top: 0;
     background-color: var(--bs-body-bg);
+    touch-action: manipulation;
 }
 
 input {
