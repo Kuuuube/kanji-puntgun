@@ -31,9 +31,8 @@ function prepare_components_selection() {
         if (data.stroke_count !== current_stroke_count) {
             current_stroke_count = data.stroke_count;
             if (data.stroke_count !== 0) {
-                components_selection_innerHTML_string += "</span><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
+                components_selection_innerHTML_string += "</div><div id=\"component-count-" + current_stroke_count + "\"><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
             }
-            components_selection_innerHTML_string += "<span id=\"component-count-" + current_stroke_count + "\">";
         }
         components_selection_innerHTML_string += "<span class=\"table-item\">" + component + "</span>";
     }
@@ -75,9 +74,8 @@ function prepare_radicals_selection() {
         if (radical_character.stroke_count !== current_stroke_count) {
             current_stroke_count = radical_character.stroke_count;
             if (radical_character.stroke_count !== 0) {
-                radicals_selection_innerHTML_string += "</span><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
+                radicals_selection_innerHTML_string += "</div><div id=\"radical-count-" + current_stroke_count + "\"><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
             }
-            radicals_selection_innerHTML_string += "<span id=\"radical-count-" + current_stroke_count + "\">";
         }
         radicals_selection_innerHTML_string += "<span class=\"table-item radical-id-" + radical_character.radical_id + "\">" + radical_character.character + "</span>";
     }
