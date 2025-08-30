@@ -1,7 +1,7 @@
 let selected_radical = -1;
 let selected_components = [];
 let selected_four_corners = {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1};
-let selected_skip = {part_one: -1, part_two: -1, part_two_deviation: 0, part_three: -1, part_three_deviation: 0};
+let selected_skip = {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0};
 const ALL_KANJI = get_all_kanji();
 
 function get_all_kanji() {
