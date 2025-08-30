@@ -317,8 +317,13 @@ body {
 }
 
 .selected {
-    border-radius: 50%;
-    background-color: var(--bs-tertiary-border-subtle);
+    /* radial-gradient is used to create an effect equivalent to the following without decreasing the clickable area/hitbox of the element:
+        ```
+        border-radius: 50%;
+        background-color: var(--bs-tertiary-border-subtle);
+        ```
+    */
+    background: radial-gradient(ellipse at center, var(--bs-tertiary-border-subtle) 68%,#00000000 70%);
 }
 
 #sticky-header {
