@@ -285,7 +285,8 @@ function find_possible_kanji() {
         possible_kanji = possible_kanji.filter((x) => matching_stroke_counts.includes(x));
     }
 
-    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
+    const result_item_class = "table-item";
+    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "&nbsp;";
 }
 
 function prepare_jisho_search() {
