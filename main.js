@@ -296,6 +296,15 @@ function prepare_jisho_search() {
     });
 }
 
+function prepare_header_results_selector() {
+    const kanji_results = document.querySelector("#kanji-results");
+    const header_input = document.querySelector("#header-input");
+    kanji_results.addEventListener("click", (e) => {
+        if (e.target.textContent.length > 1) { return; }
+        header_input.value += e.target.textContent;
+    });
+}
+
 prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
@@ -303,4 +312,5 @@ prepare_skip_selection();
 prepare_partial_word();
 prepare_stroke_count();
 prepare_jisho_search();
+prepare_header_results_selector();
 find_possible_kanji();
