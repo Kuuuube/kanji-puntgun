@@ -323,20 +323,20 @@ input {
 .table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
     cursor: pointer;
     transition: background-color var(--fast-fade);
+    transition: filter var(--fast-fade);
+    border-radius: 50%;
 }
 
-.table-item:hover {
+.table-item:hover:not(.selected) {
     background-color: var(--bs-gray-600);
 }
 
+.table-item.selected:hover {
+    filter: saturate(150%);
+}
+
 .selected {
-    /* radial-gradient is used to create an effect equivalent to the following without decreasing the clickable area/hitbox of the element:
-        ```
-        border-radius: 50%;
-        background-color: var(--bs-tertiary-border-subtle);
-        ```
-    */
-    background: radial-gradient(ellipse at center, var(--bs-tertiary-border-subtle) 68%,#00000000 70%);
+    background-color: var(--bs-tertiary-border-subtle);
 }
 
 #sticky-header {
