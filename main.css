@@ -1,0 +1,12 @@
+body {
+    font-family: sans-serif;
+}
+
+#kanji-results {
+    white-space:nowrap;
+    overflow-x:scroll;
+}
+
+.no-select {
+    user-select: none;
+}

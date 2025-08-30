@@ -155,7 +155,7 @@ function find_possible_kanji() {
     }
 
 
-    document.querySelector("#kanji").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
+    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
 }
 
 prepare_radicals_selection();
