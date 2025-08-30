@@ -118,6 +118,7 @@
     --bs-form-invalid-border-color: #dc3545;
 
     --radicals-components-padding: 5px;
+    --fast-fade: 0.25s cubic-bezier(0,0,0,1);
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -321,6 +322,11 @@ input {
 
 .table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
     cursor: pointer;
+    transition: background-color var(--fast-fade);
+}
+
+.table-item:hover {
+    background-color: var(--bs-gray-600);
 }
 
 .selected {
