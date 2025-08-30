@@ -303,6 +303,9 @@ function prepare_header_results_selector() {
         if (e.target.textContent.length > 1) { return; }
         header_input.value += e.target.textContent;
     });
+    header_input.addEventListener("input", (e) => {
+        kana_ime_on_search(header_input, e);
+    });
 }
 
 prepare_radicals_selection();
