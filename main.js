@@ -308,6 +308,11 @@ function prepare_header_results_selector() {
     kanji_results.addEventListener("click", (e) => {
         if (e.target.textContent.length > 1) { return; }
         header_input.value += e.target.textContent;
+
+        e.target.classList.add("clicked");
+        setTimeout(() => {
+            e.target.classList.remove("clicked");
+        }, 100);
     });
     header_input.addEventListener("input", (e) => {
         kana_ime_on_search(header_input, e);

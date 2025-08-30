@@ -327,7 +327,7 @@ input {
     border-radius: 50%;
 }
 
-.table-item:hover:not(.selected) {
+.table-item:hover:not(.selected):not(.clicked) {
     background-color: var(--bs-gray-600);
 }
 
@@ -337,6 +337,10 @@ input {
 
 .selected {
     background-color: var(--bs-tertiary-border-subtle);
+}
+
+.clicked {
+    background-color: var(--bs-gray-700);
 }
 
 #sticky-header {
