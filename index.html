@@ -25,18 +25,18 @@
         <div id="main-container" class="flexbox flexbox-vertical">
             <div class="flexbox flexbox-horizontal">
                 <div id="radicals-container">
-                    <h3>Radicals <span class="reset-button table-item">↻</span></h3>
+                    <h3>Radicals <span class="reset-button table-item" id="radicals-reset">↻</span></h3>
                     <div id="radicals-selection" class="no-click-select"></div>
                 </div>
                 <span class="vertical-separator"></span>
                 <div id="components-container">
-                    <h3>Components <span class="reset-button table-item">↻</span></h3>
+                    <h3>Components <span class="reset-button table-item" id="components-reset">↻</span></h3>
                     <div id="components-selection" class="no-click-select"></div>
                 </div>
             </div>
             <div class="grid-container">
                 <div id="four-corner-container">
-                    <h3>Four Corner <span class="reset-button table-item">↻</span></h3>
+                    <h3>Four Corner <span class="reset-button table-item" id="four-corner-reset">↻</span></h3>
                     <div class="no-click-select">
                         <div>◰: <span id="four-corners-top-left"></span></div>
                         <div>◳: <span id="four-corners-top-right"></span></div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div id="skip-container">
-                    <h3>SKIP Code <span class="reset-button table-item">↻</span></h3>
+                    <h3>SKIP Code <span class="reset-button table-item" id="skip-reset">↻</span></h3>
                     <div>
                         Part 1
                         <div id="skip-part-1" class="no-click-select">
@@ -69,14 +69,14 @@
                 </div>
                 <div class="flexbox flexbox-vertical">
                     <div id="partial-word-container">
-                        <h3>Partial Word <span class="reset-button table-item">↻</span></h3>
+                        <h3>Partial Word <span class="reset-button table-item" id="partial-word-reset">↻</span></h3>
                         <input type="text" maxlength="5" id="word-part-1">
                         <input type="text" maxlength="5" id="word-part-2">
                         <input type="text" maxlength="5" id="word-part-3">
                         <input type="text" maxlength="5" id="word-part-4">
                     </div>
                     <div id="stroke-count-container">
-                        <h3>Stroke Count <span class="reset-button table-item">↻</span></h3>
+                        <h3>Stroke Count <span class="reset-button table-item" id="stroke-count-reset">↻</span></h3>
                         <input id="stroke-count-input" type="number" value="0" min="0">
                     </div>
                 </div>
