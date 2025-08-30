@@ -1,6 +1,7 @@
 import json
 import re
 import os
+import unicodedata
 
 assets_dir = "./assets/"
 data_assets_dir = assets_dir + "data/"
@@ -134,7 +135,41 @@ def generate_skip_file():
 
     write_js_json(skip_codes_dict, "skip")
 
+validation_regex = re.compile("(CJK (UNIFIED|COMPATIBILITY) IDEOGRAPH|HIRAGANA|IDEOGRAPHIC)")
+kanji_regex = re.compile("(CJK (UNIFIED|COMPATIBILITY) IDEOGRAPH)")
+def validate_word(string):
+    string_len = len(string)
+    if string_len > 4 or string_len < 2:
+        return False
+    has_kanji = False
+    for unichar in string:
+        charname = unicodedata.name(unichar, "")
+        if not bool(validation_regex.match(charname)):
+            return False
+        if not has_kanji:
+            has_kanji = bool(kanji_regex.match(charname))
+
+    return has_kanji
+
+def generate_word_list():
+    words = {
+        2: [],
+        3: [],
+        4: [],
+    }
+    with open(data_assets_dir + "JMdict.xml") as jmdict_raw:
+        for line in jmdict_raw:
+            headword_with_kanji = re.search("(?<=<keb>).*?(?=</keb>)", line)
+            if headword_with_kanji:
+                headword_string = headword_with_kanji[0]
+                if not validate_word(headword_string):
+                    continue
+                words[len(headword_string)].append(headword_string)
+
+    write_js_json(words, "words_list")
+
 generate_radicals_file()
 generate_components_file()
 generate_four_corner_file()
 generate_skip_file()
+generate_word_list()
