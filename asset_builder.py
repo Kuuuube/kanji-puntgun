@@ -70,7 +70,7 @@ def generate_four_corner_file():
 def generate_radicals_file():
     radicals_dict = {}
 
-    radicals_info = json.loads(open("./assets/radicals_info.json").read())
+    radicals_info = json.loads(open("./assets/static_data/radicals_info.json").read())
     for radical_info in radicals_info:
         radical_id = radical_info["radical_id"]
         if radical_id not in radicals_dict.keys():
