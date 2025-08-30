@@ -313,9 +313,12 @@ function prepare_header_results_selector() {
         setTimeout(() => {
             e.target.classList.remove("clicked");
         }, 100);
+
+        document.querySelector("#header-input-mirror").innerHTML = header_input.value;
     });
     header_input.addEventListener("input", (e) => {
         kana_ime_on_search(header_input, e);
+        document.querySelector("#header-input-mirror").innerHTML = header_input.value.length ? header_input.value : "&nbsp;";
     });
 }
 

@@ -254,10 +254,12 @@ body {
     touch-action: manipulation;
 }
 
-input {
+input, #header-input-mirror {
     background-color: var(--bs-body-bg);
     border-style: solid;
     border-radius: var(--bs-border-radius-s);
+    border-color: var(--bs-gray-600);
+    border-width: 2px;
 }
 
 .flexbox {
@@ -353,16 +355,27 @@ input {
     margin-bottom: 0;
 }
 
-#header-input {
-    width: 100%;
+.header-input-item {
     font-size: 1.5rem;
     line-height: 1.25;
-    flex-basis: 90%;
+    flex-basis: 40%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#header-input {
+    width: 100%;
+}
+
+#header-input-mirror {
+    flex-basis: 40%;
+    line-height: 1.45;
 }
 
 #jisho-search {
     align-items: center;
     text-align: center;
+    margin-right: 10px;
 }
 
 #header-search-flexbox {
