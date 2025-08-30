@@ -159,13 +159,12 @@ function prepare_skip_selection() {
                     skip_part_one_selection = classItem.replace("skip-part-1-val-", "");
                 }
             }
-            if (skip_part_one_selection === -1) { return; }
             if (selected_skip.part_one === skip_part_one_selection) {
                 skip_part_one_selection = -1;
             } else {
-                selected_skip.part_one = skip_part_one_selection;
                 e.target.style.color = "red";
             }
+            selected_skip.part_one = skip_part_one_selection;
 
             find_possible_kanji();
         });
