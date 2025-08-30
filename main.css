@@ -323,8 +323,7 @@ input {
 
 .table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
     cursor: pointer;
-    transition: background-color var(--fast-fade);
-    transition: filter var(--fast-fade);
+    transition: background-color var(--fast-fade), filter var(--fast-fade);
     border-radius: 50%;
 }
 
