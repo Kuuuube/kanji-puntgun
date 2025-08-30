@@ -30,3 +30,7 @@ body {
     display: inline-block;
     text-align: center;
 }
+
+.table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
+    cursor: pointer;
+}
