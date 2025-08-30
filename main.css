@@ -57,6 +57,7 @@
     --bs-dark-bg-subtle: #ced4da;
     --bs-primary-border-subtle: #9ec5fe;
     --bs-secondary-border-subtle: #c4c8cb;
+    --bs-tertiary-border-subtle: #c8c4cb;
     --bs-success-border-subtle: #a3cfbb;
     --bs-info-border-subtle: #9eeaf9;
     --bs-warning-border-subtle: #ffe69c;
@@ -176,6 +177,7 @@
         --bs-dark-bg-subtle: #1a1d20;
         --bs-primary-border-subtle: #084298;
         --bs-secondary-border-subtle: #41464b;
+        --bs-tertiary-border-subtle: #590898;
         --bs-success-border-subtle: #0f5132;
         --bs-info-border-subtle: #087990;
         --bs-warning-border-subtle: #997404;
@@ -279,7 +281,8 @@ body {
 }
 
 .selected {
-    color: red;
+    border-radius: 50%;
+    background-color: var(--bs-tertiary-border-subtle);
 }
 
 #sticky-header {
