@@ -349,6 +349,10 @@ input {
     background-color: var(--bs-body-bg);
 }
 
+#sticky-header > hr {
+    margin-bottom: 0;
+}
+
 #header-input {
     width: 100%;
     font-size: 1.5rem;
