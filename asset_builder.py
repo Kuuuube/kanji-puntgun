@@ -142,11 +142,11 @@ def generate_skip_file():
 
     write_js_json(skip_codes_dict, "skip")
 
-validation_regex = re.compile("(CJK (UNIFIED|COMPATIBILITY) IDEOGRAPH|HIRAGANA|IDEOGRAPHIC)")
+validation_regex = re.compile("(CJK (UNIFIED|COMPATIBILITY) IDEOGRAPH|HIRAGANA|IDEOGRAPHIC ITERATION MARK)")
 kanji_regex = re.compile("(CJK (UNIFIED|COMPATIBILITY) IDEOGRAPH)")
-def validate_word(string):
+def validate_word(string, min_length, max_length):
     string_len = len(string)
-    if string_len > 4 or string_len < 2:
+    if string_len > max_length or string_len < min_length:
         return False
     has_kanji = False
     for unichar in string:
@@ -164,12 +164,14 @@ def generate_word_list():
         3: set([]),
         4: set([]),
     }
+    min_length = 2
+    max_length = 4
     with open(data_assets_dir + "JMdict.xml") as jmdict_raw:
         for line in jmdict_raw:
             headword_with_kanji = re.search("(?<=<keb>).*?(?=</keb>)", line)
             if headword_with_kanji:
-                headword_string = headword_with_kanji[0]
-                if not validate_word(headword_string):
+                headword_string = headword_with_kanji[0][:max_length]
+                if not validate_word(headword_string, min_length, max_length):
                     continue
                 words[len(headword_string)].add(headword_string)
 
