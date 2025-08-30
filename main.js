@@ -2,6 +2,7 @@ let selected_radical = -1;
 let selected_components = [];
 let selected_four_corners = {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1};
 let selected_skip = {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0};
+let word_parts = {"1": "", "2": "", "3": "", "4": ""};
 const ALL_KANJI = get_all_kanji();
 
 function get_all_kanji() {
@@ -178,18 +179,42 @@ function prepare_skip_selection() {
     skip_part_three_deviation_input.addEventListener("change", (e) => {selected_skip.part_three_deviation = Number(e.target.value); find_possible_kanji();});
 }
 
+function prepare_partial_word() {
+    const word_part_ids = ["word-part-1", "word-part-2", "word-part-3", "word-part-4"]
+    for (const word_part_id of word_part_ids) {
+        const word_part_input = document.querySelector("#" + word_part_id);
+        word_part_input.addEventListener("input", (e) => {
+            kana_ime_on_search(word_part_input, e);
+        });
+        word_part_input.addEventListener("change", (e) => {
+            const value = e.target.value;
+            console.log(word_parts);
+            if (value.length !== 1) {
+                word_parts[word_part_id.replace("word-part-", "")] = "";
+            } else {
+                word_parts[word_part_id.replace("word-part-", "")] = value;
+            }
+            find_possible_kanji();
+        });
+    }
+}
+
 function find_possible_kanji() {
     let possible_kanji = ALL_KANJI;
+
     for (let i = 0; i < selected_components.length; i++) {
         possible_kanji = possible_kanji.filter((x) => COMPONENTS[selected_components[i]]["kanji"].includes(x))
     }
+
     for (const [corner, shape] of Object.entries(selected_four_corners)) {
         if (shape === -1) { continue; }
         possible_kanji = possible_kanji.filter((x) => FOUR_CORNER[corner][shape].includes(x))
     }
+
     if (selected_radical !== -1) {
         possible_kanji = possible_kanji.filter((x) => RADICALS[selected_radical]["kanji"].includes(x));
     }
+
     if (selected_skip.part_one !== -1) {
         possible_kanji = possible_kanji.filter((x) => SKIP.part_one[selected_skip.part_one].includes(x));
         if (selected_skip.part_two > 0) {
@@ -212,6 +237,26 @@ function find_possible_kanji() {
         }
     }
 
+    if (Object.values(word_parts).join("").length > 0) {
+        let word_parts_kanji = new Set([]);
+        let word_lengths = ["2", "3", "4"];
+        if (word_parts["4"].length > 0) { word_lengths = ["4"] }
+        if (word_parts["3"].length > 0) { word_lengths = ["3", "4"] }
+        const word_parts_values = Object.values(word_parts);
+        for (const word_length of word_lengths) {
+            for (const word of WORDS_LIST[word_length]) {
+                const word_indexable = [...word];
+                for (let i = 0; i < word_parts_values.length; i++) {
+                    const word_part_value = word_parts_values[i];
+                    if (word_part_value.length === 1 && word_indexable[i] === word_part_value) {
+                        word_indexable.forEach(x => word_parts_kanji.add(x));
+                    }
+                }
+            }
+        }
+        possible_kanji = possible_kanji.filter((x) => word_parts_kanji.has(x));
+    }
+
     document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
 }
 
@@ -219,4 +264,5 @@ prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
 prepare_skip_selection();
+prepare_partial_word();
 find_possible_kanji();

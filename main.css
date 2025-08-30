@@ -299,3 +299,7 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+#partial-word-container > input {
+    width: 2em;
+}

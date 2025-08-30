@@ -7,7 +7,9 @@
         <script src="./assets/generated/components.js"></script>
         <script src="./assets/generated/four_corner.js"></script>
         <script src="./assets/generated/skip.js"></script>
+        <script src="./assets/generated/words_list.js"></script>
         <script src="./assets/generated/kanji_stroke_counts.js"></script>
+        <script src="./japanese_kana_ime.js"></script>
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
@@ -54,6 +56,13 @@
                     ±&nbsp;<input id="skip-part-3-input-deviation" type="number" value="0" min="0">
                 </div>
             </div>
+        </div>
+        <div id="partial-word-container">
+            <h3>Partial Word</h3>
+            <input type="text" maxlength="5" id="word-part-1">
+            <input type="text" maxlength="5" id="word-part-2">
+            <input type="text" maxlength="5" id="word-part-3">
+            <input type="text" maxlength="5" id="word-part-4">
         </div>
         <script src="./main.js"></script>
     </body>
