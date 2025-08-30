@@ -1,7 +1,7 @@
 let selected_radical = -1;
 let selected_components = [];
 let selected_four_corners = {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1};
-let selected_skip = {part_one: -1, part_two: -1, part_two_deviation: -1, part_three: -1, part_three_deviation: -1};
+let selected_skip = {part_one: -1, part_two: -1, part_two_deviation: 0, part_three: -1, part_three_deviation: 0};
 const ALL_KANJI = get_all_kanji();
 
 function get_all_kanji() {
@@ -171,14 +171,14 @@ function prepare_skip_selection() {
         });
     }
     const skip_part_two_input = document.querySelector("#skip-part-2-input");
-    const skip_part_two_deviation_input = document.querySelector("#skip-part-2-input");
-    skip_part_two_input.addEventListener("change", (e) => {selected_skip.part_two = e.target.value; find_possible_kanji();});
-    skip_part_two_deviation_input.addEventListener("change", (e) => {selected_skip.part_two_deviation = e.target.value; find_possible_kanji();});
+    const skip_part_two_deviation_input = document.querySelector("#skip-part-2-input-deviation");
+    skip_part_two_input.addEventListener("change", (e) => {selected_skip.part_two = Number(e.target.value); find_possible_kanji();});
+    skip_part_two_deviation_input.addEventListener("change", (e) => {selected_skip.part_two_deviation = Number(e.target.value); find_possible_kanji();});
 
     const skip_part_three_input = document.querySelector("#skip-part-3-input");
-    const skip_part_three_deviation_input = document.querySelector("#skip-part-3-input");
-    skip_part_three_input.addEventListener("change", (e) => {selected_skip.part_three = e.target.value; find_possible_kanji();});
-    skip_part_three_deviation_input.addEventListener("change", (e) => {selected_skip.part_three_deviation = e.target.value; find_possible_kanji();});
+    const skip_part_three_deviation_input = document.querySelector("#skip-part-3-input-deviation");
+    skip_part_three_input.addEventListener("change", (e) => {selected_skip.part_three = Number(e.target.value); find_possible_kanji();});
+    skip_part_three_deviation_input.addEventListener("change", (e) => {selected_skip.part_three_deviation = Number(e.target.value); find_possible_kanji();});
 }
 
 function find_possible_kanji() {
@@ -196,13 +196,24 @@ function find_possible_kanji() {
     if (selected_skip.part_one !== -1) {
         possible_kanji = possible_kanji.filter((x) => SKIP.part_one[selected_skip.part_one].includes(x));
         if (selected_skip.part_two > 0) {
-            possible_kanji = possible_kanji.filter((x) => SKIP.part_two[selected_skip.part_two].includes(x));
+            let part_two_filter = [];
+            for (const [part_two_skip_number, kanji_array] of Object.entries(SKIP.part_two)) {
+                if (selected_skip.part_two + selected_skip.part_two_deviation >= Number(part_two_skip_number) && selected_skip.part_two - selected_skip.part_two_deviation <= Number(part_two_skip_number)) {
+                    part_two_filter = part_two_filter.concat(kanji_array);
+                }
+            }
+            possible_kanji = possible_kanji.filter((x) => part_two_filter.includes(x));
         }
         if (selected_skip.part_three > 0) {
-            possible_kanji = possible_kanji.filter((x) => SKIP.part_three[selected_skip.part_three].includes(x));
+            let part_three_filter = [];
+            for (const [part_three_skip_number, kanji_array] of Object.entries(SKIP.part_three)) {
+                if (selected_skip.part_three + selected_skip.part_three_deviation >= Number(part_three_skip_number) && selected_skip.part_three - selected_skip.part_three_deviation <= Number(part_three_skip_number)) {
+                    part_three_filter = part_three_filter.concat(kanji_array);
+                }
+            }
+            possible_kanji = possible_kanji.filter((x) => part_three_filter.includes(x));
         }
     }
-
 
     document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
 }
