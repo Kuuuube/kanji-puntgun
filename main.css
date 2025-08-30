@@ -35,3 +35,7 @@ body {
 .table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
     cursor: pointer;
 }
+
+.selected {
+    color: red;
+}

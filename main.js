@@ -48,10 +48,10 @@ function prepare_components_selection() {
         if (component.length > 1) { return; }
         if (selected_components.indexOf(component) == -1) {
             selected_components.push(component);
-            e.target.style.color = "red";
+            e.target.classList.add("selected");
         } else {
             selected_components.splice(selected_components.indexOf(component), 1);
-            e.target.style.color = "";
+            e.target.classList.remove("selected");
         }
 
         find_possible_kanji();
@@ -102,11 +102,11 @@ function prepare_radicals_selection() {
         }
         for (const radical_selection of e.target.parentNode.parentNode.children) {
             for (const radical_selection_child of radical_selection.children) {
-                radical_selection_child.style.color = "";
+                radical_selection_child.classList.remove("selected");
                 if (selected_radical === -1) { continue; }
                 for (const classItem of radical_selection_child.classList) {
                     if (classItem === "radical-id-" + radical) {
-                        radical_selection_child.style.color = "red";
+                        radical_selection_child.classList.add("selected");
                     }
                 }
             }
@@ -131,14 +131,14 @@ function prepare_four_corners_selection() {
             }
             if (corner_selection === -1) { return; }
             for (const corner_selector of e.target.parentNode.children) {
-                corner_selector.style.color = "";
+                corner_selector.classList.remove("selected");
             }
             const corner_name = Object.keys(selected_four_corners)[i];
             if (selected_four_corners[corner_name] === corner_selection) {
                 selected_four_corners[corner_name] = -1;
             } else {
                 selected_four_corners[corner_name] = corner_selection;
-                e.target.style.color = "red";
+                e.target.classList.add("selected");
             }
 
             find_possible_kanji();
@@ -151,7 +151,7 @@ function prepare_skip_selection() {
     for (const skip_part_one_child of skip_part_one_element.children) {
         skip_part_one_child.addEventListener("click", (e) => {
             for (const target_siblings of e.target.parentNode.children) {
-                target_siblings.style.color = "";
+                target_siblings.classList.remove("selected");
             }
             let skip_part_one_selection = -1;
             for (const classItem of e.target.classList) {
@@ -162,7 +162,7 @@ function prepare_skip_selection() {
             if (selected_skip.part_one === skip_part_one_selection) {
                 skip_part_one_selection = -1;
             } else {
-                e.target.style.color = "red";
+                e.target.classList.add("selected");
             }
             selected_skip.part_one = skip_part_one_selection;
 
