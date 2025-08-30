@@ -288,10 +288,18 @@ function find_possible_kanji() {
     document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? possible_kanji.join("") : "&nbsp;";
 }
 
+function prepare_jisho_search() {
+    const jisho_search = document.querySelector("#jisho-search");
+    document.querySelector("#header-input").addEventListener("input", (e) => {
+        jisho_search.href = "https://jisho.org/search/" + e.target.value
+    });
+}
+
 prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
 prepare_skip_selection();
 prepare_partial_word();
 prepare_stroke_count();
+prepare_jisho_search();
 find_possible_kanji();
