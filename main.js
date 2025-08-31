@@ -217,8 +217,35 @@ function prepare_stroke_count() {
     });
 }
 
+function gray_out_unavailable(possible_radicals, possible_components) {
+    const radical_selection = document.querySelector("#radicals-selection");
+    const radical_table_items = radical_selection.querySelectorAll(".table-item");
+    for (const radical_table_item of radical_table_items) {
+        if (radical_table_item.classList.contains("stroke-count")) { continue; }
+        let radical = Number(get_class_includes(radical_table_item.classList, "radical-id-", -1));
+        radical_table_item.classList.remove("disabled-item");
+        if (!possible_radicals.has(radical)) {
+            radical_table_item.classList.add("disabled-item");
+        }
+    }
+
+    const components_selection = document.querySelector("#components-selection");
+    const components_table_items = components_selection.querySelectorAll(".table-item");
+    for (const components_table_item of components_table_items) {
+        if (components_table_item.classList.contains("stroke-count")) { continue; }
+        let component = components_table_item.textContent;
+        components_table_item.classList.remove("disabled-item");
+        if (!possible_components.has(component)) {
+            components_table_item.classList.add("disabled-item");
+        }
+    }
+}
+
 function find_possible_kanji() {
     let possible_kanji = [];
+
+    let remaining_radicals = new Set([]);
+    let remaining_components = new Set([]);
 
     function check_selected_radical(test_radical) {
         if (selected_radical === -1) { return true; }
@@ -305,8 +332,15 @@ function find_possible_kanji() {
         if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
         if (!check_word_parts_kanji(kanji)) { continue; }
 
+        remaining_radicals.add(kanji_values.radical.id);
+        if (kanji_values.components) {
+            kanji_values.components.forEach((x) => remaining_components.add(x));
+        }
         possible_kanji.push(kanji);
     }
+
+    gray_out_unavailable(remaining_radicals, remaining_components);
+
     possible_kanji.sort((a, b) => KANJI_DATA[a].stroke_count - KANJI_DATA[b].stroke_count);
 
     const result_item_class = "table-item";
