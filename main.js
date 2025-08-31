@@ -306,10 +306,15 @@ function find_possible_kanji() {
 }
 
 function prepare_jisho_search() {
-    const jisho_search = document.querySelector("#jisho-search");
-    document.querySelector("#header-input").addEventListener("input", (e) => {
-        jisho_search.href = "https://jisho.org/search/" + e.target.value
+    document.querySelector("#header-input").addEventListener("input", () => {
+        populate_jisho_search();
     });
+}
+
+function populate_jisho_search() {
+    const jisho_search = document.querySelector("#jisho-search");
+    const header_input = document.querySelector("#header-input");
+    jisho_search.href = "https://jisho.org/search/" + header_input.value;
 }
 
 function prepare_header_results_selector() {
@@ -324,10 +329,12 @@ function prepare_header_results_selector() {
             e.target.classList.remove("clicked");
         }, 100);
 
+        populate_jisho_search();
         document.querySelector("#header-input-mirror").innerHTML = header_input.value;
     });
     header_input.addEventListener("input", (e) => {
         kana_ime_on_search(header_input, e);
+        populate_jisho_search();
         document.querySelector("#header-input-mirror").innerHTML = header_input.value.length ? header_input.value : "&nbsp;";
     });
 }
