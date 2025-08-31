@@ -120,6 +120,10 @@
     --radicals-components-padding: 5px;
     --fast-fade: 0.25s cubic-bezier(0,0,0,1);
     --svg-light-background: var(--bs-light);
+
+    /* URI Components escaped */
+    --reset-button-svg: url("data:image/svg+xml, %3Csvg%20fill%3D%22%23000000%22%20width%3D%22800px%22%20height%3D%22800px%22%20viewBox%3D%220%200%201920%201920%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M960%200v213.333c411.627%200%20746.667%20334.934%20746.667%20746.667S1371.627%201706.667%20960%201706.667%20213.333%201371.733%20213.333%20960c0-197.013%2078.4-382.507%20213.334-520.747v254.08H640V106.667H53.333V320h191.04C88.64%20494.08%200%20720.96%200%20960c0%20529.28%20430.613%20960%20960%20960s960-430.72%20960-960S1489.387%200%20960%200%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E");
+    --reset-button-size: 0.85em;
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -417,8 +421,10 @@ input, #header-input-mirror {
 
 .reset-button > .icon {
     filter: var(--reset-button-filter);
-    width: 0.85em;
-    height: 0.85em;
+    width: var(--reset-button-size);
+    height: var(--reset-button-size);
+    background-image: var(--reset-button-svg);
+    background-size: var(--reset-button-size) var(--reset-button-size);
 }
 
 #reset-all {
