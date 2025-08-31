@@ -396,7 +396,11 @@ function find_possible_kanji() {
     possible_kanji.sort((a, b) => get_sorting_value(a) - get_sorting_value(b));
 
     const result_item_class = "table-item";
-    document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.slice(0, KANJI_RESULTS_LIMIT).join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
+    const kanji_results_element = document.querySelector("#kanji-results");
+    kanji_results_element.innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.slice(0, KANJI_RESULTS_LIMIT).join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
+    if (possible_kanji.length > KANJI_RESULTS_LIMIT) {
+        kanji_results_element.innerHTML += "&hellip;";
+    }
 }
 
 function prepare_jisho_search() {
