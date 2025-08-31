@@ -372,9 +372,11 @@ input, #header-input-mirror {
     width: 100%;
 }
 
-#header-input-mirror {
+#header-input, #header-input-mirror {
     flex-basis: 40%;
     line-height: 1.45;
+    padding-top: 0;
+    padding-bottom: 0;
     white-space: nowrap;
     overflow-x: scroll;
 }
