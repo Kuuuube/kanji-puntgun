@@ -232,7 +232,7 @@ function find_possible_kanji() {
     }
 
     function check_selected_components(test_components) {
-        if (!test_components) { return false; }
+        if (selected_components.length > 0 && !test_components) { return false; }
         for (let i = 0; i < selected_components.length; i++) {
             if (!test_components.includes(selected_components[i])) {
                 return false;
@@ -242,10 +242,9 @@ function find_possible_kanji() {
     }
 
     function check_selected_four_corner(test_four_corner) {
-        if (!test_four_corner) { return false; }
         for (const [corner, shape] of Object.entries(selected_four_corners)) {
             if (shape === -1) { continue; }
-            if (test_four_corner[corner] !== shape) {
+            if (!test_four_corner || test_four_corner[corner] !== shape) {
                 return false;
             }
         }
@@ -308,7 +307,7 @@ function find_possible_kanji() {
         possible_kanji = possible_kanji.filter((x) => word_parts_kanji.has(x));
     }
 
-    possible_kanji.sort((a, b) => KANJI_DATA[a].stroke_count - KANJI_DATA[b].stroke_count)
+    possible_kanji.sort((a, b) => KANJI_DATA[a].stroke_count - KANJI_DATA[b].stroke_count);
 
     const result_item_class = "table-item";
     document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.slice(0, KANJI_RESULTS_LIMIT).join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
