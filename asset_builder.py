@@ -55,23 +55,24 @@ def parse_kanjidic_data():
     kanji_data = {}
 
     default_kanji_data = {
-    "skip": {
-        "part_one": -1,
-        "part_two": -1,
-        "part_three": -1,
-    },
-    "four_corner": {
-        "top_left": -1,
-        "top_right": -1,
-        "bottom_left": -1,
-        "bottom_right": -1,
-        "extra": -1,
-    },
+        "skip": {
+            "part_one": -1,
+            "part_two": -1,
+            "part_three": -1,
+        },
+        "four_corner": {
+            "top_left": -1,
+            "top_right": -1,
+            "bottom_left": -1,
+            "bottom_right": -1,
+            "extra": -1,
+        },
         "radical": {
             "id": -1,
             "characters": [],
         },
         "components": [],
+        "frequency": -1,
     }
 
 
@@ -86,6 +87,8 @@ def parse_kanjidic_data():
                 ]
         else:
             radicals_info_dict[radical_info["radical_id"]].append({"character": radical_info["character"], "stroke_count": radical_info["stroke_count"]})
+
+    jpdb_frequency_info = json.loads(open(static_assets_dir + "jpdb_frequency_info.json").read())
 
     kanjidic = open(data_assets_dir + "kanjidic2.xml").read().replace("\n", "").replace("\r", "")
     for character_data in re.findall("<character>.*?</character>", kanjidic):
@@ -132,6 +135,11 @@ def parse_kanjidic_data():
             kanji_data[character]["skip"]["part_three"] = skip_code[2]
         else:
             del kanji_data[character]["skip"]
+
+        if character in jpdb_frequency_info:
+            kanji_data[character]["frequency"] = jpdb_frequency_info[character]
+        else:
+            del kanji_data[character]["frequency"]
 
     components_dict = generate_components_data()
     for component, component_info in components_dict.items():
