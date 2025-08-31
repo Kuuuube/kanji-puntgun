@@ -16,6 +16,10 @@ let selected_skip = structuredClone(DEFAULTS.skip);
 let word_parts = structuredClone(DEFAULTS.word_parts);
 let stroke_count_filter = structuredClone(DEFAULTS.stroke_count);
 
+let full_kanji_results = [];
+let kanji_results_ellipsis_char = "⋯";
+let kanji_results_index = 0;
+
 function prevent_double_triple_click_select(e) {
     if (e.detail > 1 && e.button === 0) {
         e.preventDefault();
@@ -395,12 +399,19 @@ function find_possible_kanji() {
 
     possible_kanji.sort((a, b) => get_sorting_value(a) - get_sorting_value(b));
 
+    render_kanji_results(possible_kanji.slice(0, KANJI_RESULTS_LIMIT), possible_kanji.length > KANJI_RESULTS_LIMIT);
+    full_kanji_results = possible_kanji;
+    kanji_results_index = KANJI_RESULTS_LIMIT;
+}
+
+function render_kanji_results(kanji_list, ellide) {
     const result_item_class = "table-item";
     const kanji_results_element = document.querySelector("#kanji-results");
-    kanji_results_element.innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.slice(0, KANJI_RESULTS_LIMIT).join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
-    if (possible_kanji.length > KANJI_RESULTS_LIMIT) {
-        kanji_results_element.innerHTML += "&hellip;";
+    kanji_results_element.innerHTML = kanji_list.length ? "<span class=\"" + result_item_class + "\">" + kanji_list.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
+    if (ellide) {
+        kanji_results_element.innerHTML += "<span id=\"kanji-results-ellipsis\" class=\"table-item\">" + kanji_results_ellipsis_char + "</span>";
     }
+    kanji_results_element.scrollLeft = 0;
 }
 
 function prepare_jisho_search() {
@@ -420,6 +431,12 @@ function prepare_header_results_selector() {
     const header_input = document.querySelector("#header-input");
     kanji_results.addEventListener("click", (e) => {
         if (e.target.textContent.length > 1) { return; }
+        if (e.target.textContent === kanji_results_ellipsis_char) {
+            render_kanji_results(full_kanji_results.slice(kanji_results_index, kanji_results_index + KANJI_RESULTS_LIMIT), full_kanji_results.length > kanji_results_index + KANJI_RESULTS_LIMIT);
+            kanji_results_index += KANJI_RESULTS_LIMIT;
+            return;
+        }
+
         header_input.value += e.target.textContent;
 
         e.target.classList.add("clicked");
