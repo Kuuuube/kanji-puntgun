@@ -6,7 +6,7 @@ const DEFAULTS = {
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: 0,
 }
-const KANJI_RESULTS_LIMIT = 100;
+const KANJI_RESULTS_LIMIT = 250;
 
 let selected_radical = structuredClone(DEFAULTS.radical);
 let selected_components = structuredClone(DEFAULTS.components);
