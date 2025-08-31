@@ -7,6 +7,7 @@ const DEFAULTS = {
     stroke_count: {greater: 0, equal: 0, less: 0},
 }
 const KANJI_RESULTS_LIMIT = 250;
+const MAX_FREQUENCY_VALUE = 5000;
 
 let selected_radical = structuredClone(DEFAULTS.radical);
 let selected_components = structuredClone(DEFAULTS.components);
@@ -28,6 +29,15 @@ function get_class_includes(class_list, includes_string, default_result) {
         }
     }
     return default_result;
+}
+
+function get_sorting_value(character) {
+    const character_data = KANJI_DATA[character];
+    let frequency_decimal = character_data.frequency / (MAX_FREQUENCY_VALUE + 1);
+    if (!frequency_decimal) {
+        frequency_decimal = 1 - Number.EPSILON;
+    }
+    return character_data.stroke_count + frequency_decimal;
 }
 
 function prepare_components_selection() {
@@ -383,7 +393,7 @@ function find_possible_kanji() {
 
     gray_out_unavailable(remaining_radicals, remaining_components, remaining_four_corner, remaining_skip_part_one);
 
-    possible_kanji.sort((a, b) => KANJI_DATA[a].stroke_count - KANJI_DATA[b].stroke_count);
+    possible_kanji.sort((a, b) => get_sorting_value(a) - get_sorting_value(b));
 
     const result_item_class = "table-item";
     document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.slice(0, KANJI_RESULTS_LIMIT).join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
