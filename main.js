@@ -14,7 +14,6 @@ let selected_four_corners = structuredClone(DEFAULTS.four_corners);
 let selected_skip = structuredClone(DEFAULTS.skip);
 let word_parts = structuredClone(DEFAULTS.word_parts);
 let stroke_count_filter = structuredClone(DEFAULTS.stroke_count);
-const ALL_KANJI = get_all_kanji();
 
 function prevent_double_triple_click_select(e) {
     if (e.detail > 1 && e.button === 0) {
@@ -22,37 +21,21 @@ function prevent_double_triple_click_select(e) {
     }
 }
 
-function get_all_kanji() {
-    let all_kanji = new Set([]);
-    for (const component_value of Object.values(COMPONENTS)) {
-        component_value.kanji.forEach(x => all_kanji.add(x));
-    }
-    for (const corner of Object.values(FOUR_CORNER)) {
-        for (const shape of Object.values(corner)) {
-            shape.forEach(x => all_kanji.add(x));
-        }
-    }
-    for (const radical_value of Object.values(RADICALS)) {
-        radical_value.kanji.forEach(x => all_kanji.add(x));
-    }
-    let all_kanji_array = Array.from(all_kanji)
-    all_kanji_array.sort((a, b) => KANJI_STROKE_COUNTS[a] - KANJI_STROKE_COUNTS[b]);
-    return all_kanji_array;
-}
-
 function prepare_components_selection() {
     const components_selection = document.querySelector("#components-selection");
 
     let current_stroke_count = 0;
     let components_selection_innerHTML_string = "";
-    for (const [component, data] of Object.entries(COMPONENTS)) {
-        if (data.stroke_count !== current_stroke_count) {
-            current_stroke_count = data.stroke_count;
-            if (data.stroke_count !== 0) {
+    let component_characters = COMPONENTS_INFO;
+    component_characters.sort((a, b) => a.stroke_count - b.stroke_count);
+    for (const component_character of component_characters) {
+        if (component_character.stroke_count !== current_stroke_count) {
+            current_stroke_count = component_character.stroke_count;
+            if (component_character.stroke_count !== 0) {
                 components_selection_innerHTML_string += "</div><div id=\"component-count-" + current_stroke_count + "\"><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
             }
         }
-        components_selection_innerHTML_string += "<span class=\"table-item\">" + component + "</span>";
+        components_selection_innerHTML_string += "<span class=\"table-item\">" + component_character.component + "</span>";
     }
     components_selection_innerHTML_string += "</span>"
     components_selection.innerHTML = components_selection_innerHTML_string;
@@ -80,15 +63,10 @@ function prepare_radicals_selection() {
 
     let current_stroke_count = 0;
     let radicals_selection_innerHTML_string = "";
-    let radical_characters = [];
-    for (const [radical_id, data] of Object.entries(RADICALS)) {
-        for (const radical_character of data.radical_characters) {
-            radical_characters.push({character: radical_character.character, radical_id: radical_id, stroke_count: radical_character.stroke_count});
-        }
-    }
+    let radical_characters = RADICALS_INFO;
     radical_characters.sort((a, b) => a.stroke_count - b.stroke_count);
 
-    for (const radical_character of radical_characters) {
+    for (const radical_character of RADICALS_INFO) {
         if (radical_character.stroke_count !== current_stroke_count) {
             current_stroke_count = radical_character.stroke_count;
             if (radical_character.stroke_count !== 0) {
@@ -107,7 +85,7 @@ function prepare_radicals_selection() {
         let radical = -1;
         for (const classItem of e.target.classList) {
             if (classItem.includes("radical-id-")) {
-                radical = classItem.replace("radical-id-", "");
+                radical = Number(classItem.replace("radical-id-", ""));
             }
         }
         if (radical === -1) { return; }
@@ -172,7 +150,7 @@ function prepare_skip_selection() {
             let skip_part_one_selection = -1;
             for (const classItem of e.target.classList) {
                 if (classItem.includes("skip-part-1-val-")) {
-                    skip_part_one_selection = classItem.replace("skip-part-1-val-", "");
+                    skip_part_one_selection = Number(classItem.replace("skip-part-1-val-", ""));
                 }
             }
             if (selected_skip.part_one === skip_part_one_selection) {
@@ -246,41 +224,62 @@ function prepare_stroke_count() {
 }
 
 function find_possible_kanji() {
-    let possible_kanji = ALL_KANJI;
+    let possible_kanji = [];
 
-    for (let i = 0; i < selected_components.length; i++) {
-        possible_kanji = possible_kanji.filter((x) => COMPONENTS[selected_components[i]]["kanji"].includes(x))
+    function check_selected_radical(test_radical) {
+        if (selected_radical === -1) { return true; }
+        return test_radical === selected_radical;
     }
 
-    for (const [corner, shape] of Object.entries(selected_four_corners)) {
-        if (shape === -1) { continue; }
-        possible_kanji = possible_kanji.filter((x) => FOUR_CORNER[corner][shape].includes(x))
-    }
-
-    if (selected_radical !== -1) {
-        possible_kanji = possible_kanji.filter((x) => RADICALS[selected_radical]["kanji"].includes(x));
-    }
-
-    if (selected_skip.part_one !== -1) {
-        possible_kanji = possible_kanji.filter((x) => SKIP.part_one[selected_skip.part_one].includes(x));
-        if (selected_skip.part_two > 0) {
-            let part_two_filter = [];
-            for (const [part_two_skip_number, kanji_array] of Object.entries(SKIP.part_two)) {
-                if (selected_skip.part_two + selected_skip.part_two_deviation >= Number(part_two_skip_number) && selected_skip.part_two - selected_skip.part_two_deviation <= Number(part_two_skip_number)) {
-                    part_two_filter = part_two_filter.concat(kanji_array);
-                }
+    function check_selected_components(test_components) {
+        if (!test_components) { return false; }
+        for (let i = 0; i < selected_components.length; i++) {
+            if (!test_components.includes(selected_components[i])) {
+                return false;
             }
-            possible_kanji = possible_kanji.filter((x) => part_two_filter.includes(x));
         }
-        if (selected_skip.part_three > 0) {
-            let part_three_filter = [];
-            for (const [part_three_skip_number, kanji_array] of Object.entries(SKIP.part_three)) {
-                if (selected_skip.part_three + selected_skip.part_three_deviation >= Number(part_three_skip_number) && selected_skip.part_three - selected_skip.part_three_deviation <= Number(part_three_skip_number)) {
-                    part_three_filter = part_three_filter.concat(kanji_array);
-                }
+        return true;
+    }
+
+    function check_selected_four_corner(test_four_corner) {
+        if (!test_four_corner) { return false; }
+        for (const [corner, shape] of Object.entries(selected_four_corners)) {
+            if (shape === -1) { continue; }
+            if (test_four_corner[corner] !== shape) {
+                return false;
             }
-            possible_kanji = possible_kanji.filter((x) => part_three_filter.includes(x));
         }
+        return true;
+    }
+
+    function check_selected_skip(test_skip) {
+        if (selected_skip.part_one !== -1) {
+            if (test_skip.part_one !== selected_skip.part_one) { return false; }
+            if (selected_skip.part_two > 0 && (test_skip.part_two > selected_skip.part_two + selected_skip.part_two_deviation || test_skip.part_two < selected_skip.part_two - selected_skip.part_two_deviation)) { return false; }
+            if (selected_skip.part_three > 0 && (test_skip.part_three > selected_skip.part_three + selected_skip.part_three_deviation || test_skip.part_three < selected_skip.part_three - selected_skip.part_three_deviation)) { return false; }
+        }
+        return true;
+    }
+
+    function check_stroke_count(test_stroke_count) {
+        if (stroke_count_filter.equal + stroke_count_filter.greater + stroke_count_filter.less > 0) {
+            if ((stroke_count_filter.equal > 0 && test_stroke_count !== stroke_count_filter.equal) ||
+                (stroke_count_filter.greater > 0 && test_stroke_count <= stroke_count_filter.greater) ||
+                (stroke_count_filter.less > 0 && test_stroke_count >= stroke_count_filter.less)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    for (const [kanji, kanji_values] of Object.entries(KANJI_DATA)) {
+        if (!check_selected_radical(kanji_values.radical.id)) { continue; }
+        if (!check_selected_components(kanji_values.components)) { continue; }
+        if (!check_selected_four_corner(kanji_values.four_corner)) { continue; }
+        if (!check_selected_skip(kanji_values.skip)) { continue; }
+        if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
+
+        possible_kanji.push(kanji);
     }
 
     if (Object.values(word_parts).join("").length > 0) {
@@ -309,17 +308,7 @@ function find_possible_kanji() {
         possible_kanji = possible_kanji.filter((x) => word_parts_kanji.has(x));
     }
 
-    if (stroke_count_filter.equal + stroke_count_filter.greater + stroke_count_filter.less > 0) {
-        let matching_stroke_counts = [];
-        for (const [kanji, stroke_count] of Object.entries(KANJI_STROKE_COUNTS)) {
-            if ((stroke_count_filter.equal === 0 || stroke_count === stroke_count_filter.equal) &&
-                (stroke_count_filter.greater === 0 || stroke_count > stroke_count_filter.greater) &&
-                (stroke_count_filter.less === 0 || stroke_count < stroke_count_filter.less)) {
-                matching_stroke_counts.push(kanji);
-            }
-        }
-        possible_kanji = possible_kanji.filter((x) => matching_stroke_counts.includes(x));
-    }
+    possible_kanji.sort((a, b) => KANJI_DATA[a].stroke_count - KANJI_DATA[b].stroke_count)
 
     const result_item_class = "table-item";
     document.querySelector("#kanji-results").innerHTML = possible_kanji.length ? "<span class=\"" + result_item_class + "\">" + possible_kanji.slice(0, KANJI_RESULTS_LIMIT).join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
