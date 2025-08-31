@@ -217,7 +217,7 @@ function prepare_stroke_count() {
     });
 }
 
-function gray_out_unavailable(possible_radicals, possible_components) {
+function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner) {
     const radical_selection = document.querySelector("#radicals-selection");
     const radical_table_items = radical_selection.querySelectorAll(".table-item");
     for (const radical_table_item of radical_table_items) {
@@ -239,6 +239,20 @@ function gray_out_unavailable(possible_radicals, possible_components) {
             components_table_item.classList.add("disabled-item");
         }
     }
+
+    const four_corners_ids = ["four-corners-top-left", "four-corners-top-right", "four-corners-bottom-left", "four-corners-bottom-right", "four-corners-extra"];
+    for (let i = 0; i < four_corners_ids.length; i++) {
+        const four_corners_element = document.querySelector("#" + four_corners_ids[i]);
+        const current_corner = four_corners_ids[i].replace("four-corners-", "").replace("-", "_");
+        const shape_table_items = four_corners_element.querySelectorAll(".table-item");
+        for (const shape_table_item of shape_table_items) {
+            let four_corner_id = get_class_includes(shape_table_item.classList, "four-corner-id-", -1);
+            shape_table_item.classList.remove("disabled-item");
+            if (!possible_four_corner[current_corner].has(four_corner_id)) {
+                shape_table_item.classList.add("disabled-item");
+            }
+        }
+    }
 }
 
 function find_possible_kanji() {
@@ -246,6 +260,13 @@ function find_possible_kanji() {
 
     let remaining_radicals = new Set([]);
     let remaining_components = new Set([]);
+    let remaining_four_corner = {
+        top_left: new Set([]),
+        top_right: new Set([]),
+        bottom_left: new Set([]),
+        bottom_right: new Set([]),
+        extra: new Set([]),
+    };
 
     function check_selected_radical(test_radical) {
         if (selected_radical === -1) { return true; }
@@ -336,10 +357,17 @@ function find_possible_kanji() {
         if (kanji_values.components) {
             kanji_values.components.forEach((x) => remaining_components.add(x));
         }
+        if (kanji_values.four_corner) {
+            remaining_four_corner.top_left.add(kanji_values.four_corner.top_left);
+            remaining_four_corner.top_right.add(kanji_values.four_corner.top_right);
+            remaining_four_corner.bottom_left.add(kanji_values.four_corner.bottom_left);
+            remaining_four_corner.bottom_right.add(kanji_values.four_corner.bottom_right);
+            remaining_four_corner.extra.add(kanji_values.four_corner.extra);
+        }
         possible_kanji.push(kanji);
     }
 
-    gray_out_unavailable(remaining_radicals, remaining_components);
+    gray_out_unavailable(remaining_radicals, remaining_components, remaining_four_corner);
 
     possible_kanji.sort((a, b) => KANJI_DATA[a].stroke_count - KANJI_DATA[b].stroke_count);
 
