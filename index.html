@@ -110,7 +110,20 @@
                     </div>
                     <div id="stroke-count-container">
                         <h3>Stroke Count <span class="reset-button table-item icon-wrapper" id="stroke-count-reset"><span class="icon"></span></span></h3>
-                        <input id="stroke-count-input" type="number" value="0" min="0">
+                        <div class="flexbox flexbox-horizontal">
+                            <div class="flexbox flexbox-vertical flexbox-center">
+                                <span>></span>
+                                <input id="stroke-count-input-greater" type="number" value="0" min="0">
+                            </div>
+                            <div class="flexbox flexbox-vertical flexbox-center">
+                                <span>==</span>
+                                <input id="stroke-count-input-equals" type="number" value="0" min="0">
+                            </div>
+                            <div class="flexbox flexbox-vertical flexbox-center">
+                                <span><</span>
+                                <input id="stroke-count-input-less" type="number" value="0" min="0">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

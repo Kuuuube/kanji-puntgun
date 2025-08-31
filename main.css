@@ -289,6 +289,11 @@ input, #header-input-mirror {
     justify-content: space-around;
 }
 
+.flexbox-center {
+    justify-content: center;
+    align-items: center;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 400px);
@@ -317,7 +322,8 @@ input, #header-input-mirror {
 }
 
 #skip-part-2 > input[type="number"],
-#skip-part-3 > input[type="number"] {
+#skip-part-3 > input[type="number"],
+[id^=stroke-count-input] {
     width: 5em;
 }
 

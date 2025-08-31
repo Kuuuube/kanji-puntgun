@@ -4,7 +4,7 @@ const DEFAULTS = {
     four_corners: {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1},
     skip: {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0},
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
-    stroke_count: 0,
+    stroke_count: {greater: 0, equal: 0, less: 0},
 }
 const KANJI_RESULTS_LIMIT = 250;
 
@@ -216,12 +216,30 @@ function prepare_partial_word() {
 }
 
 function prepare_stroke_count() {
-    const stroke_count_input = document.querySelector("#stroke-count-input");
-    stroke_count_input.addEventListener("change", (e) => {
+    const stroke_count_input_equals = document.querySelector("#stroke-count-input-equals");
+    const stroke_count_input_greater = document.querySelector("#stroke-count-input-greater");
+    const stroke_count_input_less = document.querySelector("#stroke-count-input-less");
+    stroke_count_input_equals.addEventListener("change", (e) => {
         if (e.target.value.length === 0) {
-            stroke_count_filter = 0;
+            stroke_count_filter.equal = 0;
         } else {
-            stroke_count_filter = Number(e.target.value);
+            stroke_count_filter.equal = Number(e.target.value);
+        }
+        find_possible_kanji();
+    });
+    stroke_count_input_greater.addEventListener("change", (e) => {
+        if (e.target.value.length === 0) {
+            stroke_count_filter.greater = 0;
+        } else {
+            stroke_count_filter.greater = Number(e.target.value);
+        }
+        find_possible_kanji();
+    });
+    stroke_count_input_less.addEventListener("change", (e) => {
+        if (e.target.value.length === 0) {
+            stroke_count_filter.less = 0;
+        } else {
+            stroke_count_filter.less = Number(e.target.value);
         }
         find_possible_kanji();
     });
@@ -291,10 +309,12 @@ function find_possible_kanji() {
         possible_kanji = possible_kanji.filter((x) => word_parts_kanji.has(x));
     }
 
-    if (stroke_count_filter > 0) {
+    if (stroke_count_filter.equal + stroke_count_filter.greater + stroke_count_filter.less > 0) {
         let matching_stroke_counts = [];
         for (const [kanji, stroke_count] of Object.entries(KANJI_STROKE_COUNTS)) {
-            if (stroke_count === stroke_count_filter) {
+            if ((stroke_count_filter.equal === 0 || stroke_count === stroke_count_filter.equal) &&
+                (stroke_count_filter.greater === 0 || stroke_count > stroke_count_filter.greater) &&
+                (stroke_count_filter.less === 0 || stroke_count < stroke_count_filter.less)) {
                 matching_stroke_counts.push(kanji);
             }
         }
@@ -397,7 +417,9 @@ function prepare_reset_buttons() {
 
     function reset_stroke_count(find = true) {
         stroke_count_filter = structuredClone(DEFAULTS.stroke_count);
-        document.querySelector("#stroke-count-input").value = 0;
+        document.querySelector("#stroke-count-input-equals").value = 0;
+        document.querySelector("#stroke-count-input-greater").value = 0;
+        document.querySelector("#stroke-count-input-less").value = 0;
         if (find) { find_possible_kanji() };
     }
     document.querySelector("#stroke-count-reset").addEventListener("click", reset_stroke_count);
