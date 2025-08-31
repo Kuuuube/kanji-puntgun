@@ -265,18 +265,10 @@ function find_possible_kanji() {
         return true;
     }
 
-    for (const [kanji, kanji_values] of Object.entries(KANJI_DATA)) {
-        if (!check_selected_radical(kanji_values.radical.id)) { continue; }
-        if (!check_selected_components(kanji_values.components)) { continue; }
-        if (!check_selected_four_corner(kanji_values.four_corner)) { continue; }
-        if (!check_selected_skip(kanji_values.skip)) { continue; }
-        if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
 
-        possible_kanji.push(kanji);
-    }
-
-    if (Object.values(word_parts).join("").length > 0) {
-        let word_parts_kanji = new Set([]);
+    let word_parts_kanji = new Set([]);
+    const word_parts_kanji_active = Object.values(word_parts).join("").length > 0;
+    if (word_parts_kanji_active) {
         let word_lengths = ["2", "3", "4"];
         if (word_parts["4"].length > 0) { word_lengths = ["4"] }
         if (word_parts["3"].length > 0) { word_lengths = ["3", "4"] }
@@ -298,9 +290,23 @@ function find_possible_kanji() {
                 }
             }
         }
-        possible_kanji = possible_kanji.filter((x) => word_parts_kanji.has(x));
     }
 
+    function check_word_parts_kanji(kanji) {
+        if (word_parts_kanji_active && !word_parts_kanji.has(kanji)) { return false; }
+        return true;
+    }
+
+    for (const [kanji, kanji_values] of Object.entries(KANJI_DATA)) {
+        if (!check_selected_radical(kanji_values.radical.id)) { continue; }
+        if (!check_selected_components(kanji_values.components)) { continue; }
+        if (!check_selected_four_corner(kanji_values.four_corner)) { continue; }
+        if (!check_selected_skip(kanji_values.skip)) { continue; }
+        if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
+        if (!check_word_parts_kanji(kanji)) { continue; }
+
+        possible_kanji.push(kanji);
+    }
     possible_kanji.sort((a, b) => KANJI_DATA[a].stroke_count - KANJI_DATA[b].stroke_count);
 
     const result_item_class = "table-item";
