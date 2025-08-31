@@ -531,6 +531,13 @@ function prepare_reset_buttons() {
     document.querySelector("#reset-all").addEventListener("click", reset_all);
 }
 
+function prepare_clear_text_button() {
+    document.querySelector("#clear-text").addEventListener("click", () => {
+        document.querySelector("#header-input").value = "";
+        document.querySelector("#header-input-mirror").innerHTML = "&nbsp;";
+    });
+}
+
 prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
@@ -541,4 +548,5 @@ prepare_jisho_search();
 prepare_header_results_selector();
 prepare_no_select();
 prepare_reset_buttons();
+prepare_clear_text_button();
 find_possible_kanji();
