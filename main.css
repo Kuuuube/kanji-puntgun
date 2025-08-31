@@ -363,7 +363,7 @@ input, #header-input-mirror {
 }
 
 .disabled-item {
-    color: var(--bs-gray-600);
+    filter: opacity(50%);
 }
 
 #sticky-header {
