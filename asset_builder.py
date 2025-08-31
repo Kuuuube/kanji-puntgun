@@ -72,6 +72,10 @@ def parse_kanjidic_data():
             "characters": [],
         },
         "components": [],
+        "deroo": {
+            "top": -1,
+            "bottom": -1,
+        },
         "frequency": -1,
     }
 
@@ -97,6 +101,7 @@ def parse_kanjidic_data():
         four_corner_code = re.search(r"(?<=<q_code qc_type=\"four_corner\">).*?(?=</q_code>)", character_data)
         radical = re.search(r"(?<=<rad_value rad_type=\"classical\">).*?(?=</rad_value>)", character_data)
         skip_code = re.search(r"(?<=<q_code qc_type=\"skip\">).*?(?=</q_code>)", character_data)
+        deroo_code = re.search(r"(?<=<q_code qc_type=\"deroo\">).*?(?=</q_code>)", character_data)
 
         if character in kanji_data:
             print("dupe character found, this shouldnt happen")
@@ -135,6 +140,13 @@ def parse_kanjidic_data():
             kanji_data[character]["skip"]["part_three"] = skip_code[2]
         else:
             del kanji_data[character]["skip"]
+
+        if deroo_code:
+            deroo_code_string = deroo_code[0]
+            kanji_data[character]["deroo"]["bottom"] = deroo_code_string[-2:] # last two chars
+            kanji_data[character]["deroo"]["top"] = deroo_code_string[:2] # everything before last two chars
+        else:
+            del kanji_data[character]["deroo"]
 
         if character in jpdb_frequency_info:
             kanji_data[character]["frequency"] = jpdb_frequency_info[character]
