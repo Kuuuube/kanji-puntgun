@@ -309,6 +309,7 @@ input, #header-input-mirror {
     white-space: nowrap;
     overflow-x: scroll;
     line-height: 1.35;
+    padding-bottom: 0.5em;
 }
 
 .no-select {
