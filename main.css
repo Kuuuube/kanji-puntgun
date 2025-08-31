@@ -348,6 +348,7 @@ input, #header-input-mirror {
     position: sticky;
     top: 0;
     background-color: var(--bs-body-bg);
+    z-index: 999;
 }
 
 #sticky-header > hr {
