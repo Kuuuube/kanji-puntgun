@@ -21,6 +21,15 @@ function prevent_double_triple_click_select(e) {
     }
 }
 
+function get_class_includes(class_list, includes_string, default_result) {
+    for (const class_item of class_list) {
+        if (class_item.includes(includes_string)) {
+            return class_item.replace(includes_string, "");
+        }
+    }
+    return default_result;
+}
+
 function prepare_components_selection() {
     const components_selection = document.querySelector("#components-selection");
 
@@ -82,12 +91,7 @@ function prepare_radicals_selection() {
         e.preventDefault();
         e.stopImmediatePropagation();
 
-        let radical = -1;
-        for (const classItem of e.target.classList) {
-            if (classItem.includes("radical-id-")) {
-                radical = Number(classItem.replace("radical-id-", ""));
-            }
-        }
+        let radical = Number(get_class_includes(e.target.classList, "radical-id-", -1));
         if (radical === -1) { return; }
         if (selected_radical === radical) {
             selected_radical = -1;
@@ -117,12 +121,7 @@ function prepare_four_corners_selection() {
             four_corners_element.innerHTML += "<span class=\"table-item four-corner-id-" + j + "\">" + FOUR_CORNER_INFO[j].character + "</span>";
         }
         four_corners_element.addEventListener("click", (e) => {
-            let corner_selection = -1;
-            for (const classItem of e.target.classList) {
-                if (classItem.includes("four-corner-id-")) {
-                    corner_selection = classItem.replace("four-corner-id-", "");
-                }
-            }
+            let corner_selection = get_class_includes(e.target.classList, "four-corner-id-", -1);
             if (corner_selection === -1) { return; }
             for (const corner_selector of e.target.parentNode.children) {
                 corner_selector.classList.remove("selected");
@@ -147,12 +146,7 @@ function prepare_skip_selection() {
             for (const target_siblings of e.target.parentNode.children) {
                 target_siblings.classList.remove("selected");
             }
-            let skip_part_one_selection = -1;
-            for (const classItem of e.target.classList) {
-                if (classItem.includes("skip-part-1-val-")) {
-                    skip_part_one_selection = Number(classItem.replace("skip-part-1-val-", ""));
-                }
-            }
+            let skip_part_one_selection = Number(get_class_includes(e.target.classList, "skip-part-1-val-", -1));
             if (selected_skip.part_one === skip_part_one_selection) {
                 skip_part_one_selection = -1;
             } else {
