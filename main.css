@@ -326,7 +326,6 @@ input, #header-input-mirror {
 .table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
     cursor: pointer;
     transition: background-color var(--fast-fade), filter var(--fast-fade);
-    border-radius: 50%;
 }
 
 .table-item:hover:not(.selected):not(.clicked) {
@@ -405,6 +404,7 @@ input, #header-input-mirror {
     height: 34px;
     display: inline-block;
     user-select: none;
+    border-radius: 50%;
 }
 
 #reset-all {
