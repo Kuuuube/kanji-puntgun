@@ -119,6 +119,7 @@
 
     --radicals-components-padding: 5px;
     --fast-fade: 0.25s cubic-bezier(0,0,0,1);
+    --svg-light-background: var(--bs-light);
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -240,6 +241,10 @@
         --bs-form-valid-border-color: #75b798;
         --bs-form-invalid-color: #ea868f;
         --bs-form-invalid-border-color: #ea868f;
+
+        --svg-light-background: #e9ecef;
+
+        --reset-button-filter: invert(1);
     }
 }
 
@@ -408,6 +413,12 @@ input, #header-input-mirror {
     border-radius: 50%;
 }
 
+.reset-button > .icon {
+    filter: var(--reset-button-filter);
+    width: 0.85em;
+    height: 0.85em;
+}
+
 #reset-all {
     flex-shrink: 0;
 }
@@ -421,13 +432,19 @@ a:hover {
     color: var(--bs-link-hover-color);
 }
 
-.icon {
-    height: 1em;
-    width: 1em;
-    top: .125em;
-    position: relative;
-    background-color: var(--bs-gray-200);
+.skip-icon {
+    background-color: var(--svg-light-background);
     border: 1px solid var(--bs-border-color);
     pointer-events: none;
     user-select: none;
+}
+
+.icon {
+    height: 1em;
+    width: 1em;
+}
+
+.relative-icon {
+    top: .125em;
+    position: relative;
 }
