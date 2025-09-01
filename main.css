@@ -434,7 +434,7 @@ div.left-right-header {
     width: 2em;
 }
 
-.reset-button, .clear-text-button, .search-button {
+.reset-button, .clear-text-button, .search-button, .fake-icon {
     border: 2px solid var(--bs-gray-700);
     width: 34px;
     height: 34px;
@@ -445,11 +445,16 @@ div.left-right-header {
 
 .reset-button > .icon,
 .clear-text-button > .icon,
-.search-button > .icon {
+.search-button > .icon,
+.fake-icon > .icon {
     filter: var(--reset-button-filter);
     width: var(--reset-button-size);
     height: var(--reset-button-size);
     background-size: var(--reset-button-size) var(--reset-button-size);
+}
+
+.fake-icon {
+    visibility: hidden;
 }
 
 .reset-button > .icon {
@@ -502,4 +507,10 @@ a:hover {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (min-width: 600px) {
+    .fake-icon {
+        display: none;
+    }
 }
