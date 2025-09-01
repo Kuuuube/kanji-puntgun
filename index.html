@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-    <head lang="ja">
+<html lang="ja">
+    <head>
         <title>Kanji Punt Gun</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="./assets/generated/kanji_data.js"></script>
@@ -14,7 +14,7 @@
             <div id="header-search-flexbox" class="flexbox flexbox-horizontal flexbox-center">
                 <div class="flexbox flexbox-horizontal flexbox-center">
                     <span class="reset-button table-item icon-wrapper" id="reset-all"><span class="icon"></span></span>
-                    <input id="header-input" class="header-input-item">
+                    <input type="text" id="header-input" class="header-input-item">
                     <span class="fake-icon table-item icon-wrapper"><span class="icon"></span></span>
                 </div>
                 <div class="flexbox flexbox-horizontal flexbox-center">
@@ -115,7 +115,7 @@
                         <h3>Stroke Count <span class="reset-button table-item icon-wrapper" id="stroke-count-reset"><span class="icon"></span></span></h3>
                         <div class="flexbox flexbox-horizontal">
                             <div class="flexbox flexbox-vertical flexbox-center">
-                                <span>></span>
+                                <span>&gt;</span>
                                 <input id="stroke-count-input-greater" type="number" value="0" min="0">
                             </div>
                             <div class="flexbox flexbox-vertical flexbox-center">
@@ -123,7 +123,7 @@
                                 <input id="stroke-count-input-equals" type="number" value="0" min="0">
                             </div>
                             <div class="flexbox flexbox-vertical flexbox-center">
-                                <span><</span>
+                                <span>&lt;</span>
                                 <input id="stroke-count-input-less" type="number" value="0" min="0">
                             </div>
                         </div>
