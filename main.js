@@ -444,7 +444,8 @@ function prepare_header_results_selector() {
             return;
         }
 
-        header_input.value += e.target.textContent;
+        const cursor_index = header_input.selectionStart;
+        header_input.value = header_input.value.slice(0, cursor_index) + e.target.textContent + header_input.value.slice(cursor_index);
 
         e.target.classList.add("clicked");
         setTimeout(() => {
