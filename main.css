@@ -412,6 +412,10 @@ input, #header-input-mirror {
     align-items: center;
 }
 
+#reset-all-header {
+    margin: 5px;
+}
+
 div.left-right-header {
     flex: 0;
     align-items: stretch;
