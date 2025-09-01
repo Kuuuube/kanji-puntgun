@@ -399,17 +399,20 @@ function find_possible_kanji() {
 
     possible_kanji.sort((a, b) => get_sorting_value(a) - get_sorting_value(b));
 
-    render_kanji_results(possible_kanji.slice(0, KANJI_RESULTS_LIMIT), possible_kanji.length > KANJI_RESULTS_LIMIT);
+    render_kanji_results(possible_kanji.slice(0, KANJI_RESULTS_LIMIT), possible_kanji.length > KANJI_RESULTS_LIMIT, false);
     full_kanji_results = possible_kanji;
-    kanji_results_index = KANJI_RESULTS_LIMIT;
+    kanji_results_index = 0;
 }
 
-function render_kanji_results(kanji_list, ellide) {
+function render_kanji_results(kanji_list, ellide_end, ellide_start) {
     const result_item_class = "table-item";
     const kanji_results_element = document.querySelector("#kanji-results");
     kanji_results_element.innerHTML = kanji_list.length ? "<span class=\"" + result_item_class + "\">" + kanji_list.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
-    if (ellide) {
-        kanji_results_element.innerHTML += "<span id=\"kanji-results-ellipsis\" class=\"table-item\">" + kanji_results_ellipsis_char + "</span>";
+    if (ellide_end) {
+        kanji_results_element.innerHTML += "<span id=\"kanji-results-ellipsis-end\" class=\"table-item\">" + kanji_results_ellipsis_char + "</span>";
+    }
+    if (ellide_start) {
+        kanji_results_element.innerHTML = "<span id=\"kanji-results-ellipsis-start\" class=\"table-item\">" + kanji_results_ellipsis_char + "</span>" + kanji_results_element.innerHTML;
     }
     kanji_results_element.scrollLeft = 0;
 }
@@ -432,8 +435,12 @@ function prepare_header_results_selector() {
     kanji_results.addEventListener("click", (e) => {
         if (e.target.textContent.length > 1) { return; }
         if (e.target.textContent === kanji_results_ellipsis_char) {
-            render_kanji_results(full_kanji_results.slice(kanji_results_index, kanji_results_index + KANJI_RESULTS_LIMIT), full_kanji_results.length > kanji_results_index + KANJI_RESULTS_LIMIT);
-            kanji_results_index += KANJI_RESULTS_LIMIT;
+            if (e.target.id === "kanji-results-ellipsis-start") {
+                kanji_results_index -= KANJI_RESULTS_LIMIT;
+            } else {
+                kanji_results_index += KANJI_RESULTS_LIMIT;
+            }
+            render_kanji_results(full_kanji_results.slice(kanji_results_index, kanji_results_index + KANJI_RESULTS_LIMIT), full_kanji_results.length > kanji_results_index + KANJI_RESULTS_LIMIT, kanji_results_index > 0);
             return;
         }
 
