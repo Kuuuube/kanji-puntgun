@@ -387,11 +387,8 @@ input, #header-input-mirror {
     margin-right: 10px;
 }
 
-#header-input {
-    width: 100%;
-}
-
 #header-input, #header-input-mirror {
+    width: 100%;
     flex: 1;
     line-height: 1.45;
     padding-top: 0;
@@ -400,11 +397,14 @@ input, #header-input-mirror {
     margin-bottom: 2px;
     white-space: nowrap;
     overflow-x: scroll;
+    min-width: 200px;
+    max-width: max(max(50vw, 50vh), 500px);
 }
 
 #header-search-flexbox {
     padding-top: 8px;
     margin-bottom: 8px;
+    flex-wrap: wrap;
 }
 
 #header-search-flexbox > div {
@@ -502,4 +502,10 @@ a:hover {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (min-width: 600px) {
+    .fake-icon {
+        display: none;
+    }
 }
