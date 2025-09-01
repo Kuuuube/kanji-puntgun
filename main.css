@@ -263,6 +263,7 @@ body {
     margin-top: 0;
     background-color: var(--bs-body-bg);
     touch-action: manipulation;
+    margin-bottom: 1em;
 }
 
 input, #header-input-mirror {
