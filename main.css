@@ -125,6 +125,7 @@
     --reset-button-svg: url("data:image/svg+xml, %3Csvg%20fill%3D%22%23000000%22%20width%3D%22800px%22%20height%3D%22800px%22%20viewBox%3D%220%200%201920%201920%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M960%200v213.333c411.627%200%20746.667%20334.934%20746.667%20746.667S1371.627%201706.667%20960%201706.667%20213.333%201371.733%20213.333%20960c0-197.013%2078.4-382.507%20213.334-520.747v254.08H640V106.667H53.333V320h191.04C88.64%20494.08%200%20720.96%200%20960c0%20529.28%20430.613%20960%20960%20960s960-430.72%20960-960S1489.387%200%20960%200%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E");
     --reset-button-size: 0.85em;
     --clear-text-button-svg: url("data:image/svg+xml, %3Csvg%20width%3D%22365.76624%22%20height%3D%22365.76624%22%20viewBox%3D%220%200%2010.972987%2010.972987%22%20version%3D%221.1%22%20id%3D%22svg1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Asvg%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cdefs%20id%3D%22defs1%22%20%2F%3E%20%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%20d%3D%22M%200.48649307%2C0.48649307%2010.486493%2C10.486493%20m%20-9.99999993%2C0%209.99999993%2C-9.99999993%22%20id%3D%22path1%22%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke-width%3A1.37601%3Bstroke-dasharray%3Anone%22%2F%3E%3C%2Fsvg%3E");
+    --search-button-svg: url("data:image/svg+xml, %3Csvg%20fill%3D%22%23000000%22%20width%3D%22550%22%20height%3D%22550%22%20viewBox%3D%220%200%2022%2022%22%20version%3D%221.1%22%20id%3D%22svg1%22%20sodipodi%3Adocname%3D%22search-svgrepo-com.svg%22%20xmlns%3Ainkscape%3D%22http%3A%2F%2Fwww.inkscape.org%2Fnamespaces%2Finkscape%22%20xmlns%3Asodipodi%3D%22http%3A%2F%2Fsodipodi.sourceforge.net%2FDTD%2Fsodipodi-0.dtd%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Asvg%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cdefs%20id%3D%22defs1%22%2F%3E%20%3Csodipodi%3Anamedview%20id%3D%22namedview1%22%20pagecolor%3D%22%23ffffff%22%20bordercolor%3D%22%23000000%22%20borderopacity%3D%220.25%22%20inkscape%3Ashowpageshadow%3D%222%22%20inkscape%3Apageopacity%3D%220.0%22%20inkscape%3Apagecheckerboard%3D%220%22%20inkscape%3Adeskcolor%3D%22%23d1d1d1%22%3E%20%3Cinkscape%3Apage%20x%3D%220%22%20y%3D%220%22%20width%3D%2222%22%20height%3D%2222%22%20id%3D%22page2%22%20margin%3D%220%22%20bleed%3D%220%22%2F%3E%20%3C%2Fsodipodi%3Anamedview%3E%20%3Cpath%20d%3D%22M%2022%2C19.57%2016.353%2C13.922%20A%208.895%2C8.895%200%200%200%2017.875%2C8.938%20C%2017.875%2C4.01%2013.867%2C0%208.938%2C0%204.01%2C0%200%2C4.01%200%2C8.938%20c%200%2C4.929%204.01%2C8.938%208.938%2C8.938%20a%208.887%2C8.887%200%200%200%204.984%2C-1.522%20L%2019.568%2C22%20Z%20M%208.938%2C15.125%20A%206.194%2C6.194%200%200%201%202.75%2C8.937%206.195%2C6.195%200%200%201%208.938%2C2.749%206.195%2C6.195%200%200%201%2015.126%2C8.937%206.195%2C6.195%200%200%201%208.938%2C15.125%20Z%22%20id%3D%22path1%22%2F%3E%3C%2Fsvg%3E")
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -391,25 +392,29 @@ input, #header-input-mirror {
 }
 
 #header-input, #header-input-mirror {
-    flex-basis: 50%;
+    flex: 1;
     line-height: 1.45;
     padding-top: 0;
     padding-bottom: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
     white-space: nowrap;
     overflow-x: scroll;
 }
 
-#jisho-search {
-    align-items: center;
-    text-align: center;
-    margin-right: 2.5px;
-    font-size: 0.75rem;
-}
-
 #header-search-flexbox {
-    align-items: center;
     padding-top: 8px;
     margin-bottom: 8px;
+}
+
+#header-search-flexbox > div {
+    align-items: center;
+}
+
+div.left-right-header {
+    flex: 0;
+    align-items: stretch;
+    justify-content: space-between;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -424,7 +429,7 @@ input, #header-input-mirror {
     width: 2em;
 }
 
-.reset-button, .clear-text-button {
+.reset-button, .clear-text-button, .search-button, .fake-icon {
     border: 2px solid var(--bs-gray-700);
     width: 34px;
     height: 34px;
@@ -434,11 +439,17 @@ input, #header-input-mirror {
 }
 
 .reset-button > .icon,
-.clear-text-button > .icon {
+.clear-text-button > .icon,
+.search-button > .icon,
+.fake-icon > .icon {
     filter: var(--reset-button-filter);
     width: var(--reset-button-size);
     height: var(--reset-button-size);
     background-size: var(--reset-button-size) var(--reset-button-size);
+}
+
+.fake-icon {
+    visibility: hidden;
 }
 
 .reset-button > .icon {
@@ -449,7 +460,11 @@ input, #header-input-mirror {
     background-image: var(--clear-text-button-svg);
 }
 
-#reset-all, #clear-text {
+.search-button > .icon {
+    background-image: var(--search-button-svg);
+}
+
+#reset-all, #clear-text, #jisho-search {
     flex-shrink: 0;
 }
 
