@@ -301,6 +301,7 @@ input, #header-input-mirror {
     display: grid;
     grid-template-columns: repeat(auto-fit, 400px);
     justify-content: center;
+    margin-bottom: 1em;
 }
 
 #radicals-selection, #components-selection {
@@ -507,6 +508,14 @@ a:hover {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+}
+
+.documentation-text {
+    max-width: max(max(50vw, 50vh), 500px);
+}
+
+code {
+    background-color: var(--bs-gray-800);
 }
 
 @media (min-width: 600px) {
