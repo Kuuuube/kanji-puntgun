@@ -49,6 +49,43 @@ def generate_components_data():
 
     return components_dict
 
+def parse_cjkvi():
+    unicode_description_characters = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿"
+    circled_number_characters = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
+
+    cjkvi_lines = list(map(str.strip, open(static_assets_dir + "CJKVI.txt", "r").readlines()))
+    cjkvi_dict = {}
+
+    for line in cjkvi_lines:
+        if line[0] == "#":
+            continue
+        line_working = line.split("\t", 2)
+
+        unicode_id = line_working[0]
+        character = line_working[1]
+        compositions = line_working[2].split("\t")
+
+        cjkvi_dict[character] = {
+            "unicode": unicode_id,
+            "raw_compositions": compositions,
+            "compositions": [],
+        }
+
+        for composition in compositions:
+            working_composition = copy.deepcopy(composition)
+
+            tag_regex = re.search(r"(?<=\[).*?(?=\])", composition)
+            tag = ""
+            if tag_regex:
+                tag = tag_regex[0]
+                cjkvi_dict[character]["tag"] = tag
+            working_composition = re.sub(r"\[.*?\]", "", working_composition)
+
+            composition_parts_only = re.sub("[" + unicode_description_characters + circled_number_characters + "]", "", working_composition)
+            cjkvi_dict[character]["compositions"].append(composition_parts_only)
+
+    return cjkvi_dict
+
 def parse_kanjidic_data():
     radicals_info_dict = {}
 
@@ -93,6 +130,8 @@ def parse_kanjidic_data():
             radicals_info_dict[radical_info["radical_id"]].append({"character": radical_info["character"], "stroke_count": radical_info["stroke_count"]})
 
     jpdb_frequency_info = json.loads(open(static_assets_dir + "jpdb_frequency_info.json").read())
+
+    cjkvi_data = parse_cjkvi()
 
     kanjidic = open(data_assets_dir + "kanjidic2.xml").read().replace("\n", "").replace("\r", "")
     for character_data in re.findall("<character>.*?</character>", kanjidic):
