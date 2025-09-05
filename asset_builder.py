@@ -68,7 +68,7 @@ def parse_cjkvi():
         cjkvi_dict[character] = {
             "unicode": unicode_id,
             "raw_compositions": compositions,
-            "compositions": [],
+            "composition_parts": set([]),
         }
 
         for composition in compositions:
@@ -82,7 +82,8 @@ def parse_cjkvi():
             working_composition = re.sub(r"\[.*?\]", "", working_composition)
 
             composition_parts_only = re.sub("[" + unicode_description_characters + circled_number_characters + "]", "", working_composition)
-            cjkvi_dict[character]["compositions"].append(composition_parts_only)
+            for composition_part in composition_parts_only:
+                cjkvi_dict[character]["composition_parts"].add(composition_part)
 
     return cjkvi_dict
 
@@ -109,6 +110,7 @@ def parse_kanjidic_data():
             "characters": [],
         },
         "components": [],
+        "cjkvi_components": [],
         "deroo": {
             "top": -1,
             "bottom": -1,
@@ -191,6 +193,11 @@ def parse_kanjidic_data():
             kanji_data[character]["frequency"] = jpdb_frequency_info[character]
         else:
             del kanji_data[character]["frequency"]
+
+        if character in cjkvi_data:
+            kanji_data[character]["cjkvi_components"] = cjkvi_data[character]["composition_parts"]
+        else:
+            del kanji_data[character]["cjkvi_components"]
 
     components_dict = generate_components_data()
     for component, component_info in components_dict.items():
