@@ -240,7 +240,12 @@ function prepare_composition() {
         const composition_component = e.target.textContent;
         if ([...composition_component].length > 1) { return; }
         if (composition_selection_container.textContent.includes(composition_component)) { return; }
-        e.target.classList.add("selected");
+
+        for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
+            if (table_item.textContent === composition_component) {
+                table_item.classList.add("selected");
+            }
+        }
         document.querySelector("#composition-selection-container").innerHTML += "<span class=\"table-item selected\">" + composition_component + "</span>";
         selected_composition_parts.push(composition_component);
 
@@ -272,11 +277,11 @@ function prepare_decomposition() {
             if (!decomposition_data) { continue; }
             let decomposition_html_string = "";
             for (const decomposition_item of decomposition_data) {
-                let current_item_class = table_item_class;
+                let current_item_classes = [table_item_class];
                 if (selected_composition_parts.includes(decomposition_item)) {
-                    current_item_class += " selected";
+                    current_item_classes.push("selected");
                 }
-                decomposition_html_string += "<span class=\"" + current_item_class + "\">" + decomposition_item + "</span>"
+                decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
             }
             decomposition_table.push(decomposition_html_string);
         }
