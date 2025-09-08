@@ -49,12 +49,31 @@ def generate_components_data():
 
     return components_dict
 
+cjkvi_components_info = []
+
+def recursive_cjkvi_parts_parser(cjkvi_dict, composition_parts):
+    parts_collector = set([])
+    for part in composition_parts:
+        if part in parts_collector:
+            continue
+        if len(cjkvi_dict[part]["composition_parts"]) <= 1:
+            parts_collector.add(part)
+            continue
+        if part in cjkvi_dict:
+            parts_collector.update(recursive_cjkvi_parts_parser(cjkvi_dict, cjkvi_dict[part]["composition_parts"]))
+
+    return parts_collector
+
 def parse_cjkvi():
     unicode_description_characters = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿"
     circled_number_characters = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
 
+    stroke_counts = parse_ucs_strokes()
+
     cjkvi_lines = list(map(str.strip, open(static_assets_dir + "CJKVI.txt", "r").readlines()))
     cjkvi_dict = {}
+
+    cjkvi_unique_components = set([])
 
     for line in cjkvi_lines:
         if line[0] == "#":
@@ -69,6 +88,7 @@ def parse_cjkvi():
             "unicode": unicode_id,
             "raw_compositions": compositions,
             "composition_parts": set([]),
+            "recursive_composition_parts": set([]),
         }
 
         for composition in compositions:
@@ -85,7 +105,34 @@ def parse_cjkvi():
             for composition_part in composition_parts_only:
                 cjkvi_dict[character]["composition_parts"].add(composition_part)
 
+                if composition_part not in cjkvi_unique_components:
+                    cjkvi_unique_components.add(composition_part)
+
+    for character, value in cjkvi_dict.items():
+        for recursive_composition_part in recursive_cjkvi_parts_parser(cjkvi_dict, cjkvi_dict[character]["composition_parts"]):
+            if recursive_composition_part in cjkvi_dict[character]["composition_parts"]:
+                continue
+            cjkvi_dict[character]["recursive_composition_parts"].add(recursive_composition_part)
+
+    for unique_component in cjkvi_unique_components:
+        cjkvi_components_info.append({
+            "component": unique_component,
+            "stroke_count": int(stroke_counts[unique_component]),
+        })
+
+    cjkvi_components_info.sort(key = lambda x: x["stroke_count"])
+
     return cjkvi_dict
+
+def parse_ucs_strokes():
+    ucs_strokes_lines = list(map(str.strip, open(static_assets_dir + "ucs-strokes.txt", "r").readlines()))
+    ucs_strokes_dict = {}
+
+    for line in ucs_strokes_lines:
+        line_split = line.split("\t")
+        ucs_strokes_dict[line_split[1]] = line_split[2].split(",")[0]
+
+    return ucs_strokes_dict
 
 def parse_kanjidic_data():
     radicals_info_dict = {}
@@ -111,6 +158,7 @@ def parse_kanjidic_data():
         },
         "components": [],
         "cjkvi_components": [],
+        "cjkvi_components_recursive": [],
         "deroo": {
             "top": -1,
             "bottom": -1,
@@ -134,6 +182,8 @@ def parse_kanjidic_data():
     jpdb_frequency_info = json.loads(open(static_assets_dir + "jpdb_frequency_info.json").read())
 
     cjkvi_data = parse_cjkvi()
+
+    valid_cjkvi_components = set([])
 
     kanjidic = open(data_assets_dir + "kanjidic2.xml").read().replace("\n", "").replace("\r", "")
     for character_data in re.findall("<character>.*?</character>", kanjidic):
@@ -195,7 +245,11 @@ def parse_kanjidic_data():
             del kanji_data[character]["frequency"]
 
         if character in cjkvi_data:
-            kanji_data[character]["cjkvi_components"] = cjkvi_data[character]["composition_parts"]
+            cjkvi_composition = cjkvi_data[character]["composition_parts"]
+            kanji_data[character]["cjkvi_components"] = cjkvi_composition
+            kanji_data[character]["cjkvi_components_recursive"] = cjkvi_data[character]["recursive_composition_parts"]
+            for valid_cjkvi_component in cjkvi_composition:
+                valid_cjkvi_components.add(valid_cjkvi_component)
         else:
             del kanji_data[character]["cjkvi_components"]
 
@@ -208,17 +262,27 @@ def parse_kanjidic_data():
         if len(kanji_data[kanji]["components"]) == 0:
             del kanji_data[kanji]["components"]
 
+    i = 0
+    while i < len(cjkvi_components_info):
+        component = cjkvi_components_info[i]["component"]
+        if component not in valid_cjkvi_components:
+            del cjkvi_components_info[i]
+            continue
+        i += 1
+
     write_js_json(kanji_data, "kanji_data")
 
 def pack_info_files():
     components_info = open(static_assets_dir + "components_info.json").read()
     four_corner_info = open(static_assets_dir + "four_corner_info.json").read()
     radicals_info = open(static_assets_dir + "radicals_info.json").read()
+    # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
     with open(generated_assets_dir + "packed_info.js", "w", encoding = "utf8") as packed_info:
         packed_info.write("const COMPONENTS_INFO = " + components_info + "\n")
         packed_info.write("const FOUR_CORNER_INFO = " + four_corner_info + "\n")
         packed_info.write("const RADICALS_INFO = " + radicals_info + "\n")
+        # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
 
 
 validation_regex = re.compile("(CJK (UNIFIED|COMPATIBILITY) IDEOGRAPH|HIRAGANA|IDEOGRAPHIC ITERATION MARK)")
