@@ -87,8 +87,8 @@ def parse_cjkvi():
         cjkvi_dict[character] = {
             "unicode": unicode_id,
             "raw_compositions": compositions,
-            "composition_parts": set([]),
-            "recursive_composition_parts": set([]),
+            "composition_parts": dict([]),
+            "recursive_composition_parts": dict([]),
         }
 
         for composition in compositions:
@@ -103,16 +103,19 @@ def parse_cjkvi():
 
             composition_parts_only = re.sub("[" + unicode_description_characters + circled_number_characters + "]", "", working_composition)
             for composition_part in composition_parts_only:
-                cjkvi_dict[character]["composition_parts"].add(composition_part)
+                cjkvi_dict[character]["composition_parts"][composition_part] = None
 
                 if composition_part not in cjkvi_unique_components:
                     cjkvi_unique_components.add(composition_part)
 
     for character, value in cjkvi_dict.items():
+        cjkvi_dict[character]["composition_parts"] = list(cjkvi_dict[character]["composition_parts"])
         for recursive_composition_part in recursive_cjkvi_parts_parser(cjkvi_dict, cjkvi_dict[character]["composition_parts"]):
             if recursive_composition_part in cjkvi_dict[character]["composition_parts"]:
                 continue
-            cjkvi_dict[character]["recursive_composition_parts"].add(recursive_composition_part)
+            cjkvi_dict[character]["recursive_composition_parts"][recursive_composition_part] = None
+
+        cjkvi_dict[character]["recursive_composition_parts"] = list(cjkvi_dict[character]["recursive_composition_parts"])
 
     for unique_component in cjkvi_unique_components:
         cjkvi_components_info.append({
