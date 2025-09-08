@@ -54,4 +54,6 @@ Similar to the Components option but uses composition data containing thousands 
 
 Input any character into the Decomposition input box then select one of the decomposition outputs to add it to the kanji filtering. The decomposition input is limited to 4 characters at once.
 
+The first row shows primary decomposition results and the second row shows secondary and further results. Primary results will typically be characters with a higher stroke count.
+
 Selected parts will appear under Composition. To remove a part, click or tap it under Composition.
