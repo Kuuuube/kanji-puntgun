@@ -273,8 +273,15 @@ function prepare_decomposition() {
         let decomposition_table = [];
         const table_item_class = "table-item";
         for (const decomposition_target of decomposition_targets) {
-            const decomposition_data = KANJI_DATA[decomposition_target]?.cjkvi_components;
-            if (!decomposition_data) { continue; }
+            const cjkvi_components = KANJI_DATA[decomposition_target]?.cjkvi_components;
+            const cjkvi_components_recursive = KANJI_DATA[decomposition_target]?.cjkvi_components_recursive;
+
+            let decomposition_data = cjkvi_components ?? [];
+            if (cjkvi_components_recursive) {
+                decomposition_data.push(...cjkvi_components_recursive);
+            }
+            decomposition_data.push(decomposition_target);
+
             let decomposition_html_string = "";
             for (const decomposition_item of decomposition_data) {
                 let current_item_classes = [table_item_class];
