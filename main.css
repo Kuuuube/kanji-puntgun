@@ -518,6 +518,15 @@ code {
     background-color: var(--bs-gray-800);
 }
 
+#decomposition-input {
+    margin-bottom: 5px;
+}
+
+#composition-selection-container,
+#decomposition-container {
+    min-height: 3rem;
+}
+
 @media (min-width: 600px) {
     .fake-icon {
         display: none;

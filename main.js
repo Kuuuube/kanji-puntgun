@@ -5,6 +5,7 @@ const DEFAULTS = {
     skip: {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0},
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: {greater: 0, equal: 0, less: 0},
+    composition_parts: [],
 }
 const KANJI_RESULTS_LIMIT = 250;
 const MAX_FREQUENCY_VALUE = 5000;
@@ -15,6 +16,7 @@ let selected_four_corners = structuredClone(DEFAULTS.four_corners);
 let selected_skip = structuredClone(DEFAULTS.skip);
 let word_parts = structuredClone(DEFAULTS.word_parts);
 let stroke_count_filter = structuredClone(DEFAULTS.stroke_count);
+let selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
 
 let full_kanji_results = [];
 let kanji_results_ellipsis_char = "⋯";
@@ -231,6 +233,42 @@ function prepare_stroke_count() {
     });
 }
 
+function prepare_composition() {
+    const composition_selection_container = document.querySelector("#composition-selection-container");
+    document.querySelector("#decomposition-container").addEventListener("click", (e) => {
+        const composition_component = e.target.textContent;
+        if ([...composition_component].length > 1) { return; }
+        if (composition_selection_container.textContent.includes(composition_component)) { return; }
+        document.querySelector("#composition-selection-container").innerHTML += "<span class=\"table-item selected\">" + composition_component + "</span>";
+        selected_composition_parts.push(composition_component);
+
+        find_possible_kanji();
+    });
+    composition_selection_container.addEventListener("click", (e) => {
+        const composition_component = e.target.textContent;
+        if ([...composition_component].length > 1) { return; }
+        if (e.target.classList.contains("selected")) { e.target.remove(); }
+        selected_composition_parts.splice(selected_composition_parts.indexOf(composition_component), 1);
+
+        find_possible_kanji();
+    });
+}
+
+function prepare_decomposition() {
+    const decomposition_input = document.querySelector("#decomposition-input");
+    decomposition_input.addEventListener("input", (e) => {
+        const decomposition_targets = [...e.target.value];
+        let decomposition_table = [];
+        const result_item_class = "table-item";
+        for (const decomposition_target of decomposition_targets) {
+            const decomposition_data = KANJI_DATA[decomposition_target]?.cjkvi_components;
+            if (!decomposition_data) { continue; }
+            decomposition_table.push("<span class=\"" + result_item_class + "\">" + decomposition_data.join("</span><span class=\"" + result_item_class + "\">") + "</span>");
+        }
+        document.querySelector("#decomposition-container").innerHTML = decomposition_table.join("<span class=\"vertical-separator\"></span>");
+    });
+}
+
 function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner, possible_skip_part_one) {
     const radical_selection = document.querySelector("#radicals-selection");
     const radical_table_items = radical_selection.querySelectorAll(".table-item");
@@ -370,6 +408,15 @@ function find_possible_kanji() {
         return true;
     }
 
+    function check_composition_parts(cjkvi_components, cjkvi_components_recursive) {
+        for (const composition_part of selected_composition_parts) {
+            if (!(cjkvi_components.concat(cjkvi_components_recursive)).includes(composition_part)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     for (const [kanji, kanji_values] of Object.entries(KANJI_DATA)) {
         if (!check_selected_radical(kanji_values.radical.id)) { continue; }
         if (!check_selected_components(kanji_values.components)) { continue; }
@@ -377,6 +424,7 @@ function find_possible_kanji() {
         if (!check_selected_skip(kanji_values.skip)) { continue; }
         if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
         if (!check_word_parts_kanji(kanji)) { continue; }
+        if (!check_composition_parts(kanji_values.cjkvi_components, kanji_values.cjkvi_components_recursive)) { continue; }
 
         remaining_radicals.add(kanji_values.radical.id);
         if (kanji_values.components) {
@@ -527,6 +575,19 @@ function prepare_reset_buttons() {
     }
     document.querySelector("#stroke-count-reset").addEventListener("click", reset_stroke_count);
 
+    function reset_composition(find = true) {
+        document.querySelector("#composition-selection-container").innerHTML = "";
+        selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
+        if (find) { find_possible_kanji() };
+    }
+    document.querySelector("#composition-reset").addEventListener("click", reset_composition);
+
+    function reset_decomposition() {
+        document.querySelector("#decomposition-input").value = "";
+        document.querySelector("#decomposition-container").innerHTML = "";
+    }
+    document.querySelector("#decomposition-reset").addEventListener("click", reset_decomposition);
+
     function reset_all() {
         reset_radicals(false);
         reset_components(false);
@@ -534,6 +595,8 @@ function prepare_reset_buttons() {
         reset_skip(false);
         reset_partial_word(false);
         reset_stroke_count(false);
+        reset_composition(false);
+        reset_decomposition(); // resetting decomposition doesn't change any kanji finding data
         find_possible_kanji();
     }
     document.querySelector("#reset-all").addEventListener("click", reset_all);
@@ -552,6 +615,8 @@ prepare_four_corners_selection();
 prepare_skip_selection();
 prepare_partial_word();
 prepare_stroke_count();
+prepare_composition();
+prepare_decomposition();
 prepare_jisho_search();
 prepare_header_results_selector();
 prepare_no_select();
