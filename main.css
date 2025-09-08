@@ -297,6 +297,10 @@ input, #header-input-mirror {
     align-items: center;
 }
 
+.flexbox-wrap {
+    flex-wrap: wrap;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 400px);

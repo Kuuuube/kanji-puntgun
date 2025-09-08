@@ -269,20 +269,19 @@ function prepare_composition() {
 function prepare_decomposition() {
     const decomposition_input = document.querySelector("#decomposition-input");
     decomposition_input.addEventListener("input", (e) => {
-        const decomposition_targets = [...e.target.value];
+        const decomposition_targets = [...e.target.value].slice(0, 4); // decompose 4 characters maximum at once
         let decomposition_table = [];
         const table_item_class = "table-item";
         for (const decomposition_target of decomposition_targets) {
-            const cjkvi_components = KANJI_DATA[decomposition_target]?.cjkvi_components;
-            const cjkvi_components_recursive = KANJI_DATA[decomposition_target]?.cjkvi_components_recursive;
+            const cjkvi_components = structuredClone(KANJI_DATA[decomposition_target]?.cjkvi_components ?? []);
+            const cjkvi_components_recursive = structuredClone(KANJI_DATA[decomposition_target]?.cjkvi_components_recursive ?? []);
+            if (cjkvi_components.length + cjkvi_components_recursive.length === 0) { continue; }
 
-            let decomposition_data = cjkvi_components ?? [];
-            if (cjkvi_components_recursive) {
-                decomposition_data.push(...cjkvi_components_recursive);
-            }
+            let decomposition_data = cjkvi_components;
             decomposition_data.push(decomposition_target);
 
-            let decomposition_html_string = "";
+            let decomposition_html_string = "<span class=\"flexbox flexbox-vertical flexbox-wrap flexbox-center\"><span>";
+            // primary composition items and target kanji itself
             for (const decomposition_item of decomposition_data) {
                 let current_item_classes = [table_item_class];
                 if (selected_composition_parts.includes(decomposition_item)) {
@@ -290,6 +289,18 @@ function prepare_decomposition() {
                 }
                 decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
             }
+
+            // secondary and further below components
+            if (cjkvi_components_recursive.length > 0) { decomposition_html_string += "</span><span>"; }
+            for (const decomposition_item of cjkvi_components_recursive) {
+                let current_item_classes = [table_item_class];
+                if (selected_composition_parts.includes(decomposition_item)) {
+                    current_item_classes.push("selected");
+                }
+                decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
+            }
+
+            decomposition_html_string += "</span></span>";
             decomposition_table.push(decomposition_html_string);
         }
         document.querySelector("#decomposition-container").innerHTML = decomposition_table.join("<span class=\"vertical-separator\"></span>");
