@@ -530,7 +530,7 @@ code {
     min-height: 1.55rem;
 }
 #decomposition-container {
-    min-height: 3rem;
+    min-height: 3.1rem;
 }
 
 @media (min-width: 600px) {
