@@ -446,9 +446,9 @@ function find_possible_kanji() {
         return true;
     }
 
-    function check_composition_parts(cjkvi_components, cjkvi_components_recursive) {
+    function check_composition_parts(kanji, cjkvi_components, cjkvi_components_recursive) {
         for (const composition_part of selected_composition_parts) {
-            if (!(cjkvi_components.concat(cjkvi_components_recursive)).includes(composition_part)) {
+            if (![kanji, ...cjkvi_components, ...cjkvi_components_recursive].includes(composition_part)) {
                 return false;
             }
         }
@@ -462,7 +462,7 @@ function find_possible_kanji() {
         if (!check_selected_skip(kanji_values.skip)) { continue; }
         if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
         if (!check_word_parts_kanji(kanji)) { continue; }
-        if (!check_composition_parts(kanji_values.cjkvi_components, kanji_values.cjkvi_components_recursive)) { continue; }
+        if (!check_composition_parts(kanji, kanji_values.cjkvi_components, kanji_values.cjkvi_components_recursive)) { continue; }
 
         remaining_radicals.add(kanji_values.radical.id);
         if (kanji_values.components) {
