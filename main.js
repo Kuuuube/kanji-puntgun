@@ -68,7 +68,7 @@ function prepare_components_selection() {
         e.stopImmediatePropagation();
 
         const component = e.target.textContent;
-        if (component.length > 1) { return; }
+        if ([...component].length > 1) { return; }
         if (selected_components.indexOf(component) == -1) {
             selected_components.push(component);
             e.target.classList.add("selected");
@@ -433,7 +433,7 @@ function prepare_header_results_selector() {
     const kanji_results = document.querySelector("#kanji-results");
     const header_input = document.querySelector("#header-input");
     kanji_results.addEventListener("click", (e) => {
-        if (e.target.textContent.length > 1) { return; }
+        if ([...e.target.textContent].length > 1) { return; }
         if (e.target.textContent === kanji_results_ellipsis_char) {
             if (e.target.id === "kanji-results-ellipsis-start") {
                 kanji_results_index -= KANJI_RESULTS_LIMIT;
