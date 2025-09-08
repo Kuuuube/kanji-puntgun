@@ -616,6 +616,9 @@ function prepare_reset_buttons() {
     function reset_composition(find = true) {
         document.querySelector("#composition-selection-container").innerHTML = "";
         selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
+        for (const table_item of document.querySelector("#decomposition-container").querySelectorAll(".table-item")) {
+            table_item.classList.remove("disabled-item");
+        }
         if (find) { find_possible_kanji() };
     }
     document.querySelector("#composition-reset").addEventListener("click", reset_composition);
