@@ -302,10 +302,12 @@ input, #header-input-mirror {
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 400px);
-    justify-content: center;
     margin-bottom: 1em;
+}
+
+.grid-container > * {
+    min-width: 400px;
+    flex-shrink: 0;
 }
 
 #radicals-selection, #components-selection {
