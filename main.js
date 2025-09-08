@@ -235,10 +235,12 @@ function prepare_stroke_count() {
 
 function prepare_composition() {
     const composition_selection_container = document.querySelector("#composition-selection-container");
-    document.querySelector("#decomposition-container").addEventListener("click", (e) => {
+    const decomposition_container = document.querySelector("#decomposition-container");
+    decomposition_container.addEventListener("click", (e) => {
         const composition_component = e.target.textContent;
         if ([...composition_component].length > 1) { return; }
         if (composition_selection_container.textContent.includes(composition_component)) { return; }
+        e.target.classList.add("selected");
         document.querySelector("#composition-selection-container").innerHTML += "<span class=\"table-item selected\">" + composition_component + "</span>";
         selected_composition_parts.push(composition_component);
 
@@ -249,6 +251,11 @@ function prepare_composition() {
         if ([...composition_component].length > 1) { return; }
         if (e.target.classList.contains("selected")) { e.target.remove(); }
         selected_composition_parts.splice(selected_composition_parts.indexOf(composition_component), 1);
+        for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
+            if (table_item.textContent === composition_component) {
+                table_item.classList.remove("selected");
+            }
+        }
 
         find_possible_kanji();
     });
@@ -259,11 +266,19 @@ function prepare_decomposition() {
     decomposition_input.addEventListener("input", (e) => {
         const decomposition_targets = [...e.target.value];
         let decomposition_table = [];
-        const result_item_class = "table-item";
+        const table_item_class = "table-item";
         for (const decomposition_target of decomposition_targets) {
             const decomposition_data = KANJI_DATA[decomposition_target]?.cjkvi_components;
             if (!decomposition_data) { continue; }
-            decomposition_table.push("<span class=\"" + result_item_class + "\">" + decomposition_data.join("</span><span class=\"" + result_item_class + "\">") + "</span>");
+            let decomposition_html_string = "";
+            for (const decomposition_item of decomposition_data) {
+                let current_item_class = table_item_class;
+                if (selected_composition_parts.includes(decomposition_item)) {
+                    current_item_class += " selected";
+                }
+                decomposition_html_string += "<span class=\"" + current_item_class + "\">" + decomposition_item + "</span>"
+            }
+            decomposition_table.push(decomposition_html_string);
         }
         document.querySelector("#decomposition-container").innerHTML = decomposition_table.join("<span class=\"vertical-separator\"></span>");
     });
