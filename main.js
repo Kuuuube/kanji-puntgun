@@ -25,6 +25,8 @@ let full_kanji_results = [];
 let kanji_results_ellipsis_char = "⋯";
 let kanji_results_index = 0;
 
+let global_valid_cjkvi_components = new Set([]);
+
 function prevent_double_triple_click_select(e) {
     if (e.detail > 1 && e.button === 0) {
         e.preventDefault();
@@ -290,6 +292,9 @@ function prepare_decomposition() {
                 if (selected_composition_parts.includes(decomposition_item)) {
                     current_item_classes.push("decomposition-already-selected");
                 }
+                if (!global_valid_cjkvi_components.has(decomposition_item)) {
+                    current_item_classes.push(DISABLED_CLASS);
+                }
                 decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
             }
 
@@ -299,6 +304,9 @@ function prepare_decomposition() {
                 let current_item_classes = [table_item_class];
                 if (selected_composition_parts.includes(decomposition_item)) {
                     current_item_classes.push("decomposition-already-selected");
+                }
+                if (!global_valid_cjkvi_components.has(decomposition_item)) {
+                    current_item_classes.push(DISABLED_CLASS);
                 }
                 decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
             }
@@ -502,6 +510,8 @@ function find_possible_kanji() {
             kanji_values.cjkvi_components.forEach((x) => remaining_cjkvi_components.add(x));
             kanji_values.cjkvi_components_recursive.forEach((x) => remaining_cjkvi_components.add(x));
         }
+        global_valid_cjkvi_components = remaining_cjkvi_components;
+
         possible_kanji.push(kanji);
     }
 
