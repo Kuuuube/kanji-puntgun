@@ -243,7 +243,7 @@ function prepare_composition() {
 
         for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
             if (table_item.textContent === composition_component) {
-                table_item.classList.add("disabled-item");
+                table_item.classList.add("decomposition-already-selected");
             }
         }
         document.querySelector("#composition-selection-container").innerHTML += "<span class=\"table-item selected\">" + composition_component + "</span>";
@@ -258,7 +258,7 @@ function prepare_composition() {
         selected_composition_parts.splice(selected_composition_parts.indexOf(composition_component), 1);
         for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
             if (table_item.textContent === composition_component) {
-                table_item.classList.remove("disabled-item");
+                table_item.classList.remove("decomposition-already-selected");
             }
         }
 
@@ -285,7 +285,7 @@ function prepare_decomposition() {
             for (const decomposition_item of decomposition_data) {
                 let current_item_classes = [table_item_class];
                 if (selected_composition_parts.includes(decomposition_item)) {
-                    current_item_classes.push("disabled-item");
+                    current_item_classes.push("decomposition-already-selected");
                 }
                 decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
             }
@@ -295,7 +295,7 @@ function prepare_decomposition() {
             for (const decomposition_item of cjkvi_components_recursive) {
                 let current_item_classes = [table_item_class];
                 if (selected_composition_parts.includes(decomposition_item)) {
-                    current_item_classes.push("disabled-item");
+                    current_item_classes.push("decomposition-already-selected");
                 }
                 decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
             }

@@ -372,6 +372,7 @@ input, #header-input-mirror {
     background-color: var(--bs-gray-700);
 }
 
+.decomposition-already-selected,
 .disabled-item {
     filter: opacity(50%);
 }
