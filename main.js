@@ -286,31 +286,27 @@ function prepare_decomposition() {
             let decomposition_data = cjkvi_components;
             decomposition_data.push(decomposition_target);
 
-            let decomposition_html_string = "<span class=\"flexbox flexbox-vertical flexbox-wrap flexbox-center\"><span>";
-            // primary composition items and target kanji itself
-            for (const decomposition_item of decomposition_data) {
-                let current_item_classes = [table_item_class];
-                if (selected_composition_parts.includes(decomposition_item)) {
-                    current_item_classes.push(DECOMPOSITION_DISABLED_CLASS);
+            let decomposition_html_string = "<span class=\"flexbox flexbox-vertical flexbox-wrap flexbox-center\">";
+            function render_decomposition_row(decomposition_data) {
+                let html_string = "<span>";
+                for (const decomposition_item of decomposition_data) {
+                    let current_item_classes = [table_item_class];
+                    if (selected_composition_parts.includes(decomposition_item)) {
+                        current_item_classes.push(DECOMPOSITION_DISABLED_CLASS);
+                    }
+                    if (!global_valid_cjkvi_components.has(decomposition_item)) {
+                        current_item_classes.push(DISABLED_CLASS);
+                    }
+                    html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
                 }
-                if (!global_valid_cjkvi_components.has(decomposition_item)) {
-                    current_item_classes.push(DISABLED_CLASS);
-                }
-                decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
+                return html_string;
             }
+            // primary composition items and target kanji itself
+            decomposition_html_string += render_decomposition_row(decomposition_data);
 
             // secondary and further below components
-            if (cjkvi_components_recursive.length > 0) { decomposition_html_string += "</span><span>"; }
-            for (const decomposition_item of cjkvi_components_recursive) {
-                let current_item_classes = [table_item_class];
-                if (selected_composition_parts.includes(decomposition_item)) {
-                    current_item_classes.push(DECOMPOSITION_DISABLED_CLASS);
-                }
-                if (!global_valid_cjkvi_components.has(decomposition_item)) {
-                    current_item_classes.push(DISABLED_CLASS);
-                }
-                decomposition_html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
-            }
+            if (cjkvi_components_recursive.length > 0) { decomposition_html_string += "</span>"; }
+            decomposition_html_string += render_decomposition_row(cjkvi_components_recursive);
 
             decomposition_html_string += "</span></span>";
             decomposition_table.push(decomposition_html_string);
