@@ -307,7 +307,7 @@ function prepare_decomposition() {
     });
 }
 
-function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner, possible_skip) {
+function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner, possible_skip, possible_cjkvi_components) {
     const radical_selection = document.querySelector("#radicals-selection");
     const radical_table_items = radical_selection.querySelectorAll(".table-item");
     for (const radical_table_item of radical_table_items) {
@@ -353,6 +353,16 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
             skip_part_one_table_item.classList.add("disabled-item");
         }
     }
+
+    const decomposition_container = document.querySelector("#decomposition-container");
+    const decomposition_table_items = decomposition_container.querySelectorAll(".table-item");
+    for (const decomposition_table_item of decomposition_table_items) {
+        const cjkvi_component = decomposition_table_item.textContent;
+        decomposition_table_item.classList.remove("disabled-item");
+        if (!possible_cjkvi_components.has(cjkvi_component)) {
+            decomposition_table_item.classList.add("disabled-item");
+        }
+    }
 }
 
 function find_possible_kanji() {
@@ -371,7 +381,8 @@ function find_possible_kanji() {
         part_one: new Set([]),
         part_two: new Set([]),
         part_three: new Set([]),
-    }
+    };
+    let remaining_cjkvi_components = new Set([]);
 
     function check_selected_radical(test_radical) {
         if (selected_radical === -1) { return true; }
@@ -484,10 +495,14 @@ function find_possible_kanji() {
             remaining_skip.part_two.add(kanji_values.skip.part_two);
             remaining_skip.part_three.add(kanji_values.skip.part_three);
         }
+        if (kanji_values.cjkvi_components) {
+            kanji_values.cjkvi_components.forEach((x) => remaining_cjkvi_components.add(x));
+            kanji_values.cjkvi_components_recursive.forEach((x) => remaining_cjkvi_components.add(x));
+        }
         possible_kanji.push(kanji);
     }
 
-    gray_out_unavailable(remaining_radicals, remaining_components, remaining_four_corner, remaining_skip);
+    gray_out_unavailable(remaining_radicals, remaining_components, remaining_four_corner, remaining_skip, remaining_cjkvi_components);
 
     possible_kanji.sort((a, b) => get_sorting_value(a) - get_sorting_value(b));
 
