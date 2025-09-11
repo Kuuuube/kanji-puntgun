@@ -500,6 +500,7 @@ function find_possible_kanji() {
         if (kanji_values.cjkvi_components) {
             kanji_values.cjkvi_components.forEach((x) => remaining_cjkvi_components.add(x));
             kanji_values.cjkvi_components_recursive.forEach((x) => remaining_cjkvi_components.add(x));
+            remaining_cjkvi_components.add(kanji); // kanji can be included in the decomposition so they must be checked for
         }
         global_valid_cjkvi_components = remaining_cjkvi_components;
 
