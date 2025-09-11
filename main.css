@@ -544,6 +544,10 @@ code {
     min-height: 3.1rem;
 }
 
+.docs-header {
+    margin-bottom: 0;
+}
+
 @media (min-width: 600px) {
     .fake-icon {
         display: none;
