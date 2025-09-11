@@ -641,7 +641,7 @@ function prepare_reset_buttons() {
         document.querySelector("#composition-selection-container").innerHTML = "";
         selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
         for (const table_item of document.querySelector("#decomposition-container").querySelectorAll(".table-item")) {
-            table_item.classList.remove(DISABLED_CLASS);
+            table_item.classList.remove("decomposition-already-selected");
         }
         if (find) { find_possible_kanji() };
     }
