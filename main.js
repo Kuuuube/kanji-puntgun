@@ -12,6 +12,7 @@ const MAX_FREQUENCY_VALUE = 5000;
 
 const DISABLED_CLASS = "disabled-item";
 const SELECTED_CLASS = "selected";
+const DECOMPOSITION_DISABLED_CLASS = "decomposition-already-selected";
 
 let selected_radical = structuredClone(DEFAULTS.radical);
 let selected_components = structuredClone(DEFAULTS.components);
@@ -248,7 +249,7 @@ function prepare_composition() {
 
         for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
             if (table_item.textContent === composition_component) {
-                table_item.classList.add("decomposition-already-selected");
+                table_item.classList.add(DECOMPOSITION_DISABLED_CLASS);
             }
         }
         document.querySelector("#composition-selection-container").innerHTML += "<span class=\"table-item selected\">" + composition_component + "</span>";
@@ -263,7 +264,7 @@ function prepare_composition() {
         selected_composition_parts.splice(selected_composition_parts.indexOf(composition_component), 1);
         for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
             if (table_item.textContent === composition_component) {
-                table_item.classList.remove("decomposition-already-selected");
+                table_item.classList.remove(DECOMPOSITION_DISABLED_CLASS);
             }
         }
 
@@ -290,7 +291,7 @@ function prepare_decomposition() {
             for (const decomposition_item of decomposition_data) {
                 let current_item_classes = [table_item_class];
                 if (selected_composition_parts.includes(decomposition_item)) {
-                    current_item_classes.push("decomposition-already-selected");
+                    current_item_classes.push(DECOMPOSITION_DISABLED_CLASS);
                 }
                 if (!global_valid_cjkvi_components.has(decomposition_item)) {
                     current_item_classes.push(DISABLED_CLASS);
@@ -303,7 +304,7 @@ function prepare_decomposition() {
             for (const decomposition_item of cjkvi_components_recursive) {
                 let current_item_classes = [table_item_class];
                 if (selected_composition_parts.includes(decomposition_item)) {
-                    current_item_classes.push("decomposition-already-selected");
+                    current_item_classes.push(DECOMPOSITION_DISABLED_CLASS);
                 }
                 if (!global_valid_cjkvi_components.has(decomposition_item)) {
                     current_item_classes.push(DISABLED_CLASS);
@@ -651,7 +652,7 @@ function prepare_reset_buttons() {
         document.querySelector("#composition-selection-container").innerHTML = "";
         selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
         for (const table_item of document.querySelector("#decomposition-container").querySelectorAll(".table-item")) {
-            table_item.classList.remove("decomposition-already-selected");
+            table_item.classList.remove(DECOMPOSITION_DISABLED_CLASS);
         }
         if (find) { find_possible_kanji() };
     }
