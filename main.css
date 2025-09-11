@@ -377,6 +377,14 @@ input, #header-input-mirror {
     filter: opacity(50%);
 }
 
+.component-align-right {
+    text-align: right;
+}
+
+.component-align-left {
+    text-align: left;
+}
+
 #sticky-header {
     position: sticky;
     top: 0;

@@ -2,1266 +2,1519 @@
     {
         "component": "一",
         "stroke_count": "1",
-        "display_component": "一"
+        "display_component": "一",
+        "align": "center"
     },
     {
         "component": "｜",
         "stroke_count": "1",
-        "display_component": "｜"
+        "display_component": "｜",
+        "align": "center"
     },
     {
         "component": "丶",
         "stroke_count": "1",
-        "display_component": "丶"
+        "display_component": "丶",
+        "align": "center"
     },
     {
         "component": "ノ",
         "stroke_count": "1",
-        "display_component": "ノ"
+        "display_component": "ノ",
+        "align": "center"
     },
     {
         "component": "乙",
         "stroke_count": "1",
-        "display_component": "乙"
+        "display_component": "乙",
+        "align": "center"
     },
     {
         "component": "亅",
         "stroke_count": "1",
-        "display_component": "亅"
+        "display_component": "亅",
+        "align": "center"
     },
     {
         "component": "二",
         "stroke_count": "2",
-        "display_component": "二"
+        "display_component": "二",
+        "align": "center"
     },
     {
         "component": "亠",
         "stroke_count": "2",
-        "display_component": "亠"
+        "display_component": "亠",
+        "align": "center"
     },
     {
         "component": "人",
         "stroke_count": "2",
-        "display_component": "人"
+        "display_component": "人",
+        "align": "center"
     },
     {
         "component": "化",
         "stroke_count": "2",
-        "display_component": "⺅"
+        "display_component": "⺅",
+        "align": "left"
     },
     {
         "component": "个",
         "stroke_count": "2",
-        "display_component": "𠆢"
+        "display_component": "𠆢",
+        "align": "top"
     },
     {
         "component": "儿",
         "stroke_count": "2",
-        "display_component": "儿"
+        "display_component": "儿",
+        "align": "center"
     },
     {
         "component": "入",
         "stroke_count": "2",
-        "display_component": "入"
+        "display_component": "入",
+        "align": "center"
     },
     {
         "component": "ハ",
         "stroke_count": "2",
-        "display_component": "ハ"
+        "display_component": "ハ",
+        "align": "center"
     },
     {
         "component": "并",
         "stroke_count": "2",
-        "display_component": "丷"
+        "display_component": "丷",
+        "align": "top"
     },
     {
         "component": "冂",
         "stroke_count": "2",
-        "display_component": "冂"
+        "display_component": "冂",
+        "align": "center"
     },
     {
         "component": "冖",
         "stroke_count": "2",
-        "display_component": "冖"
+        "display_component": "冖",
+        "align": "center"
     },
     {
         "component": "冫",
         "stroke_count": "2",
-        "display_component": "冫"
+        "display_component": "冫",
+        "align": "center"
     },
     {
         "component": "几",
         "stroke_count": "2",
-        "display_component": "几"
+        "display_component": "几",
+        "align": "center"
     },
     {
         "component": "凵",
         "stroke_count": "2",
-        "display_component": "凵"
+        "display_component": "凵",
+        "align": "center"
     },
     {
         "component": "刀",
         "stroke_count": "2",
-        "display_component": "刀"
+        "display_component": "刀",
+        "align": "center"
     },
     {
         "component": "刈",
         "stroke_count": "2",
-        "display_component": "⺉"
+        "display_component": "⺉",
+        "align": "right"
     },
     {
         "component": "力",
         "stroke_count": "2",
-        "display_component": "力"
+        "display_component": "力",
+        "align": "center"
     },
     {
         "component": "勹",
         "stroke_count": "2",
-        "display_component": "勹"
+        "display_component": "勹",
+        "align": "center"
     },
     {
         "component": "匕",
         "stroke_count": "2",
-        "display_component": "匕"
+        "display_component": "匕",
+        "align": "center"
     },
     {
         "component": "匚",
         "stroke_count": "2",
-        "display_component": "匚"
+        "display_component": "匚",
+        "align": "center"
     },
     {
         "component": "十",
         "stroke_count": "2",
-        "display_component": "十"
+        "display_component": "十",
+        "align": "center"
     },
     {
         "component": "卜",
         "stroke_count": "2",
-        "display_component": "卜"
+        "display_component": "卜",
+        "align": "center"
     },
     {
         "component": "卩",
         "stroke_count": "2",
-        "display_component": "卩"
+        "display_component": "卩",
+        "align": "center"
     },
     {
         "component": "厂",
         "stroke_count": "2",
-        "display_component": "厂"
+        "display_component": "厂",
+        "align": "center"
     },
     {
         "component": "厶",
         "stroke_count": "2",
-        "display_component": "厶"
+        "display_component": "厶",
+        "align": "center"
     },
     {
         "component": "又",
         "stroke_count": "2",
-        "display_component": "又"
+        "display_component": "又",
+        "align": "center"
     },
     {
         "component": "マ",
         "stroke_count": "2",
-        "display_component": "マ"
+        "display_component": "マ",
+        "align": "center"
     },
     {
         "component": "九",
         "stroke_count": "2",
-        "display_component": "九"
+        "display_component": "九",
+        "align": "center"
     },
     {
         "component": "ユ",
         "stroke_count": "2",
-        "display_component": "ユ"
+        "display_component": "ユ",
+        "align": "center"
     },
     {
         "component": "乃",
         "stroke_count": "2",
-        "display_component": "乃"
+        "display_component": "乃",
+        "align": "center"
     },
     {
         "component": "乞",
         "stroke_count": "2",
-        "display_component": "𠂉"
+        "display_component": "𠂉",
+        "align": "center"
     },
     {
         "component": "込",
         "stroke_count": "3",
-        "display_component": "⻌"
+        "display_component": "⻌",
+        "align": "center"
     },
     {
         "component": "口",
         "stroke_count": "3",
-        "display_component": "口"
+        "display_component": "口",
+        "align": "center"
     },
     {
         "component": "囗",
         "stroke_count": "3",
-        "display_component": "囗"
+        "display_component": "囗",
+        "align": "center"
     },
     {
         "component": "土",
         "stroke_count": "3",
-        "display_component": "土"
+        "display_component": "土",
+        "align": "center"
     },
     {
         "component": "士",
         "stroke_count": "3",
-        "display_component": "士"
+        "display_component": "士",
+        "align": "center"
     },
     {
         "component": "夂",
         "stroke_count": "3",
-        "display_component": "夂"
+        "display_component": "夂",
+        "align": "center"
     },
     {
         "component": "夕",
         "stroke_count": "3",
-        "display_component": "夕"
+        "display_component": "夕",
+        "align": "center"
     },
     {
         "component": "大",
         "stroke_count": "3",
-        "display_component": "大"
+        "display_component": "大",
+        "align": "center"
     },
     {
         "component": "女",
         "stroke_count": "3",
-        "display_component": "女"
+        "display_component": "女",
+        "align": "center"
     },
     {
         "component": "子",
         "stroke_count": "3",
-        "display_component": "子"
+        "display_component": "子",
+        "align": "center"
     },
     {
         "component": "宀",
         "stroke_count": "3",
-        "display_component": "宀"
+        "display_component": "宀",
+        "align": "center"
     },
     {
         "component": "寸",
         "stroke_count": "3",
-        "display_component": "寸"
+        "display_component": "寸",
+        "align": "center"
     },
     {
         "component": "小",
         "stroke_count": "3",
-        "display_component": "小"
+        "display_component": "小",
+        "align": "center"
     },
     {
         "component": "尚",
         "stroke_count": "3",
-        "display_component": "⺌"
+        "display_component": "⺌",
+        "align": "top"
     },
     {
         "component": "尢",
         "stroke_count": "3",
-        "display_component": "尢"
+        "display_component": "尢",
+        "align": "center"
     },
     {
         "component": "尸",
         "stroke_count": "3",
-        "display_component": "尸"
+        "display_component": "尸",
+        "align": "center"
     },
     {
         "component": "屮",
         "stroke_count": "3",
-        "display_component": "屮"
+        "display_component": "屮",
+        "align": "center"
     },
     {
         "component": "山",
         "stroke_count": "3",
-        "display_component": "山"
+        "display_component": "山",
+        "align": "center"
     },
     {
         "component": "川",
         "stroke_count": "3",
-        "display_component": "川"
+        "display_component": "川",
+        "align": "center"
     },
     {
         "component": "巛",
         "stroke_count": "3",
-        "display_component": "巛"
+        "display_component": "巛",
+        "align": "center"
     },
     {
         "component": "工",
         "stroke_count": "3",
-        "display_component": "工"
+        "display_component": "工",
+        "align": "center"
     },
     {
         "component": "已",
         "stroke_count": "3",
-        "display_component": "已"
+        "display_component": "已",
+        "align": "center"
     },
     {
         "component": "巾",
         "stroke_count": "3",
-        "display_component": "巾"
+        "display_component": "巾",
+        "align": "center"
     },
     {
         "component": "干",
         "stroke_count": "3",
-        "display_component": "干"
+        "display_component": "干",
+        "align": "center"
     },
     {
         "component": "幺",
         "stroke_count": "3",
-        "display_component": "幺"
+        "display_component": "幺",
+        "align": "center"
     },
     {
         "component": "广",
         "stroke_count": "3",
-        "display_component": "广"
+        "display_component": "广",
+        "align": "center"
     },
     {
         "component": "廴",
         "stroke_count": "3",
-        "display_component": "廴"
+        "display_component": "廴",
+        "align": "center"
     },
     {
         "component": "廾",
         "stroke_count": "3",
-        "display_component": "廾"
+        "display_component": "廾",
+        "align": "center"
     },
     {
         "component": "弋",
         "stroke_count": "3",
-        "display_component": "弋"
+        "display_component": "弋",
+        "align": "center"
     },
     {
         "component": "弓",
         "stroke_count": "3",
-        "display_component": "弓"
+        "display_component": "弓",
+        "align": "center"
     },
     {
         "component": "ヨ",
         "stroke_count": "3",
-        "display_component": "ヨ"
+        "display_component": "ヨ",
+        "align": "center"
     },
     {
         "component": "彑",
         "stroke_count": "3",
-        "display_component": "彑"
+        "display_component": "彑",
+        "align": "center"
     },
     {
         "component": "彡",
         "stroke_count": "3",
-        "display_component": "彡"
+        "display_component": "彡",
+        "align": "center"
     },
     {
         "component": "彳",
         "stroke_count": "3",
-        "display_component": "彳"
+        "display_component": "彳",
+        "align": "center"
     },
     {
         "component": "忙",
         "stroke_count": "3",
-        "display_component": "⺖"
+        "display_component": "⺖",
+        "align": "left"
     },
     {
         "component": "扎",
         "stroke_count": "3",
-        "display_component": "⺘"
+        "display_component": "⺘",
+        "align": "left"
     },
     {
         "component": "汁",
         "stroke_count": "3",
-        "display_component": "⺡"
+        "display_component": "⺡",
+        "align": "left"
     },
     {
         "component": "犯",
         "stroke_count": "3",
-        "display_component": "⺨"
+        "display_component": "⺨",
+        "align": "left"
     },
     {
         "component": "艾",
         "stroke_count": "3",
-        "display_component": "⺾"
+        "display_component": "⺾",
+        "align": "top"
     },
     {
         "component": "邦",
         "stroke_count": "3",
-        "display_component": "⻏"
+        "display_component": "⻏",
+        "align": "right"
     },
     {
         "component": "阡",
         "stroke_count": "3",
-        "display_component": "⻖"
+        "display_component": "⻖",
+        "align": "left"
     },
     {
         "component": "也",
         "stroke_count": "3",
-        "display_component": "也"
+        "display_component": "也",
+        "align": "center"
     },
     {
         "component": "亡",
         "stroke_count": "3",
-        "display_component": "亡"
+        "display_component": "亡",
+        "align": "center"
     },
     {
         "component": "及",
         "stroke_count": "3",
-        "display_component": "及"
+        "display_component": "及",
+        "align": "center"
     },
     {
         "component": "久",
         "stroke_count": "3",
-        "display_component": "久"
+        "display_component": "久",
+        "align": "center"
     },
     {
         "component": "老",
         "stroke_count": "4",
-        "display_component": "⺹"
+        "display_component": "⺹",
+        "align": "top"
     },
     {
         "component": "心",
         "stroke_count": "4",
-        "display_component": "心"
+        "display_component": "心",
+        "align": "center"
     },
     {
         "component": "戈",
         "stroke_count": "4",
-        "display_component": "戈"
+        "display_component": "戈",
+        "align": "center"
     },
     {
         "component": "戸",
         "stroke_count": "4",
-        "display_component": "戸"
+        "display_component": "戸",
+        "align": "center"
     },
     {
         "component": "手",
         "stroke_count": "4",
-        "display_component": "手"
+        "display_component": "手",
+        "align": "center"
     },
     {
         "component": "支",
         "stroke_count": "4",
-        "display_component": "支"
+        "display_component": "支",
+        "align": "center"
     },
     {
         "component": "攵",
         "stroke_count": "4",
-        "display_component": "攵"
+        "display_component": "攵",
+        "align": "center"
     },
     {
         "component": "文",
         "stroke_count": "4",
-        "display_component": "文"
+        "display_component": "文",
+        "align": "center"
     },
     {
         "component": "斗",
         "stroke_count": "4",
-        "display_component": "斗"
+        "display_component": "斗",
+        "align": "center"
     },
     {
         "component": "斤",
         "stroke_count": "4",
-        "display_component": "斤"
+        "display_component": "斤",
+        "align": "center"
     },
     {
         "component": "方",
         "stroke_count": "4",
-        "display_component": "方"
+        "display_component": "方",
+        "align": "center"
     },
     {
         "component": "无",
         "stroke_count": "4",
-        "display_component": "无"
+        "display_component": "无",
+        "align": "center"
     },
     {
         "component": "日",
         "stroke_count": "4",
-        "display_component": "日"
+        "display_component": "日",
+        "align": "center"
     },
     {
         "component": "曰",
         "stroke_count": "4",
-        "display_component": "曰"
+        "display_component": "曰",
+        "align": "center"
     },
     {
         "component": "月",
         "stroke_count": "4",
-        "display_component": "月"
+        "display_component": "月",
+        "align": "center"
     },
     {
         "component": "木",
         "stroke_count": "4",
-        "display_component": "木"
+        "display_component": "木",
+        "align": "center"
     },
     {
         "component": "欠",
         "stroke_count": "4",
-        "display_component": "欠"
+        "display_component": "欠",
+        "align": "center"
     },
     {
         "component": "止",
         "stroke_count": "4",
-        "display_component": "止"
+        "display_component": "止",
+        "align": "center"
     },
     {
         "component": "歹",
         "stroke_count": "4",
-        "display_component": "歹"
+        "display_component": "歹",
+        "align": "center"
     },
     {
         "component": "殳",
         "stroke_count": "4",
-        "display_component": "殳"
+        "display_component": "殳",
+        "align": "center"
     },
     {
         "component": "比",
         "stroke_count": "4",
-        "display_component": "比"
+        "display_component": "比",
+        "align": "center"
     },
     {
         "component": "毛",
         "stroke_count": "4",
-        "display_component": "毛"
+        "display_component": "毛",
+        "align": "center"
     },
     {
         "component": "氏",
         "stroke_count": "4",
-        "display_component": "氏"
+        "display_component": "氏",
+        "align": "center"
     },
     {
         "component": "气",
         "stroke_count": "4",
-        "display_component": "气"
+        "display_component": "气",
+        "align": "center"
     },
     {
         "component": "水",
         "stroke_count": "4",
-        "display_component": "水"
+        "display_component": "水",
+        "align": "center"
     },
     {
         "component": "火",
         "stroke_count": "4",
-        "display_component": "火"
+        "display_component": "火",
+        "align": "center"
     },
     {
         "component": "杰",
         "stroke_count": "4",
-        "display_component": "⺣"
+        "display_component": "⺣",
+        "align": "bottom"
     },
     {
         "component": "爪",
         "stroke_count": "4",
-        "display_component": "爪"
+        "display_component": "爪",
+        "align": "center"
     },
     {
         "component": "父",
         "stroke_count": "4",
-        "display_component": "父"
+        "display_component": "父",
+        "align": "center"
     },
     {
         "component": "爻",
         "stroke_count": "4",
-        "display_component": "爻"
+        "display_component": "爻",
+        "align": "center"
     },
     {
         "component": "爿",
         "stroke_count": "4",
-        "display_component": "爿"
+        "display_component": "爿",
+        "align": "center"
     },
     {
         "component": "片",
         "stroke_count": "4",
-        "display_component": "片"
+        "display_component": "片",
+        "align": "center"
     },
     {
         "component": "牛",
         "stroke_count": "4",
-        "display_component": "牛"
+        "display_component": "牛",
+        "align": "center"
     },
     {
         "component": "犬",
         "stroke_count": "4",
-        "display_component": "犬"
+        "display_component": "犬",
+        "align": "center"
     },
     {
         "component": "礼",
         "stroke_count": "4",
-        "display_component": "⺭"
+        "display_component": "⺭",
+        "align": "left"
     },
     {
         "component": "王",
         "stroke_count": "4",
-        "display_component": "王"
+        "display_component": "王",
+        "align": "center"
     },
     {
         "component": "元",
         "stroke_count": "4",
-        "display_component": "元"
+        "display_component": "元",
+        "align": "center"
     },
     {
         "component": "井",
         "stroke_count": "4",
-        "display_component": "井"
+        "display_component": "井",
+        "align": "center"
     },
     {
         "component": "勿",
         "stroke_count": "4",
-        "display_component": "勿"
+        "display_component": "勿",
+        "align": "center"
     },
     {
         "component": "尤",
         "stroke_count": "4",
-        "display_component": "尤"
+        "display_component": "尤",
+        "align": "center"
     },
     {
         "component": "五",
         "stroke_count": "4",
-        "display_component": "五"
+        "display_component": "五",
+        "align": "center"
     },
     {
         "component": "屯",
         "stroke_count": "4",
-        "display_component": "屯"
+        "display_component": "屯",
+        "align": "center"
     },
     {
         "component": "巴",
         "stroke_count": "4",
-        "display_component": "巴"
+        "display_component": "巴",
+        "align": "center"
     },
     {
         "component": "毋",
         "stroke_count": "4",
-        "display_component": "毋"
+        "display_component": "毋",
+        "align": "center"
     },
     {
         "component": "玄",
         "stroke_count": "5",
-        "display_component": "玄"
+        "display_component": "玄",
+        "align": "center"
     },
     {
         "component": "瓦",
         "stroke_count": "5",
-        "display_component": "瓦"
+        "display_component": "瓦",
+        "align": "center"
     },
     {
         "component": "甘",
         "stroke_count": "5",
-        "display_component": "甘"
+        "display_component": "甘",
+        "align": "center"
     },
     {
         "component": "生",
         "stroke_count": "5",
-        "display_component": "生"
+        "display_component": "生",
+        "align": "center"
     },
     {
         "component": "用",
         "stroke_count": "5",
-        "display_component": "用"
+        "display_component": "用",
+        "align": "center"
     },
     {
         "component": "田",
         "stroke_count": "5",
-        "display_component": "田"
+        "display_component": "田",
+        "align": "center"
     },
     {
         "component": "疋",
         "stroke_count": "5",
-        "display_component": "疋"
+        "display_component": "疋",
+        "align": "center"
     },
     {
         "component": "疔",
         "stroke_count": "5",
-        "display_component": "疒"
+        "display_component": "疒",
+        "align": "center"
     },
     {
         "component": "癶",
         "stroke_count": "5",
-        "display_component": "癶"
+        "display_component": "癶",
+        "align": "center"
     },
     {
         "component": "白",
         "stroke_count": "5",
-        "display_component": "白"
+        "display_component": "白",
+        "align": "center"
     },
     {
         "component": "皮",
         "stroke_count": "5",
-        "display_component": "皮"
+        "display_component": "皮",
+        "align": "center"
     },
     {
         "component": "皿",
         "stroke_count": "5",
-        "display_component": "皿"
+        "display_component": "皿",
+        "align": "center"
     },
     {
         "component": "目",
         "stroke_count": "5",
-        "display_component": "目"
+        "display_component": "目",
+        "align": "center"
     },
     {
         "component": "矛",
         "stroke_count": "5",
-        "display_component": "矛"
+        "display_component": "矛",
+        "align": "center"
     },
     {
         "component": "矢",
         "stroke_count": "5",
-        "display_component": "矢"
+        "display_component": "矢",
+        "align": "center"
     },
     {
         "component": "石",
         "stroke_count": "5",
-        "display_component": "石"
+        "display_component": "石",
+        "align": "center"
     },
     {
         "component": "示",
         "stroke_count": "5",
-        "display_component": "示"
+        "display_component": "示",
+        "align": "center"
     },
     {
         "component": "禹",
         "stroke_count": "5",
-        "display_component": "禸"
+        "display_component": "禸",
+        "align": "center"
     },
     {
         "component": "禾",
         "stroke_count": "5",
-        "display_component": "禾"
+        "display_component": "禾",
+        "align": "center"
     },
     {
         "component": "穴",
         "stroke_count": "5",
-        "display_component": "穴"
+        "display_component": "穴",
+        "align": "center"
     },
     {
         "component": "立",
         "stroke_count": "5",
-        "display_component": "立"
+        "display_component": "立",
+        "align": "center"
     },
     {
         "component": "初",
         "stroke_count": "5",
-        "display_component": "⻂"
+        "display_component": "⻂",
+        "align": "left"
     },
     {
         "component": "世",
         "stroke_count": "5",
-        "display_component": "世"
+        "display_component": "世",
+        "align": "center"
     },
     {
         "component": "巨",
         "stroke_count": "5",
-        "display_component": "巨"
+        "display_component": "巨",
+        "align": "center"
     },
     {
         "component": "冊",
         "stroke_count": "5",
-        "display_component": "冊"
+        "display_component": "冊",
+        "align": "center"
     },
     {
         "component": "母",
         "stroke_count": "5",
-        "display_component": "母"
+        "display_component": "母",
+        "align": "center"
     },
     {
         "component": "買",
         "stroke_count": "5",
-        "display_component": "⺲"
+        "display_component": "⺲",
+        "align": "top"
     },
     {
         "component": "牙",
         "stroke_count": "5",
-        "display_component": "牙"
+        "display_component": "牙",
+        "align": "center"
     },
     {
         "component": "瓜",
         "stroke_count": "6",
-        "display_component": "瓜"
+        "display_component": "瓜",
+        "align": "center"
     },
     {
         "component": "竹",
         "stroke_count": "6",
-        "display_component": "竹"
+        "display_component": "竹",
+        "align": "center"
     },
     {
         "component": "米",
         "stroke_count": "6",
-        "display_component": "米"
+        "display_component": "米",
+        "align": "center"
     },
     {
         "component": "糸",
         "stroke_count": "6",
-        "display_component": "糸"
+        "display_component": "糸",
+        "align": "center"
     },
     {
         "component": "缶",
         "stroke_count": "6",
-        "display_component": "缶"
+        "display_component": "缶",
+        "align": "center"
     },
     {
         "component": "羊",
         "stroke_count": "6",
-        "display_component": "羊"
+        "display_component": "羊",
+        "align": "center"
     },
     {
         "component": "羽",
         "stroke_count": "6",
-        "display_component": "羽"
+        "display_component": "羽",
+        "align": "center"
     },
     {
         "component": "而",
         "stroke_count": "6",
-        "display_component": "而"
+        "display_component": "而",
+        "align": "center"
     },
     {
         "component": "耒",
         "stroke_count": "6",
-        "display_component": "耒"
+        "display_component": "耒",
+        "align": "center"
     },
     {
         "component": "耳",
         "stroke_count": "6",
-        "display_component": "耳"
+        "display_component": "耳",
+        "align": "center"
     },
     {
         "component": "聿",
         "stroke_count": "6",
-        "display_component": "聿"
+        "display_component": "聿",
+        "align": "center"
     },
     {
         "component": "肉",
         "stroke_count": "6",
-        "display_component": "肉"
+        "display_component": "肉",
+        "align": "center"
     },
     {
         "component": "自",
         "stroke_count": "6",
-        "display_component": "自"
+        "display_component": "自",
+        "align": "center"
     },
     {
         "component": "至",
         "stroke_count": "6",
-        "display_component": "至"
+        "display_component": "至",
+        "align": "center"
     },
     {
         "component": "臼",
         "stroke_count": "6",
-        "display_component": "臼"
+        "display_component": "臼",
+        "align": "center"
     },
     {
         "component": "舌",
         "stroke_count": "6",
-        "display_component": "舌"
+        "display_component": "舌",
+        "align": "center"
     },
     {
         "component": "舟",
         "stroke_count": "6",
-        "display_component": "舟"
+        "display_component": "舟",
+        "align": "center"
     },
     {
         "component": "艮",
         "stroke_count": "6",
-        "display_component": "艮"
+        "display_component": "艮",
+        "align": "center"
     },
     {
         "component": "色",
         "stroke_count": "6",
-        "display_component": "色"
+        "display_component": "色",
+        "align": "center"
     },
     {
         "component": "虍",
         "stroke_count": "6",
-        "display_component": "虍"
+        "display_component": "虍",
+        "align": "center"
     },
     {
         "component": "虫",
         "stroke_count": "6",
-        "display_component": "虫"
+        "display_component": "虫",
+        "align": "center"
     },
     {
         "component": "血",
         "stroke_count": "6",
-        "display_component": "血"
+        "display_component": "血",
+        "align": "center"
     },
     {
         "component": "行",
         "stroke_count": "6",
-        "display_component": "行"
+        "display_component": "行",
+        "align": "center"
     },
     {
         "component": "衣",
         "stroke_count": "6",
-        "display_component": "衣"
+        "display_component": "衣",
+        "align": "center"
     },
     {
         "component": "西",
         "stroke_count": "6",
-        "display_component": "西"
+        "display_component": "西",
+        "align": "center"
     },
     {
         "component": "臣",
         "stroke_count": "7",
-        "display_component": "臣"
+        "display_component": "臣",
+        "align": "center"
     },
     {
         "component": "見",
         "stroke_count": "7",
-        "display_component": "見"
+        "display_component": "見",
+        "align": "center"
     },
     {
         "component": "角",
         "stroke_count": "7",
-        "display_component": "角"
+        "display_component": "角",
+        "align": "center"
     },
     {
         "component": "言",
         "stroke_count": "7",
-        "display_component": "言"
+        "display_component": "言",
+        "align": "center"
     },
     {
         "component": "谷",
         "stroke_count": "7",
-        "display_component": "谷"
+        "display_component": "谷",
+        "align": "center"
     },
     {
         "component": "豆",
         "stroke_count": "7",
-        "display_component": "豆"
+        "display_component": "豆",
+        "align": "center"
     },
     {
         "component": "豕",
         "stroke_count": "7",
-        "display_component": "豕"
+        "display_component": "豕",
+        "align": "center"
     },
     {
         "component": "豸",
         "stroke_count": "7",
-        "display_component": "豸"
+        "display_component": "豸",
+        "align": "center"
     },
     {
         "component": "貝",
         "stroke_count": "7",
-        "display_component": "貝"
+        "display_component": "貝",
+        "align": "center"
     },
     {
         "component": "赤",
         "stroke_count": "7",
-        "display_component": "赤"
+        "display_component": "赤",
+        "align": "center"
     },
     {
         "component": "走",
         "stroke_count": "7",
-        "display_component": "走"
+        "display_component": "走",
+        "align": "center"
     },
     {
         "component": "足",
         "stroke_count": "7",
-        "display_component": "足"
+        "display_component": "足",
+        "align": "center"
     },
     {
         "component": "身",
         "stroke_count": "7",
-        "display_component": "身"
+        "display_component": "身",
+        "align": "center"
     },
     {
         "component": "車",
         "stroke_count": "7",
-        "display_component": "車"
+        "display_component": "車",
+        "align": "center"
     },
     {
         "component": "辛",
         "stroke_count": "7",
-        "display_component": "辛"
+        "display_component": "辛",
+        "align": "center"
     },
     {
         "component": "辰",
         "stroke_count": "7",
-        "display_component": "辰"
+        "display_component": "辰",
+        "align": "center"
     },
     {
         "component": "酉",
         "stroke_count": "7",
-        "display_component": "酉"
+        "display_component": "酉",
+        "align": "center"
     },
     {
         "component": "釆",
         "stroke_count": "7",
-        "display_component": "釆"
+        "display_component": "釆",
+        "align": "center"
     },
     {
         "component": "里",
         "stroke_count": "7",
-        "display_component": "里"
+        "display_component": "里",
+        "align": "center"
     },
     {
         "component": "舛",
         "stroke_count": "7",
-        "display_component": "舛"
+        "display_component": "舛",
+        "align": "center"
     },
     {
         "component": "麦",
         "stroke_count": "7",
-        "display_component": "麦"
+        "display_component": "麦",
+        "align": "center"
     },
     {
         "component": "金",
         "stroke_count": "8",
-        "display_component": "金"
+        "display_component": "金",
+        "align": "center"
     },
     {
         "component": "長",
         "stroke_count": "8",
-        "display_component": "長"
+        "display_component": "長",
+        "align": "center"
     },
     {
         "component": "門",
         "stroke_count": "8",
-        "display_component": "門"
+        "display_component": "門",
+        "align": "center"
     },
     {
         "component": "隶",
         "stroke_count": "8",
-        "display_component": "隶"
+        "display_component": "隶",
+        "align": "center"
     },
     {
         "component": "隹",
         "stroke_count": "8",
-        "display_component": "隹"
+        "display_component": "隹",
+        "align": "center"
     },
     {
         "component": "雨",
         "stroke_count": "8",
-        "display_component": "雨"
+        "display_component": "雨",
+        "align": "center"
     },
     {
         "component": "青",
         "stroke_count": "8",
-        "display_component": "青"
+        "display_component": "青",
+        "align": "center"
     },
     {
         "component": "非",
         "stroke_count": "8",
-        "display_component": "非"
+        "display_component": "非",
+        "align": "center"
     },
     {
         "component": "奄",
         "stroke_count": "8",
-        "display_component": "奄"
+        "display_component": "奄",
+        "align": "center"
     },
     {
         "component": "岡",
         "stroke_count": "8",
-        "display_component": "岡"
+        "display_component": "岡",
+        "align": "center"
     },
     {
         "component": "免",
         "stroke_count": "8",
-        "display_component": "免"
+        "display_component": "免",
+        "align": "center"
     },
     {
         "component": "斉",
         "stroke_count": "8",
-        "display_component": "斉"
+        "display_component": "斉",
+        "align": "center"
     },
     {
         "component": "面",
         "stroke_count": "9",
-        "display_component": "面"
+        "display_component": "面",
+        "align": "center"
     },
     {
         "component": "革",
         "stroke_count": "9",
-        "display_component": "革"
+        "display_component": "革",
+        "align": "center"
     },
     {
         "component": "韭",
         "stroke_count": "9",
-        "display_component": "韭"
+        "display_component": "韭",
+        "align": "center"
     },
     {
         "component": "音",
         "stroke_count": "9",
-        "display_component": "音"
+        "display_component": "音",
+        "align": "center"
     },
     {
         "component": "頁",
         "stroke_count": "9",
-        "display_component": "頁"
+        "display_component": "頁",
+        "align": "center"
     },
     {
         "component": "風",
         "stroke_count": "9",
-        "display_component": "風"
+        "display_component": "風",
+        "align": "center"
     },
     {
         "component": "飛",
         "stroke_count": "9",
-        "display_component": "飛"
+        "display_component": "飛",
+        "align": "center"
     },
     {
         "component": "食",
         "stroke_count": "9",
-        "display_component": "食"
+        "display_component": "食",
+        "align": "center"
     },
     {
         "component": "首",
         "stroke_count": "9",
-        "display_component": "首"
+        "display_component": "首",
+        "align": "center"
     },
     {
         "component": "香",
         "stroke_count": "9",
-        "display_component": "香"
+        "display_component": "香",
+        "align": "center"
     },
     {
         "component": "品",
         "stroke_count": "9",
-        "display_component": "品"
+        "display_component": "品",
+        "align": "center"
     },
     {
         "component": "馬",
         "stroke_count": "10",
-        "display_component": "馬"
+        "display_component": "馬",
+        "align": "center"
     },
     {
         "component": "骨",
         "stroke_count": "10",
-        "display_component": "骨"
+        "display_component": "骨",
+        "align": "center"
     },
     {
         "component": "高",
         "stroke_count": "10",
-        "display_component": "高"
+        "display_component": "高",
+        "align": "center"
     },
     {
         "component": "髟",
         "stroke_count": "10",
-        "display_component": "髟"
+        "display_component": "髟",
+        "align": "center"
     },
     {
         "component": "鬥",
         "stroke_count": "10",
-        "display_component": "鬥"
+        "display_component": "鬥",
+        "align": "center"
     },
     {
         "component": "鬯",
         "stroke_count": "10",
-        "display_component": "鬯"
+        "display_component": "鬯",
+        "align": "center"
     },
     {
         "component": "鬲",
         "stroke_count": "10",
-        "display_component": "鬲"
+        "display_component": "鬲",
+        "align": "center"
     },
     {
         "component": "鬼",
         "stroke_count": "10",
-        "display_component": "鬼"
+        "display_component": "鬼",
+        "align": "center"
     },
     {
         "component": "竜",
         "stroke_count": "10",
-        "display_component": "竜"
+        "display_component": "竜",
+        "align": "center"
     },
     {
         "component": "韋",
         "stroke_count": "10",
-        "display_component": "韋"
+        "display_component": "韋",
+        "align": "center"
     },
     {
         "component": "魚",
         "stroke_count": "11",
-        "display_component": "魚"
+        "display_component": "魚",
+        "align": "center"
     },
     {
         "component": "鳥",
         "stroke_count": "11",
-        "display_component": "鳥"
+        "display_component": "鳥",
+        "align": "center"
     },
     {
         "component": "鹵",
         "stroke_count": "11",
-        "display_component": "鹵"
+        "display_component": "鹵",
+        "align": "center"
     },
     {
         "component": "鹿",
         "stroke_count": "11",
-        "display_component": "鹿"
+        "display_component": "鹿",
+        "align": "center"
     },
     {
         "component": "麻",
         "stroke_count": "11",
-        "display_component": "麻"
+        "display_component": "麻",
+        "align": "center"
     },
     {
         "component": "亀",
         "stroke_count": "11",
-        "display_component": "亀"
+        "display_component": "亀",
+        "align": "center"
     },
     {
         "component": "滴",
         "stroke_count": "11",
-        "display_component": "啇"
+        "display_component": "啇",
+        "align": "center"
     },
     {
         "component": "黄",
         "stroke_count": "11",
-        "display_component": "黄"
+        "display_component": "黄",
+        "align": "center"
     },
     {
         "component": "黒",
         "stroke_count": "11",
-        "display_component": "黒"
+        "display_component": "黒",
+        "align": "center"
     },
     {
         "component": "黍",
         "stroke_count": "12",
-        "display_component": "黍"
+        "display_component": "黍",
+        "align": "center"
     },
     {
         "component": "黹",
         "stroke_count": "12",
-        "display_component": "黹"
+        "display_component": "黹",
+        "align": "center"
     },
     {
         "component": "無",
         "stroke_count": "12",
-        "display_component": "無"
+        "display_component": "無",
+        "align": "center"
     },
     {
         "component": "歯",
         "stroke_count": "12",
-        "display_component": "歯"
+        "display_component": "歯",
+        "align": "center"
     },
     {
         "component": "黽",
         "stroke_count": "13",
-        "display_component": "黽"
+        "display_component": "黽",
+        "align": "center"
     },
     {
         "component": "鼎",
         "stroke_count": "13",
-        "display_component": "鼎"
+        "display_component": "鼎",
+        "align": "center"
     },
     {
         "component": "鼓",
         "stroke_count": "13",
-        "display_component": "鼓"
+        "display_component": "鼓",
+        "align": "center"
     },
     {
         "component": "鼠",
         "stroke_count": "13",
-        "display_component": "鼠"
+        "display_component": "鼠",
+        "align": "center"
     },
     {
         "component": "鼻",
         "stroke_count": "14",
-        "display_component": "鼻"
+        "display_component": "鼻",
+        "align": "center"
     },
     {
         "component": "齊",
         "stroke_count": "14",
-        "display_component": "齊"
+        "display_component": "齊",
+        "align": "center"
     },
     {
         "component": "龠",
         "stroke_count": "17",
-        "display_component": "龠"
+        "display_component": "龠",
+        "align": "center"
     }
 ]
