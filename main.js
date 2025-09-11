@@ -13,6 +13,7 @@ const MAX_FREQUENCY_VALUE = 5000;
 const DISABLED_CLASS = "disabled-item";
 const SELECTED_CLASS = "selected";
 const DECOMPOSITION_DISABLED_CLASS = "decomposition-already-selected";
+const TABLE_ITEM_CLASS = "table-item";
 
 let selected_radical = structuredClone(DEFAULTS.radical);
 let selected_components = structuredClone(DEFAULTS.components);
@@ -63,10 +64,10 @@ function prepare_components_selection() {
         if (component_character.stroke_count !== current_stroke_count) {
             current_stroke_count = component_character.stroke_count;
             if (component_character.stroke_count !== 0) {
-                components_selection_innerHTML_string += "</div><div id=\"component-count-" + current_stroke_count + "\"><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
+                components_selection_innerHTML_string += "</div><div id=\"component-count-" + current_stroke_count + "\"><span class=\"stroke-count " + TABLE_ITEM_CLASS + "\">" + current_stroke_count + "</span>";
             }
         }
-        components_selection_innerHTML_string += "<span class=\"table-item\">" + component_character.component + "</span>";
+        components_selection_innerHTML_string += "<span class=\"" + TABLE_ITEM_CLASS + "\">" + component_character.component + "</span>";
     }
     components_selection_innerHTML_string += "</span>"
     components_selection.innerHTML = components_selection_innerHTML_string;
@@ -101,10 +102,10 @@ function prepare_radicals_selection() {
         if (radical_character.stroke_count !== current_stroke_count) {
             current_stroke_count = radical_character.stroke_count;
             if (radical_character.stroke_count !== 0) {
-                radicals_selection_innerHTML_string += "</div><div id=\"radical-count-" + current_stroke_count + "\"><span class=\"stroke-count table-item\">" + current_stroke_count + "</span>";
+                radicals_selection_innerHTML_string += "</div><div id=\"radical-count-" + current_stroke_count + "\"><span class=\"stroke-count " + TABLE_ITEM_CLASS + "\">" + current_stroke_count + "</span>";
             }
         }
-        radicals_selection_innerHTML_string += "<span class=\"table-item radical-id-" + radical_character.radical_id + "\">" + radical_character.character + "</span>";
+        radicals_selection_innerHTML_string += "<span class=\"" + TABLE_ITEM_CLASS + " radical-id-" + radical_character.radical_id + "\">" + radical_character.character + "</span>";
     }
     radicals_selection_innerHTML_string += "</span>"
     radicals_selection.innerHTML = radicals_selection_innerHTML_string;
@@ -140,7 +141,7 @@ function prepare_four_corners_selection() {
     for (let i = 0; i < four_corners_ids.length; i++) {
         const four_corners_element = document.querySelector("#" + four_corners_ids[i]);
         for (let j = 0; j < 10; j++) {
-            four_corners_element.innerHTML += "<span class=\"table-item four-corner-id-" + j + "\">" + FOUR_CORNER_INFO[j].character + "</span>";
+            four_corners_element.innerHTML += "<span class=\"" + TABLE_ITEM_CLASS + " four-corner-id-" + j + "\">" + FOUR_CORNER_INFO[j].character + "</span>";
         }
         four_corners_element.addEventListener("click", (e) => {
             let corner_selection = get_class_includes(e.target.classList, "four-corner-id-", -1);
@@ -247,12 +248,12 @@ function prepare_composition() {
         if ([...composition_component].length > 1) { return; }
         if (composition_selection_container.textContent.includes(composition_component)) { return; }
 
-        for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
+        for (const table_item of decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS)) {
             if (table_item.textContent === composition_component) {
                 table_item.classList.add(DECOMPOSITION_DISABLED_CLASS);
             }
         }
-        document.querySelector("#composition-selection-container").innerHTML += "<span class=\"table-item selected\">" + composition_component + "</span>";
+        document.querySelector("#composition-selection-container").innerHTML += "<span class=\"" + TABLE_ITEM_CLASS + " selected\">" + composition_component + "</span>";
         selected_composition_parts.push(composition_component);
 
         find_possible_kanji();
@@ -262,7 +263,7 @@ function prepare_composition() {
         if ([...composition_component].length > 1) { return; }
         if (e.target.classList.contains(SELECTED_CLASS)) { e.target.remove(); }
         selected_composition_parts.splice(selected_composition_parts.indexOf(composition_component), 1);
-        for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
+        for (const table_item of decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS)) {
             if (table_item.textContent === composition_component) {
                 table_item.classList.remove(DECOMPOSITION_DISABLED_CLASS);
             }
@@ -277,7 +278,6 @@ function prepare_decomposition() {
     decomposition_input.addEventListener("input", (e) => {
         const decomposition_targets = [...e.target.value].slice(0, 4); // decompose 4 characters maximum at once
         let decomposition_table = [];
-        const table_item_class = "table-item";
         for (const decomposition_target of decomposition_targets) {
             const cjkvi_components = structuredClone(KANJI_DATA[decomposition_target]?.cjkvi_components ?? []);
             const cjkvi_components_recursive = structuredClone(KANJI_DATA[decomposition_target]?.cjkvi_components_recursive ?? []);
@@ -290,7 +290,7 @@ function prepare_decomposition() {
             function render_decomposition_row(decomposition_data) {
                 let html_string = "<span>";
                 for (const decomposition_item of decomposition_data) {
-                    let current_item_classes = [table_item_class];
+                    let current_item_classes = [TABLE_ITEM_CLASS];
                     if (selected_composition_parts.includes(decomposition_item)) {
                         current_item_classes.push(DECOMPOSITION_DISABLED_CLASS);
                     }
@@ -317,7 +317,7 @@ function prepare_decomposition() {
 
 function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner, possible_skip, possible_cjkvi_components) {
     const radical_selection = document.querySelector("#radicals-selection");
-    const radical_table_items = radical_selection.querySelectorAll(".table-item");
+    const radical_table_items = radical_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const radical_table_item of radical_table_items) {
         if (radical_table_item.classList.contains("stroke-count")) { continue; }
         let radical = Number(get_class_includes(radical_table_item.classList, "radical-id-", -1));
@@ -328,7 +328,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     }
 
     const components_selection = document.querySelector("#components-selection");
-    const components_table_items = components_selection.querySelectorAll(".table-item");
+    const components_table_items = components_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const components_table_item of components_table_items) {
         if (components_table_item.classList.contains("stroke-count")) { continue; }
         let component = components_table_item.textContent;
@@ -342,7 +342,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     for (let i = 0; i < four_corners_ids.length; i++) {
         const four_corners_element = document.querySelector("#" + four_corners_ids[i]);
         const current_corner = four_corners_ids[i].replace("four-corners-", "").replace("-", "_");
-        const shape_table_items = four_corners_element.querySelectorAll(".table-item");
+        const shape_table_items = four_corners_element.querySelectorAll("." + TABLE_ITEM_CLASS);
         for (const shape_table_item of shape_table_items) {
             let four_corner_id = get_class_includes(shape_table_item.classList, "four-corner-id-", -1);
             shape_table_item.classList.remove(DISABLED_CLASS);
@@ -353,7 +353,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     }
 
     const skip_part_one = document.querySelector("#skip-part-1");
-    const skip_part_one_table_items = skip_part_one.querySelectorAll(".table-item");
+    const skip_part_one_table_items = skip_part_one.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const skip_part_one_table_item of skip_part_one_table_items) {
         let skip_part_one_val = Number(get_class_includes(skip_part_one_table_item.classList, "skip-part-1-val-", -1));
         skip_part_one_table_item.classList.remove(DISABLED_CLASS);
@@ -363,7 +363,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     }
 
     const decomposition_container = document.querySelector("#decomposition-container");
-    const decomposition_table_items = decomposition_container.querySelectorAll(".table-item");
+    const decomposition_table_items = decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const decomposition_table_item of decomposition_table_items) {
         const cjkvi_component = decomposition_table_item.textContent;
         decomposition_table_item.classList.remove(DISABLED_CLASS);
@@ -522,14 +522,14 @@ function find_possible_kanji() {
 }
 
 function render_kanji_results(kanji_list, ellide_end, ellide_start) {
-    const result_item_class = "table-item";
+    const result_item_class = TABLE_ITEM_CLASS;
     const kanji_results_element = document.querySelector("#kanji-results");
     kanji_results_element.innerHTML = kanji_list.length ? "<span class=\"" + result_item_class + "\">" + kanji_list.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
     if (ellide_end) {
-        kanji_results_element.innerHTML += "<span id=\"kanji-results-ellipsis-end\" class=\"table-item\">" + kanji_results_ellipsis_char + "</span>";
+        kanji_results_element.innerHTML += "<span id=\"kanji-results-ellipsis-end\" class=\"" + result_item_class + "\">" + kanji_results_ellipsis_char + "</span>";
     }
     if (ellide_start) {
-        kanji_results_element.innerHTML = "<span id=\"kanji-results-ellipsis-start\" class=\"table-item\">" + kanji_results_ellipsis_char + "</span>" + kanji_results_element.innerHTML;
+        kanji_results_element.innerHTML = "<span id=\"kanji-results-ellipsis-start\" class=\"" + result_item_class + "\">" + kanji_results_ellipsis_char + "</span>" + kanji_results_element.innerHTML;
     }
     kanji_results_element.scrollLeft = 0;
 }
@@ -587,7 +587,7 @@ function prepare_no_select() {
 }
 
 function deselect_table_items(parent_element) {
-    for (const table_item of parent_element.querySelectorAll(".table-item")) {
+    for (const table_item of parent_element.querySelectorAll("." + TABLE_ITEM_CLASS)) {
         table_item.classList.remove(SELECTED_CLASS);
     }
 }
@@ -647,7 +647,7 @@ function prepare_reset_buttons() {
     function reset_composition(find = true) {
         document.querySelector("#composition-selection-container").innerHTML = "";
         selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
-        for (const table_item of document.querySelector("#decomposition-container").querySelectorAll(".table-item")) {
+        for (const table_item of document.querySelector("#decomposition-container").querySelectorAll("." + TABLE_ITEM_CLASS)) {
             table_item.classList.remove(DECOMPOSITION_DISABLED_CLASS);
         }
         if (find) { find_possible_kanji() };
