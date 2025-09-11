@@ -46,11 +46,13 @@
     },
     {
         "component": "化",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "⺅"
     },
     {
         "component": "个",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "𠆢"
     },
     {
         "component": "儿",
@@ -69,7 +71,8 @@
     },
     {
         "component": "并",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "丷"
     },
     {
         "component": "冂",
@@ -103,7 +106,8 @@
     },
     {
         "component": "刈",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "⺉"
     },
     {
         "component": "力",
@@ -177,11 +181,13 @@
     },
     {
         "component": "乞",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "𠂉"
     },
     {
         "component": "込",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⻌"
     },
     {
         "component": "口",
@@ -245,7 +251,8 @@
     },
     {
         "component": "尚",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⺌"
     },
     {
         "component": "尢",
@@ -349,31 +356,38 @@
     },
     {
         "component": "忙",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⺖"
     },
     {
         "component": "扎",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⺘"
     },
     {
         "component": "汁",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⺡"
     },
     {
         "component": "犯",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⺨"
     },
     {
         "component": "艾",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⺾"
     },
     {
         "component": "邦",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⻏"
     },
     {
         "component": "阡",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "⻖"
     },
     {
         "component": "也",
@@ -397,7 +411,8 @@
     },
     {
         "component": "老",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "⺹"
     },
     {
         "component": "心",
@@ -526,7 +541,8 @@
     },
     {
         "component": "杰",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "⺣"
     },
     {
         "component": "爪",
@@ -565,7 +581,8 @@
     },
     {
         "component": "礼",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "⺭"
     },
     {
         "component": "王",
@@ -649,7 +666,8 @@
     },
     {
         "component": "疔",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "疒"
     },
     {
         "component": "癶",
@@ -698,7 +716,8 @@
     },
     {
         "component": "禹",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "禸"
     },
     {
         "component": "禾",
@@ -717,7 +736,8 @@
     },
     {
         "component": "初",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "⻂"
     },
     {
         "component": "世",
@@ -741,7 +761,8 @@
     },
     {
         "component": "買",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "⺲"
     },
     {
         "component": "牙",
@@ -1175,7 +1196,8 @@
     },
     {
         "component": "滴",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "啇"
     },
     {
         "component": "黄",
