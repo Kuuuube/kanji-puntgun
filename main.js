@@ -10,6 +10,9 @@ const DEFAULTS = {
 const KANJI_RESULTS_LIMIT = 250;
 const MAX_FREQUENCY_VALUE = 5000;
 
+const DISABLED_CLASS = "disabled-item";
+const SELECTED_CLASS = "selected";
+
 let selected_radical = structuredClone(DEFAULTS.radical);
 let selected_components = structuredClone(DEFAULTS.components);
 let selected_four_corners = structuredClone(DEFAULTS.four_corners);
@@ -73,10 +76,10 @@ function prepare_components_selection() {
         if ([...component].length > 1) { return; }
         if (selected_components.indexOf(component) == -1) {
             selected_components.push(component);
-            e.target.classList.add("selected");
+            e.target.classList.add(SELECTED_CLASS);
         } else {
             selected_components.splice(selected_components.indexOf(component), 1);
-            e.target.classList.remove("selected");
+            e.target.classList.remove(SELECTED_CLASS);
         }
 
         find_possible_kanji();
@@ -116,11 +119,11 @@ function prepare_radicals_selection() {
         }
         for (const radical_selection of e.target.parentNode.parentNode.children) {
             for (const radical_selection_child of radical_selection.children) {
-                radical_selection_child.classList.remove("selected");
+                radical_selection_child.classList.remove(SELECTED_CLASS);
                 if (selected_radical === -1) { continue; }
                 for (const classItem of radical_selection_child.classList) {
                     if (classItem === "radical-id-" + radical) {
-                        radical_selection_child.classList.add("selected");
+                        radical_selection_child.classList.add(SELECTED_CLASS);
                     }
                 }
             }
@@ -140,14 +143,14 @@ function prepare_four_corners_selection() {
             let corner_selection = get_class_includes(e.target.classList, "four-corner-id-", -1);
             if (corner_selection === -1) { return; }
             for (const corner_selector of e.target.parentNode.children) {
-                corner_selector.classList.remove("selected");
+                corner_selector.classList.remove(SELECTED_CLASS);
             }
             const corner_name = Object.keys(selected_four_corners)[i];
             if (selected_four_corners[corner_name] === corner_selection) {
                 selected_four_corners[corner_name] = -1;
             } else {
                 selected_four_corners[corner_name] = corner_selection;
-                e.target.classList.add("selected");
+                e.target.classList.add(SELECTED_CLASS);
             }
 
             find_possible_kanji();
@@ -160,13 +163,13 @@ function prepare_skip_selection() {
     for (const skip_part_one_child of skip_part_one_element.children) {
         skip_part_one_child.addEventListener("click", (e) => {
             for (const target_siblings of e.target.parentNode.children) {
-                target_siblings.classList.remove("selected");
+                target_siblings.classList.remove(SELECTED_CLASS);
             }
             let skip_part_one_selection = Number(get_class_includes(e.target.classList, "skip-part-1-val-", -1));
             if (selected_skip.part_one === skip_part_one_selection) {
                 skip_part_one_selection = -1;
             } else {
-                e.target.classList.add("selected");
+                e.target.classList.add(SELECTED_CLASS);
             }
             selected_skip.part_one = skip_part_one_selection;
 
@@ -254,7 +257,7 @@ function prepare_composition() {
     composition_selection_container.addEventListener("click", (e) => {
         const composition_component = e.target.textContent;
         if ([...composition_component].length > 1) { return; }
-        if (e.target.classList.contains("selected")) { e.target.remove(); }
+        if (e.target.classList.contains(SELECTED_CLASS)) { e.target.remove(); }
         selected_composition_parts.splice(selected_composition_parts.indexOf(composition_component), 1);
         for (const table_item of decomposition_container.querySelectorAll(".table-item")) {
             if (table_item.textContent === composition_component) {
@@ -313,9 +316,9 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     for (const radical_table_item of radical_table_items) {
         if (radical_table_item.classList.contains("stroke-count")) { continue; }
         let radical = Number(get_class_includes(radical_table_item.classList, "radical-id-", -1));
-        radical_table_item.classList.remove("disabled-item");
+        radical_table_item.classList.remove(DISABLED_CLASS);
         if (!possible_radicals.has(radical)) {
-            radical_table_item.classList.add("disabled-item");
+            radical_table_item.classList.add(DISABLED_CLASS);
         }
     }
 
@@ -324,9 +327,9 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     for (const components_table_item of components_table_items) {
         if (components_table_item.classList.contains("stroke-count")) { continue; }
         let component = components_table_item.textContent;
-        components_table_item.classList.remove("disabled-item");
+        components_table_item.classList.remove(DISABLED_CLASS);
         if (!possible_components.has(component)) {
-            components_table_item.classList.add("disabled-item");
+            components_table_item.classList.add(DISABLED_CLASS);
         }
     }
 
@@ -337,9 +340,9 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
         const shape_table_items = four_corners_element.querySelectorAll(".table-item");
         for (const shape_table_item of shape_table_items) {
             let four_corner_id = get_class_includes(shape_table_item.classList, "four-corner-id-", -1);
-            shape_table_item.classList.remove("disabled-item");
+            shape_table_item.classList.remove(DISABLED_CLASS);
             if (!possible_four_corner[current_corner].has(four_corner_id)) {
-                shape_table_item.classList.add("disabled-item");
+                shape_table_item.classList.add(DISABLED_CLASS);
             }
         }
     }
@@ -348,9 +351,9 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     const skip_part_one_table_items = skip_part_one.querySelectorAll(".table-item");
     for (const skip_part_one_table_item of skip_part_one_table_items) {
         let skip_part_one_val = Number(get_class_includes(skip_part_one_table_item.classList, "skip-part-1-val-", -1));
-        skip_part_one_table_item.classList.remove("disabled-item");
+        skip_part_one_table_item.classList.remove(DISABLED_CLASS);
         if (!possible_skip.part_one.has(skip_part_one_val)) {
-            skip_part_one_table_item.classList.add("disabled-item");
+            skip_part_one_table_item.classList.add(DISABLED_CLASS);
         }
     }
 
@@ -358,9 +361,9 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     const decomposition_table_items = decomposition_container.querySelectorAll(".table-item");
     for (const decomposition_table_item of decomposition_table_items) {
         const cjkvi_component = decomposition_table_item.textContent;
-        decomposition_table_item.classList.remove("disabled-item");
+        decomposition_table_item.classList.remove(DISABLED_CLASS);
         if (!possible_cjkvi_components.has(cjkvi_component)) {
-            decomposition_table_item.classList.add("disabled-item");
+            decomposition_table_item.classList.add(DISABLED_CLASS);
         }
     }
 }
@@ -578,7 +581,7 @@ function prepare_no_select() {
 
 function deselect_table_items(parent_element) {
     for (const table_item of parent_element.querySelectorAll(".table-item")) {
-        table_item.classList.remove("selected");
+        table_item.classList.remove(SELECTED_CLASS);
     }
 }
 
@@ -638,7 +641,7 @@ function prepare_reset_buttons() {
         document.querySelector("#composition-selection-container").innerHTML = "";
         selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
         for (const table_item of document.querySelector("#decomposition-container").querySelectorAll(".table-item")) {
-            table_item.classList.remove("disabled-item");
+            table_item.classList.remove(DISABLED_CLASS);
         }
         if (find) { find_possible_kanji() };
     }
