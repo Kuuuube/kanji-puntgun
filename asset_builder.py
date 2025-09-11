@@ -28,6 +28,10 @@ kanji_stroke_counts = {}
 
 def generate_components_data():
     radkfile_lines = list(map(str.strip, open(data_assets_dir + "radkfilex", "r", encoding = "euc_jisx0213").readlines()))
+    components_info = json.loads(open(static_assets_dir + "components_info.json").read())
+    components_info_dict = {}
+    for component in components_info:
+        components_info_dict[component["component"]] = component
 
     header = ""
     components_dict = {}
@@ -36,7 +40,9 @@ def generate_components_data():
         if len(radkfile_line) <= 0 or radkfile_line[0] == "#":
             continue
         if radkfile_line[0] == "$":
-            header = radkfile_line.split()[1]
+            line_header = radkfile_line.split()[1]
+            header = components_info_dict[line_header]["display_component"]
+
             stroke_count = radkfile_line.split()[2]
             components_dict[header] = {"kanji": [], "stroke_count": stroke_count}
             components_list.append({"component": header, "stroke_count": stroke_count})
@@ -45,6 +51,8 @@ def generate_components_data():
         components_dict[header]["kanji"] += list(radkfile_line)
         components_dict[header]["kanji"].sort(key = lambda x: kanji_stroke_counts[x])
 
+    if len(components_list) != len(components_info):
+        print("Components list and info mismatch")
     write_js_json(components_list, "components_list")
 
     return components_dict

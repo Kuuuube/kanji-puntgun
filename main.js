@@ -61,7 +61,7 @@ function prepare_components_selection() {
                 components_selection_innerHTML_string += "</div><div id=\"component-count-" + current_stroke_count + "\"><span class=\"stroke-count " + TABLE_ITEM_CLASS + "\">" + current_stroke_count + "</span>";
             }
         }
-        components_selection_innerHTML_string += "<span class=\"" + TABLE_ITEM_CLASS + "\">" + component_character.component + "</span>";
+        components_selection_innerHTML_string += "<span class=\"" + TABLE_ITEM_CLASS + "\">" + component_character.display_component + "</span>";
     }
     components_selection_innerHTML_string += "</span>"
     components_selection.innerHTML = components_selection_innerHTML_string;
