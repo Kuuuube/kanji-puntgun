@@ -15,13 +15,7 @@ const SELECTED_CLASS = "selected";
 const DECOMPOSITION_DISABLED_CLASS = "decomposition-already-selected";
 const TABLE_ITEM_CLASS = "table-item";
 
-let selected_radical = structuredClone(DEFAULTS.radical);
-let selected_components = structuredClone(DEFAULTS.components);
-let selected_four_corners = structuredClone(DEFAULTS.four_corners);
-let selected_skip = structuredClone(DEFAULTS.skip);
-let word_parts = structuredClone(DEFAULTS.word_parts);
-let stroke_count_filter = structuredClone(DEFAULTS.stroke_count);
-let selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
+let selected_filters = structuredClone(DEFAULTS);
 
 let full_kanji_results = [];
 let kanji_results_ellipsis_char = "⋯";
@@ -78,11 +72,11 @@ function prepare_components_selection() {
 
         const component = e.target.textContent;
         if ([...component].length > 1) { return; }
-        if (selected_components.indexOf(component) == -1) {
-            selected_components.push(component);
+        if (selected_filters.components.indexOf(component) == -1) {
+            selected_filters.components.push(component);
             e.target.classList.add(SELECTED_CLASS);
         } else {
-            selected_components.splice(selected_components.indexOf(component), 1);
+            selected_filters.components.splice(selected_filters.components.indexOf(component), 1);
             e.target.classList.remove(SELECTED_CLASS);
         }
 
@@ -116,15 +110,15 @@ function prepare_radicals_selection() {
 
         let radical = Number(get_class_includes(e.target.classList, "radical-id-", -1));
         if (radical === -1) { return; }
-        if (selected_radical === radical) {
-            selected_radical = -1;
+        if (selected_filters.radical === radical) {
+            selected_filters.radical = -1;
         } else {
-            selected_radical = radical;
+            selected_filters.radical = radical;
         }
         for (const radical_selection of e.target.parentNode.parentNode.children) {
             for (const radical_selection_child of radical_selection.children) {
                 radical_selection_child.classList.remove(SELECTED_CLASS);
-                if (selected_radical === -1) { continue; }
+                if (selected_filters.radical === -1) { continue; }
                 for (const classItem of radical_selection_child.classList) {
                     if (classItem === "radical-id-" + radical) {
                         radical_selection_child.classList.add(SELECTED_CLASS);
@@ -149,11 +143,11 @@ function prepare_four_corners_selection() {
             for (const corner_selector of e.target.parentNode.children) {
                 corner_selector.classList.remove(SELECTED_CLASS);
             }
-            const corner_name = Object.keys(selected_four_corners)[i];
-            if (selected_four_corners[corner_name] === corner_selection) {
-                selected_four_corners[corner_name] = -1;
+            const corner_name = Object.keys(selected_filters.four_corners)[i];
+            if (selected_filters.four_corners[corner_name] === corner_selection) {
+                selected_filters.four_corners[corner_name] = -1;
             } else {
-                selected_four_corners[corner_name] = corner_selection;
+                selected_filters.four_corners[corner_name] = corner_selection;
                 e.target.classList.add(SELECTED_CLASS);
             }
 
@@ -170,25 +164,25 @@ function prepare_skip_selection() {
                 target_siblings.classList.remove(SELECTED_CLASS);
             }
             let skip_part_one_selection = Number(get_class_includes(e.target.classList, "skip-part-1-val-", -1));
-            if (selected_skip.part_one === skip_part_one_selection) {
+            if (selected_filters.skip.part_one === skip_part_one_selection) {
                 skip_part_one_selection = -1;
             } else {
                 e.target.classList.add(SELECTED_CLASS);
             }
-            selected_skip.part_one = skip_part_one_selection;
+            selected_filters.skip.part_one = skip_part_one_selection;
 
             find_possible_kanji();
         });
     }
     const skip_part_two_input = document.querySelector("#skip-part-2-input");
     const skip_part_two_deviation_input = document.querySelector("#skip-part-2-input-deviation");
-    skip_part_two_input.addEventListener("change", (e) => {selected_skip.part_two = Number(e.target.value); find_possible_kanji();});
-    skip_part_two_deviation_input.addEventListener("change", (e) => {selected_skip.part_two_deviation = Number(e.target.value); find_possible_kanji();});
+    skip_part_two_input.addEventListener("change", (e) => {selected_filters.skip.part_two = Number(e.target.value); find_possible_kanji();});
+    skip_part_two_deviation_input.addEventListener("change", (e) => {selected_filters.skip.part_two_deviation = Number(e.target.value); find_possible_kanji();});
 
     const skip_part_three_input = document.querySelector("#skip-part-3-input");
     const skip_part_three_deviation_input = document.querySelector("#skip-part-3-input-deviation");
-    skip_part_three_input.addEventListener("change", (e) => {selected_skip.part_three = Number(e.target.value); find_possible_kanji();});
-    skip_part_three_deviation_input.addEventListener("change", (e) => {selected_skip.part_three_deviation = Number(e.target.value); find_possible_kanji();});
+    skip_part_three_input.addEventListener("change", (e) => {selected_filters.skip.part_three = Number(e.target.value); find_possible_kanji();});
+    skip_part_three_deviation_input.addEventListener("change", (e) => {selected_filters.skip.part_three_deviation = Number(e.target.value); find_possible_kanji();});
 }
 
 function prepare_partial_word() {
@@ -201,9 +195,9 @@ function prepare_partial_word() {
         word_part_input.addEventListener("change", (e) => {
             const value = e.target.value;
             if (value.length !== 1) {
-                word_parts[word_part_id.replace("word-part-", "")] = "";
+                selected_filters.word_parts[word_part_id.replace("word-part-", "")] = "";
             } else {
-                word_parts[word_part_id.replace("word-part-", "")] = value;
+                selected_filters.word_parts[word_part_id.replace("word-part-", "")] = value;
             }
             find_possible_kanji();
         });
@@ -216,25 +210,25 @@ function prepare_stroke_count() {
     const stroke_count_input_less = document.querySelector("#stroke-count-input-less");
     stroke_count_input_equals.addEventListener("change", (e) => {
         if (e.target.value.length === 0) {
-            stroke_count_filter.equal = 0;
+            selected_filters.stroke_count.equal = 0;
         } else {
-            stroke_count_filter.equal = Number(e.target.value);
+            selected_filters.stroke_count.equal = Number(e.target.value);
         }
         find_possible_kanji();
     });
     stroke_count_input_greater.addEventListener("change", (e) => {
         if (e.target.value.length === 0) {
-            stroke_count_filter.greater = 0;
+            selected_filters.stroke_count.greater = 0;
         } else {
-            stroke_count_filter.greater = Number(e.target.value);
+            selected_filters.stroke_count.greater = Number(e.target.value);
         }
         find_possible_kanji();
     });
     stroke_count_input_less.addEventListener("change", (e) => {
         if (e.target.value.length === 0) {
-            stroke_count_filter.less = 0;
+            selected_filters.stroke_count.less = 0;
         } else {
-            stroke_count_filter.less = Number(e.target.value);
+            selected_filters.stroke_count.less = Number(e.target.value);
         }
         find_possible_kanji();
     });
@@ -254,7 +248,7 @@ function prepare_composition() {
             }
         }
         document.querySelector("#composition-selection-container").innerHTML += "<span class=\"" + TABLE_ITEM_CLASS + " selected\">" + composition_component + "</span>";
-        selected_composition_parts.push(composition_component);
+        selected_filters.composition_parts.push(composition_component);
 
         find_possible_kanji();
     });
@@ -262,7 +256,7 @@ function prepare_composition() {
         const composition_component = e.target.textContent;
         if ([...composition_component].length > 1) { return; }
         if (e.target.classList.contains(SELECTED_CLASS)) { e.target.remove(); }
-        selected_composition_parts.splice(selected_composition_parts.indexOf(composition_component), 1);
+        selected_filters.composition_parts.splice(selected_filters.composition_parts.indexOf(composition_component), 1);
         for (const table_item of decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS)) {
             if (table_item.textContent === composition_component) {
                 table_item.classList.remove(DECOMPOSITION_DISABLED_CLASS);
@@ -291,7 +285,7 @@ function prepare_decomposition() {
                 let html_string = "<span>";
                 for (const decomposition_item of decomposition_data) {
                     let current_item_classes = [TABLE_ITEM_CLASS];
-                    if (selected_composition_parts.includes(decomposition_item)) {
+                    if (selected_filters.composition_parts.includes(decomposition_item)) {
                         current_item_classes.push(DECOMPOSITION_DISABLED_CLASS);
                     }
                     if (!global_valid_cjkvi_components.has(decomposition_item)) {
@@ -393,14 +387,14 @@ function find_possible_kanji() {
     let remaining_cjkvi_components = new Set([]);
 
     function check_selected_radical(test_radical) {
-        if (selected_radical === -1) { return true; }
-        return test_radical === selected_radical;
+        if (selected_filters.radical === -1) { return true; }
+        return test_radical === selected_filters.radical;
     }
 
     function check_selected_components(test_components) {
-        if (selected_components.length > 0 && !test_components) { return false; }
-        for (let i = 0; i < selected_components.length; i++) {
-            if (!test_components.includes(selected_components[i])) {
+        if (selected_filters.components.length > 0 && !test_components) { return false; }
+        for (let i = 0; i < selected_filters.components.length; i++) {
+            if (!test_components.includes(selected_filters.components[i])) {
                 return false;
             }
         }
@@ -408,7 +402,7 @@ function find_possible_kanji() {
     }
 
     function check_selected_four_corner(test_four_corner) {
-        for (const [corner, shape] of Object.entries(selected_four_corners)) {
+        for (const [corner, shape] of Object.entries(selected_filters.four_corners)) {
             if (shape === -1) { continue; }
             if (!test_four_corner || test_four_corner[corner] !== shape) {
                 return false;
@@ -418,19 +412,19 @@ function find_possible_kanji() {
     }
 
     function check_selected_skip(test_skip) {
-        if (selected_skip.part_one !== -1) {
-            if (test_skip.part_one !== selected_skip.part_one) { return false; }
-            if (selected_skip.part_two > 0 && (test_skip.part_two > selected_skip.part_two + selected_skip.part_two_deviation || test_skip.part_two < selected_skip.part_two - selected_skip.part_two_deviation)) { return false; }
-            if (selected_skip.part_three > 0 && (test_skip.part_three > selected_skip.part_three + selected_skip.part_three_deviation || test_skip.part_three < selected_skip.part_three - selected_skip.part_three_deviation)) { return false; }
+        if (selected_filters.skip.part_one !== -1) {
+            if (test_skip.part_one !== selected_filters.skip.part_one) { return false; }
+            if (selected_filters.skip.part_two > 0 && (test_skip.part_two > selected_filters.skip.part_two + selected_filters.skip.part_two_deviation || test_skip.part_two < selected_filters.skip.part_two - selected_filters.skip.part_two_deviation)) { return false; }
+            if (selected_filters.skip.part_three > 0 && (test_skip.part_three > selected_filters.skip.part_three + selected_filters.skip.part_three_deviation || test_skip.part_three < selected_filters.skip.part_three - selected_filters.skip.part_three_deviation)) { return false; }
         }
         return true;
     }
 
     function check_stroke_count(test_stroke_count) {
-        if (stroke_count_filter.equal + stroke_count_filter.greater + stroke_count_filter.less > 0) {
-            if ((stroke_count_filter.equal > 0 && test_stroke_count !== stroke_count_filter.equal) ||
-                (stroke_count_filter.greater > 0 && test_stroke_count <= stroke_count_filter.greater) ||
-                (stroke_count_filter.less > 0 && test_stroke_count >= stroke_count_filter.less)) {
+        if (selected_filters.stroke_count.equal + selected_filters.stroke_count.greater + selected_filters.stroke_count.less > 0) {
+            if ((selected_filters.stroke_count.equal > 0 && test_stroke_count !== selected_filters.stroke_count.equal) ||
+                (selected_filters.stroke_count.greater > 0 && test_stroke_count <= selected_filters.stroke_count.greater) ||
+                (selected_filters.stroke_count.less > 0 && test_stroke_count >= selected_filters.stroke_count.less)) {
                 return false;
             }
         }
@@ -439,12 +433,12 @@ function find_possible_kanji() {
 
 
     let word_parts_kanji = new Set([]);
-    const word_parts_kanji_active = Object.values(word_parts).join("").length > 0;
+    const word_parts_kanji_active = Object.values(selected_filters.word_parts).join("").length > 0;
     if (word_parts_kanji_active) {
         let word_lengths = ["2", "3", "4"];
-        if (word_parts["4"].length > 0) { word_lengths = ["4"] }
-        if (word_parts["3"].length > 0) { word_lengths = ["3", "4"] }
-        const word_parts_values = Object.values(word_parts);
+        if (selected_filters.word_parts["4"].length > 0) { word_lengths = ["4"] }
+        if (selected_filters.word_parts["3"].length > 0) { word_lengths = ["3", "4"] }
+        const word_parts_values = Object.values(selected_filters.word_parts);
         for (const word_length of word_lengths) {
             for (const word of WORDS_LIST[word_length]) {
                 const word_indexable = [...word];
@@ -470,7 +464,7 @@ function find_possible_kanji() {
     }
 
     function check_composition_parts(kanji, cjkvi_components, cjkvi_components_recursive) {
-        for (const composition_part of selected_composition_parts) {
+        for (const composition_part of selected_filters.composition_parts) {
             if (![kanji, ...cjkvi_components, ...cjkvi_components_recursive].includes(composition_part)) {
                 return false;
             }
@@ -594,28 +588,28 @@ function deselect_table_items(parent_element) {
 
 function prepare_reset_buttons() {
     function reset_radicals(find = true) {
-        selected_radical = structuredClone(DEFAULTS.radical);
+        selected_filters.radical = structuredClone(DEFAULTS.radical);
         deselect_table_items(document.querySelector("#radicals-container"));
         if (find) { find_possible_kanji(); }
     }
     document.querySelector("#radicals-reset").addEventListener("click", reset_radicals);
 
     function reset_components(find = true) {
-        selected_components = structuredClone(DEFAULTS.components);
+        selected_filters.components = structuredClone(DEFAULTS.components);
         deselect_table_items(document.querySelector("#components-container"));
         if (find) { find_possible_kanji() };
     }
     document.querySelector("#components-reset").addEventListener("click", reset_components);
 
     function reset_four_corner(find = true) {
-        selected_four_corners = structuredClone(DEFAULTS.four_corners);
+        selected_filters.four_corners = structuredClone(DEFAULTS.four_corners);
         deselect_table_items(document.querySelector("#four-corner-container"));
         if (find) { find_possible_kanji() };
     }
     document.querySelector("#four-corner-reset").addEventListener("click", reset_four_corner);
 
     function reset_skip(find = true) {
-        selected_skip = structuredClone(DEFAULTS.skip);
+        selected_filters.skip = structuredClone(DEFAULTS.skip);
         deselect_table_items(document.querySelector("#skip-container"));
         document.querySelector("#skip-part-2-input").value = 0;
         document.querySelector("#skip-part-2-input-deviation").value = 0;
@@ -626,7 +620,7 @@ function prepare_reset_buttons() {
     document.querySelector("#skip-reset").addEventListener("click", reset_skip);
 
     function reset_partial_word(find = true) {
-        word_parts = structuredClone(DEFAULTS.word_parts);
+        selected_filters.word_parts = structuredClone(DEFAULTS.word_parts);
         document.querySelector("#word-part-1").value = "";
         document.querySelector("#word-part-2").value = "";
         document.querySelector("#word-part-3").value = "";
@@ -636,7 +630,7 @@ function prepare_reset_buttons() {
     document.querySelector("#partial-word-reset").addEventListener("click", reset_partial_word);
 
     function reset_stroke_count(find = true) {
-        stroke_count_filter = structuredClone(DEFAULTS.stroke_count);
+        selected_filters.stroke_count = structuredClone(DEFAULTS.stroke_count);
         document.querySelector("#stroke-count-input-equals").value = 0;
         document.querySelector("#stroke-count-input-greater").value = 0;
         document.querySelector("#stroke-count-input-less").value = 0;
@@ -646,7 +640,7 @@ function prepare_reset_buttons() {
 
     function reset_composition(find = true) {
         document.querySelector("#composition-selection-container").innerHTML = "";
-        selected_composition_parts = structuredClone(DEFAULTS.composition_parts);
+        selected_filters.composition_parts = structuredClone(DEFAULTS.composition_parts);
         for (const table_item of document.querySelector("#decomposition-container").querySelectorAll("." + TABLE_ITEM_CLASS)) {
             table_item.classList.remove(DECOMPOSITION_DISABLED_CLASS);
         }
