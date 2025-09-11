@@ -1,39 +1,48 @@
 [
     {
         "component": "一",
-        "stroke_count": "1"
+        "stroke_count": "1",
+        "display_component": "一"
     },
     {
         "component": "｜",
-        "stroke_count": "1"
+        "stroke_count": "1",
+        "display_component": "｜"
     },
     {
         "component": "丶",
-        "stroke_count": "1"
+        "stroke_count": "1",
+        "display_component": "丶"
     },
     {
         "component": "ノ",
-        "stroke_count": "1"
+        "stroke_count": "1",
+        "display_component": "ノ"
     },
     {
         "component": "乙",
-        "stroke_count": "1"
+        "stroke_count": "1",
+        "display_component": "乙"
     },
     {
         "component": "亅",
-        "stroke_count": "1"
+        "stroke_count": "1",
+        "display_component": "亅"
     },
     {
         "component": "二",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "二"
     },
     {
         "component": "亠",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "亠"
     },
     {
         "component": "人",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "人"
     },
     {
         "component": "化",
@@ -45,15 +54,18 @@
     },
     {
         "component": "儿",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "儿"
     },
     {
         "component": "入",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "入"
     },
     {
         "component": "ハ",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "ハ"
     },
     {
         "component": "并",
@@ -61,27 +73,33 @@
     },
     {
         "component": "冂",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "冂"
     },
     {
         "component": "冖",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "冖"
     },
     {
         "component": "冫",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "冫"
     },
     {
         "component": "几",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "几"
     },
     {
         "component": "凵",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "凵"
     },
     {
         "component": "刀",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "刀"
     },
     {
         "component": "刈",
@@ -89,59 +107,73 @@
     },
     {
         "component": "力",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "力"
     },
     {
         "component": "勹",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "勹"
     },
     {
         "component": "匕",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "匕"
     },
     {
         "component": "匚",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "匚"
     },
     {
         "component": "十",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "十"
     },
     {
         "component": "卜",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "卜"
     },
     {
         "component": "卩",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "卩"
     },
     {
         "component": "厂",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "厂"
     },
     {
         "component": "厶",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "厶"
     },
     {
         "component": "又",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "又"
     },
     {
         "component": "マ",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "マ"
     },
     {
         "component": "九",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "九"
     },
     {
         "component": "ユ",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "ユ"
     },
     {
         "component": "乃",
-        "stroke_count": "2"
+        "stroke_count": "2",
+        "display_component": "乃"
     },
     {
         "component": "乞",
@@ -153,51 +185,63 @@
     },
     {
         "component": "口",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "口"
     },
     {
         "component": "囗",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "囗"
     },
     {
         "component": "土",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "土"
     },
     {
         "component": "士",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "士"
     },
     {
         "component": "夂",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "夂"
     },
     {
         "component": "夕",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "夕"
     },
     {
         "component": "大",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "大"
     },
     {
         "component": "女",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "女"
     },
     {
         "component": "子",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "子"
     },
     {
         "component": "宀",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "宀"
     },
     {
         "component": "寸",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "寸"
     },
     {
         "component": "小",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "小"
     },
     {
         "component": "尚",
@@ -205,83 +249,103 @@
     },
     {
         "component": "尢",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "尢"
     },
     {
         "component": "尸",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "尸"
     },
     {
         "component": "屮",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "屮"
     },
     {
         "component": "山",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "山"
     },
     {
         "component": "川",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "川"
     },
     {
         "component": "巛",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "巛"
     },
     {
         "component": "工",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "工"
     },
     {
         "component": "已",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "已"
     },
     {
         "component": "巾",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "巾"
     },
     {
         "component": "干",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "干"
     },
     {
         "component": "幺",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "幺"
     },
     {
         "component": "广",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "广"
     },
     {
         "component": "廴",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "廴"
     },
     {
         "component": "廾",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "廾"
     },
     {
         "component": "弋",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "弋"
     },
     {
         "component": "弓",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "弓"
     },
     {
         "component": "ヨ",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "ヨ"
     },
     {
         "component": "彑",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "彑"
     },
     {
         "component": "彡",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "彡"
     },
     {
         "component": "彳",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "彳"
     },
     {
         "component": "忙",
@@ -313,19 +377,23 @@
     },
     {
         "component": "也",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "也"
     },
     {
         "component": "亡",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "亡"
     },
     {
         "component": "及",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "及"
     },
     {
         "component": "久",
-        "stroke_count": "3"
+        "stroke_count": "3",
+        "display_component": "久"
     },
     {
         "component": "老",
@@ -333,103 +401,128 @@
     },
     {
         "component": "心",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "心"
     },
     {
         "component": "戈",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "戈"
     },
     {
         "component": "戸",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "戸"
     },
     {
         "component": "手",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "手"
     },
     {
         "component": "支",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "支"
     },
     {
         "component": "攵",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "攵"
     },
     {
         "component": "文",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "文"
     },
     {
         "component": "斗",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "斗"
     },
     {
         "component": "斤",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "斤"
     },
     {
         "component": "方",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "方"
     },
     {
         "component": "无",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "无"
     },
     {
         "component": "日",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "日"
     },
     {
         "component": "曰",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "曰"
     },
     {
         "component": "月",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "月"
     },
     {
         "component": "木",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "木"
     },
     {
         "component": "欠",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "欠"
     },
     {
         "component": "止",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "止"
     },
     {
         "component": "歹",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "歹"
     },
     {
         "component": "殳",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "殳"
     },
     {
         "component": "比",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "比"
     },
     {
         "component": "毛",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "毛"
     },
     {
         "component": "氏",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "氏"
     },
     {
         "component": "气",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "气"
     },
     {
         "component": "水",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "水"
     },
     {
         "component": "火",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "火"
     },
     {
         "component": "杰",
@@ -437,31 +530,38 @@
     },
     {
         "component": "爪",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "爪"
     },
     {
         "component": "父",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "父"
     },
     {
         "component": "爻",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "爻"
     },
     {
         "component": "爿",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "爿"
     },
     {
         "component": "片",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "片"
     },
     {
         "component": "牛",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "牛"
     },
     {
         "component": "犬",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "犬"
     },
     {
         "component": "礼",
@@ -469,67 +569,83 @@
     },
     {
         "component": "王",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "王"
     },
     {
         "component": "元",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "元"
     },
     {
         "component": "井",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "井"
     },
     {
         "component": "勿",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "勿"
     },
     {
         "component": "尤",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "尤"
     },
     {
         "component": "五",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "五"
     },
     {
         "component": "屯",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "屯"
     },
     {
         "component": "巴",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "巴"
     },
     {
         "component": "毋",
-        "stroke_count": "4"
+        "stroke_count": "4",
+        "display_component": "毋"
     },
     {
         "component": "玄",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "玄"
     },
     {
         "component": "瓦",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "瓦"
     },
     {
         "component": "甘",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "甘"
     },
     {
         "component": "生",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "生"
     },
     {
         "component": "用",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "用"
     },
     {
         "component": "田",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "田"
     },
     {
         "component": "疋",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "疋"
     },
     {
         "component": "疔",
@@ -537,39 +653,48 @@
     },
     {
         "component": "癶",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "癶"
     },
     {
         "component": "白",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "白"
     },
     {
         "component": "皮",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "皮"
     },
     {
         "component": "皿",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "皿"
     },
     {
         "component": "目",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "目"
     },
     {
         "component": "矛",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "矛"
     },
     {
         "component": "矢",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "矢"
     },
     {
         "component": "石",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "石"
     },
     {
         "component": "示",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "示"
     },
     {
         "component": "禹",
@@ -577,15 +702,18 @@
     },
     {
         "component": "禾",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "禾"
     },
     {
         "component": "穴",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "穴"
     },
     {
         "component": "立",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "立"
     },
     {
         "component": "初",
@@ -593,19 +721,23 @@
     },
     {
         "component": "世",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "世"
     },
     {
         "component": "巨",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "巨"
     },
     {
         "component": "冊",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "冊"
     },
     {
         "component": "母",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "母"
     },
     {
         "component": "買",
@@ -613,347 +745,433 @@
     },
     {
         "component": "牙",
-        "stroke_count": "5"
+        "stroke_count": "5",
+        "display_component": "牙"
     },
     {
         "component": "瓜",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "瓜"
     },
     {
         "component": "竹",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "竹"
     },
     {
         "component": "米",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "米"
     },
     {
         "component": "糸",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "糸"
     },
     {
         "component": "缶",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "缶"
     },
     {
         "component": "羊",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "羊"
     },
     {
         "component": "羽",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "羽"
     },
     {
         "component": "而",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "而"
     },
     {
         "component": "耒",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "耒"
     },
     {
         "component": "耳",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "耳"
     },
     {
         "component": "聿",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "聿"
     },
     {
         "component": "肉",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "肉"
     },
     {
         "component": "自",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "自"
     },
     {
         "component": "至",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "至"
     },
     {
         "component": "臼",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "臼"
     },
     {
         "component": "舌",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "舌"
     },
     {
         "component": "舟",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "舟"
     },
     {
         "component": "艮",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "艮"
     },
     {
         "component": "色",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "色"
     },
     {
         "component": "虍",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "虍"
     },
     {
         "component": "虫",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "虫"
     },
     {
         "component": "血",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "血"
     },
     {
         "component": "行",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "行"
     },
     {
         "component": "衣",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "衣"
     },
     {
         "component": "西",
-        "stroke_count": "6"
+        "stroke_count": "6",
+        "display_component": "西"
     },
     {
         "component": "臣",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "臣"
     },
     {
         "component": "見",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "見"
     },
     {
         "component": "角",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "角"
     },
     {
         "component": "言",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "言"
     },
     {
         "component": "谷",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "谷"
     },
     {
         "component": "豆",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "豆"
     },
     {
         "component": "豕",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "豕"
     },
     {
         "component": "豸",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "豸"
     },
     {
         "component": "貝",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "貝"
     },
     {
         "component": "赤",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "赤"
     },
     {
         "component": "走",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "走"
     },
     {
         "component": "足",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "足"
     },
     {
         "component": "身",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "身"
     },
     {
         "component": "車",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "車"
     },
     {
         "component": "辛",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "辛"
     },
     {
         "component": "辰",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "辰"
     },
     {
         "component": "酉",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "酉"
     },
     {
         "component": "釆",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "釆"
     },
     {
         "component": "里",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "里"
     },
     {
         "component": "舛",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "舛"
     },
     {
         "component": "麦",
-        "stroke_count": "7"
+        "stroke_count": "7",
+        "display_component": "麦"
     },
     {
         "component": "金",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "金"
     },
     {
         "component": "長",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "長"
     },
     {
         "component": "門",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "門"
     },
     {
         "component": "隶",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "隶"
     },
     {
         "component": "隹",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "隹"
     },
     {
         "component": "雨",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "雨"
     },
     {
         "component": "青",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "青"
     },
     {
         "component": "非",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "非"
     },
     {
         "component": "奄",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "奄"
     },
     {
         "component": "岡",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "岡"
     },
     {
         "component": "免",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "免"
     },
     {
         "component": "斉",
-        "stroke_count": "8"
+        "stroke_count": "8",
+        "display_component": "斉"
     },
     {
         "component": "面",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "面"
     },
     {
         "component": "革",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "革"
     },
     {
         "component": "韭",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "韭"
     },
     {
         "component": "音",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "音"
     },
     {
         "component": "頁",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "頁"
     },
     {
         "component": "風",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "風"
     },
     {
         "component": "飛",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "飛"
     },
     {
         "component": "食",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "食"
     },
     {
         "component": "首",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "首"
     },
     {
         "component": "香",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "香"
     },
     {
         "component": "品",
-        "stroke_count": "9"
+        "stroke_count": "9",
+        "display_component": "品"
     },
     {
         "component": "馬",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "馬"
     },
     {
         "component": "骨",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "骨"
     },
     {
         "component": "高",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "高"
     },
     {
         "component": "髟",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "髟"
     },
     {
         "component": "鬥",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "鬥"
     },
     {
         "component": "鬯",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "鬯"
     },
     {
         "component": "鬲",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "鬲"
     },
     {
         "component": "鬼",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "鬼"
     },
     {
         "component": "竜",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "竜"
     },
     {
         "component": "韋",
-        "stroke_count": "10"
+        "stroke_count": "10",
+        "display_component": "韋"
     },
     {
         "component": "魚",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "魚"
     },
     {
         "component": "鳥",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "鳥"
     },
     {
         "component": "鹵",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "鹵"
     },
     {
         "component": "鹿",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "鹿"
     },
     {
         "component": "麻",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "麻"
     },
     {
         "component": "亀",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "亀"
     },
     {
         "component": "滴",
@@ -961,54 +1179,67 @@
     },
     {
         "component": "黄",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "黄"
     },
     {
         "component": "黒",
-        "stroke_count": "11"
+        "stroke_count": "11",
+        "display_component": "黒"
     },
     {
         "component": "黍",
-        "stroke_count": "12"
+        "stroke_count": "12",
+        "display_component": "黍"
     },
     {
         "component": "黹",
-        "stroke_count": "12"
+        "stroke_count": "12",
+        "display_component": "黹"
     },
     {
         "component": "無",
-        "stroke_count": "12"
+        "stroke_count": "12",
+        "display_component": "無"
     },
     {
         "component": "歯",
-        "stroke_count": "12"
+        "stroke_count": "12",
+        "display_component": "歯"
     },
     {
         "component": "黽",
-        "stroke_count": "13"
+        "stroke_count": "13",
+        "display_component": "黽"
     },
     {
         "component": "鼎",
-        "stroke_count": "13"
+        "stroke_count": "13",
+        "display_component": "鼎"
     },
     {
         "component": "鼓",
-        "stroke_count": "13"
+        "stroke_count": "13",
+        "display_component": "鼓"
     },
     {
         "component": "鼠",
-        "stroke_count": "13"
+        "stroke_count": "13",
+        "display_component": "鼠"
     },
     {
         "component": "鼻",
-        "stroke_count": "14"
+        "stroke_count": "14",
+        "display_component": "鼻"
     },
     {
         "component": "齊",
-        "stroke_count": "14"
+        "stroke_count": "14",
+        "display_component": "齊"
     },
     {
         "component": "龠",
-        "stroke_count": "17"
+        "stroke_count": "17",
+        "display_component": "龠"
     }
 ]
