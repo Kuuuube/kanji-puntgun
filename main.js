@@ -307,7 +307,7 @@ function prepare_decomposition() {
     });
 }
 
-function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner, possible_skip_part_one) {
+function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner, possible_skip) {
     const radical_selection = document.querySelector("#radicals-selection");
     const radical_table_items = radical_selection.querySelectorAll(".table-item");
     for (const radical_table_item of radical_table_items) {
@@ -349,7 +349,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     for (const skip_part_one_table_item of skip_part_one_table_items) {
         let skip_part_one_val = Number(get_class_includes(skip_part_one_table_item.classList, "skip-part-1-val-", -1));
         skip_part_one_table_item.classList.remove("disabled-item");
-        if (!possible_skip_part_one.has(skip_part_one_val)) {
+        if (!possible_skip.part_one.has(skip_part_one_val)) {
             skip_part_one_table_item.classList.add("disabled-item");
         }
     }
@@ -367,7 +367,11 @@ function find_possible_kanji() {
         bottom_right: new Set([]),
         extra: new Set([]),
     };
-    let remaining_skip_part_one = new Set([]);
+    let remaining_skip = {
+        part_one: new Set([]),
+        part_two: new Set([]),
+        part_three: new Set([]),
+    }
 
     function check_selected_radical(test_radical) {
         if (selected_radical === -1) { return true; }
@@ -476,12 +480,14 @@ function find_possible_kanji() {
             remaining_four_corner.extra.add(kanji_values.four_corner.extra);
         }
         if (kanji_values.skip) {
-            remaining_skip_part_one.add(kanji_values.skip.part_one);
+            remaining_skip.part_one.add(kanji_values.skip.part_one);
+            remaining_skip.part_two.add(kanji_values.skip.part_two);
+            remaining_skip.part_three.add(kanji_values.skip.part_three);
         }
         possible_kanji.push(kanji);
     }
 
-    gray_out_unavailable(remaining_radicals, remaining_components, remaining_four_corner, remaining_skip_part_one);
+    gray_out_unavailable(remaining_radicals, remaining_components, remaining_four_corner, remaining_skip);
 
     possible_kanji.sort((a, b) => get_sorting_value(a) - get_sorting_value(b));
 
