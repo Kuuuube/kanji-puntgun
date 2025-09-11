@@ -236,9 +236,7 @@ def parse_kanjidic_data():
         if skip_code:
             skip_code = list(map(int, skip_code[0].split("-"))) # remove random inconsistent zero padding
             kanji_data[character]["skip"]["part_one"] = skip_code[0]
-
             kanji_data[character]["skip"]["part_two"] = skip_code[1]
-
             kanji_data[character]["skip"]["part_three"] = skip_code[2]
         else:
             del kanji_data[character]["skip"]
@@ -282,6 +280,39 @@ def parse_kanjidic_data():
         i += 1
 
     write_js_json(kanji_data, "kanji_data")
+
+    counts = {
+        "radical": 0,
+        "components": 0,
+        "four_corner": 0,
+        "skip": 0,
+        "stroke_count": 0,
+        "cjkvi_components": 0,
+        "deroo": 0,
+        "frequency": 0,
+    }
+
+    print("Total: " + str(len(kanji_data)))
+    for kanji_info in kanji_data.values():
+        if "components" in kanji_info:
+            counts["components"] += 1
+        if "cjkvi_components" in kanji_info:
+            counts["cjkvi_components"] += 1
+        if "frequency" in kanji_info:
+            counts["frequency"] += 1
+        if "deroo" in kanji_info:
+            counts["deroo"] += 1
+        if "skip" in kanji_info:
+            counts["skip"] += 1
+        if "four_corner" in kanji_info:
+            counts["four_corner"] += 1
+        if "radical" in kanji_info:
+            counts["radical"] += 1
+        if "stroke_count" in kanji_info:
+            counts["stroke_count"] += 1
+
+    for key, count in counts.items():
+        print(key.replace("_", " ").title() + ": " + str(count) + ", " + str(int(count / len(kanji_data) * 100)) + r"% coverage")
 
 def pack_info_files():
     components_info = open(static_assets_dir + "components_info.json").read()
@@ -330,6 +361,8 @@ def generate_word_list():
                 words[len(headword_string)].add(headword_string)
 
     write_js_json(words, "words_list")
+
+    print("Words list length: " + str(len(words[2]) + len(words[3]) + len(words[4])))
 
 parse_kanjidic_data()
 pack_info_files()
