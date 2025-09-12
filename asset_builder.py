@@ -9,6 +9,55 @@ data_assets_dir = assets_dir + "data/"
 generated_assets_dir = assets_dir + "generated/"
 static_assets_dir = assets_dir + "static_data/"
 
+dataset_info = {
+    "totals": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "radical": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "components": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "four_corner": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "skip": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "stroke_count": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "cjkvi_components": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "deroo": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "frequency": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
+    "words_list_length": 0,
+}
+
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         # convert sets into lists
@@ -281,49 +330,33 @@ def parse_kanjidic_data():
 
     write_js_json(kanji_data, "kanji_data")
 
-    counts = {
-        "radical": 0,
-        "components": 0,
-        "four_corner": 0,
-        "skip": 0,
-        "stroke_count": 0,
-        "cjkvi_components": 0,
-        "deroo": 0,
-        "frequency": 0,
-    }
+    kanji_lists = json.loads(open(static_assets_dir + "kanji_lists.json", encoding = "utf8").read())
+    for kanji, kanji_info in kanji_data.items():
+        for key, value in kanji_info.items():
+            if key in ["cjkvi_components_recursive"]:
+                continue
+            dataset_info[key]["count"] += 1
+            if kanji in kanji_lists["jouyou"]:
+                dataset_info[key]["jouyou_count"] += 1
+            if kanji in kanji_lists["jinmeiyou"]:
+                dataset_info[key]["jinmeiyou_count"] += 1
 
-    print("Total: " + str(len(kanji_data)))
-    for kanji_info in kanji_data.values():
-        if "components" in kanji_info:
-            counts["components"] += 1
-        if "cjkvi_components" in kanji_info:
-            counts["cjkvi_components"] += 1
-        if "frequency" in kanji_info:
-            counts["frequency"] += 1
-        if "deroo" in kanji_info:
-            counts["deroo"] += 1
-        if "skip" in kanji_info:
-            counts["skip"] += 1
-        if "four_corner" in kanji_info:
-            counts["four_corner"] += 1
-        if "radical" in kanji_info:
-            counts["radical"] += 1
-        if "stroke_count" in kanji_info:
-            counts["stroke_count"] += 1
-
-    for key, count in counts.items():
-        print(key.replace("_", " ").title() + ": " + str(count) + ", " + str(int(count / len(kanji_data) * 100)) + r"% coverage")
+    dataset_info["totals"]["count"] = len(kanji_data)
+    dataset_info["totals"]["jouyou_count"] = len(kanji_lists["jouyou"])
+    dataset_info["totals"]["jinmeiyou_count"] = len(kanji_lists["jinmeiyou"])
 
 def pack_info_files():
     components_info = open(static_assets_dir + "components_info.json").read()
     four_corner_info = open(static_assets_dir + "four_corner_info.json").read()
     radicals_info = open(static_assets_dir + "radicals_info.json").read()
+    dataset_data = json.dumps(dataset_info, indent = 4)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
     with open(generated_assets_dir + "packed_info.js", "w", encoding = "utf8") as packed_info:
         packed_info.write("const COMPONENTS_INFO = " + components_info + "\n")
         packed_info.write("const FOUR_CORNER_INFO = " + four_corner_info + "\n")
         packed_info.write("const RADICALS_INFO = " + radicals_info + "\n")
+        packed_info.write("const DATASET_INFO = " + dataset_data + "\n")
         # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
 
 
@@ -362,8 +395,9 @@ def generate_word_list():
 
     write_js_json(words, "words_list")
 
-    print("Words list length: " + str(len(words[2]) + len(words[3]) + len(words[4])))
+    for word_set in words.values():
+        dataset_info["words_list_length"] += len(word_set)
 
 parse_kanjidic_data()
-pack_info_files()
 generate_word_list()
+pack_info_files()
