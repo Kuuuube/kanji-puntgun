@@ -55,7 +55,9 @@ dataset_info = {
         "jouyou_count": 0,
         "jinmeiyou_count": 0,
     },
-    "words_list_length": 0,
+    "words_list_length": {
+        "count": 0,
+    },
 }
 
 class CustomJSONEncoder(json.JSONEncoder):
@@ -396,7 +398,7 @@ def generate_word_list():
     write_js_json(words, "words_list")
 
     for word_set in words.values():
-        dataset_info["words_list_length"] += len(word_set)
+        dataset_info["words_list_length"]["count"] += len(word_set)
 
 parse_kanjidic_data()
 generate_word_list()

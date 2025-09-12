@@ -676,6 +676,24 @@ function prepare_clear_text_button() {
     });
 }
 
+function prepare_dataset_info() {
+    for (const element of document.querySelectorAll("[id^=dataset-]")) {
+        const split_id = element.id.split("-");
+        let element_dataset_info = DATASET_INFO[split_id[1]][split_id[2]];
+        if (split_id.includes("percent")) {
+            if (split_id.includes("jouyou")) {
+                element_dataset_info /= DATASET_INFO["totals"]["jouyou_count"];
+            } else if (split_id.includes("jinmeiyou")) {
+                element_dataset_info /= DATASET_INFO["totals"]["jinmeiyou_count"];
+            } else {
+                element_dataset_info /= DATASET_INFO["totals"]["count"];
+            }
+            element_dataset_info = Math.floor(element_dataset_info * 100).toString() + "%";
+        }
+        element.textContent = element_dataset_info;
+    }
+}
+
 prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
@@ -689,4 +707,5 @@ prepare_header_results_selector();
 prepare_no_select();
 prepare_reset_buttons();
 prepare_clear_text_button();
+prepare_dataset_info();
 find_possible_kanji();

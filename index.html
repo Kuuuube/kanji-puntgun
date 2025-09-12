@@ -149,10 +149,10 @@
                         Click here to show documentation
                     </summary>
                     <div>
-                        Total Dataset: 13108 Unique Characters
+                        Total Dataset: <span id="dataset-totals-count"></span> Unique Characters
                         <h4 class="docs-header">Radical</h4>
                         <div class="documentation-text">
-                            Dataset Coverage: 100%
+                            Dataset Coverage: <span id="dataset-radical-count-percent"></span>
                             <hr>
                             The main kanji part or component in a character. This differs from components which can occur multiple times in a character.<br>
                             Most "radical searches" on websites and apps are actually component searches. Use the Components section of this page for a similar experience.<br>
@@ -162,7 +162,7 @@
                     <div>
                         <h4 class="docs-header">Components</h4>
                         <div class="documentation-text">
-                            Dataset Coverage: 92%
+                            Dataset Coverage: <span id="dataset-components-count-percent"></span>
                             <hr>
                             Kanji parts that are found in many characters. Components in characters are often not shaped exactly like the original component. They may be stetched, squished, or otherwise distorted.
                         </div>
@@ -170,7 +170,7 @@
                     <div>
                         <h4 class="docs-header">Four Corner</h4>
                         <div class="documentation-text">
-                            Dataset Coverage: 48%
+                            Dataset Coverage: <span id="dataset-four_corner-count-percent"></span>
                             <hr>
                             Identifies kanji based on components present in each corner of the character. Not every corner component is strictly in the corner. (<a href="https://www.edrdg.org/wwwjdic/FOURCORNER.html">More information</a>)
                         </div>
@@ -178,7 +178,7 @@
                     <div>
                         <h4 class="docs-header">SKIP Code</h4>
                         <div class="documentation-text">
-                            Dataset Coverage: 100%
+                            Dataset Coverage: <span id="dataset-skip-count-percent"></span>
                             <hr>
                             Identifies kanji based on a pattern, the stroke order within the shaded or dark part of the pattern, and the stroke order within the unshaded or light part of the pattern.<br>
                             Kanji which can be split vertically (left-right) are pattern 1, kanji which can be split horizontally (top-bottom) use pattern 2, kanji which are contained in an enclosure use pattern 3, and kanji which cannot be split use pattern 4.<br>
@@ -189,7 +189,7 @@
                     <div>
                         <h4 class="docs-header">Partial Word</h4>
                         <div class="documentation-text">
-                            Dataset: 186934 Unique 2-4 character combinations
+                            Dataset: <span id="dataset-words_list_length-count"></span> Unique 2-4 character combinations
                             <hr>
                             Narrows down the search to kanji present in possible words.<br>
                             For example, entering <code>　</code> <code>し</code> <code>　</code> <code>す</code> allows limiting to kanji that are contained in words which have し as the second character and す as the fourth character.<br>
@@ -200,7 +200,7 @@
                     <div>
                         <h4 class="docs-header">Stroke Count</h4>
                         <div class="documentation-text">
-                            Dataset Coverage: 100%
+                            Dataset Coverage: <span id="dataset-stroke_count-count-percent"></span>
                             <hr>
                             Only show kanji with stroke counts greater than, equal to, and/or less than the specified numbers.
                         </div>
@@ -208,7 +208,7 @@
                     <div>
                         <h4 class="docs-header">Composition/Decomposition</h4>
                         <div class="documentation-text">
-                            Dataset Coverage: 100%
+                            Dataset Coverage: <span id="dataset-cjkvi_components-count-percent"></span>
                             <hr>
                             Similar to the Components option but uses composition data containing thousands of unique kanji parts to filter kanji rather than a select few hundred key parts.<br>
                             Input any character into the Decomposition input box then select one of the decomposition outputs to add it to the kanji filtering. The decomposition input is limited to 4 characters at once.<br>
