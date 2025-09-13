@@ -299,7 +299,7 @@ function prepare_decomposition() {
             decomposition_html_string += render_decomposition_row(decomposition_data);
 
             // secondary and further below components
-            if (cjkvi_components_recursive.length > 0) { decomposition_html_string += "</span>"; }
+            decomposition_html_string += "</span>";
             decomposition_html_string += render_decomposition_row(cjkvi_components_recursive);
 
             decomposition_html_string += "</span></span>";
