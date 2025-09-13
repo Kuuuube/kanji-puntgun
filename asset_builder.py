@@ -347,11 +347,36 @@ def parse_kanjidic_data():
     dataset_info["totals"]["jouyou_count"] = len(kanji_lists["jouyou"])
     dataset_info["totals"]["jinmeiyou_count"] = len(kanji_lists["jinmeiyou"])
 
+def truncate_svg(svg_string):
+    # strip newlines, unnecessary whitespace, comments, xml def
+    return re.sub(r"(<!--.*?-->|<\?xml.*?\?>)", "", re.sub(r"\s+", " ", re.sub(r"(\n|\r)", "", svg_string)))
+
+def pack_deroo_svg_data():
+    deroo_dir = static_assets_dir + "deroo_svgs"
+    deroo_dict = {"top": {}, "bottom": {}}
+    for root, dirs, files in os.walk(deroo_dir):
+        for file in files:
+            path = os.path.join(root, file)
+            if ".svg" in path:
+                svg_file = truncate_svg(open(path).read())
+
+                deroo_section = re.search(r"(top|bottom)", path)[0]
+                deroo_row = re.search(r"row_\d+", path)[0]
+                deroo_number = re.search(r"\d+(?=\.svg)", path)[0]
+
+                if deroo_row not in deroo_dict[deroo_section]:
+                    deroo_dict[deroo_section][deroo_row] = {}
+
+                deroo_dict[deroo_section][deroo_row][deroo_number] = svg_file
+
+    return deroo_dict
+
 def pack_info_files():
     components_info = open(static_assets_dir + "components_info.json").read()
     four_corner_info = open(static_assets_dir + "four_corner_info.json").read()
     radicals_info = open(static_assets_dir + "radicals_info.json").read()
     dataset_data = json.dumps(dataset_info, indent = 4)
+    deroo_svg_data = json.dumps(pack_deroo_svg_data(), indent = 4)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
     with open(generated_assets_dir + "packed_info.js", "w", encoding = "utf8") as packed_info:
@@ -359,6 +384,7 @@ def pack_info_files():
         packed_info.write("const FOUR_CORNER_INFO = " + four_corner_info + "\n")
         packed_info.write("const RADICALS_INFO = " + radicals_info + "\n")
         packed_info.write("const DATASET_INFO = " + dataset_data + "\n")
+        packed_info.write("const DEROO_SVG_INFO = " + deroo_svg_data + "\n")
         # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
 
 
