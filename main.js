@@ -278,7 +278,9 @@ function prepare_decomposition() {
             if (cjkvi_components.length + cjkvi_components_recursive.length === 0) { continue; }
 
             let decomposition_data = cjkvi_components;
-            decomposition_data.push(decomposition_target);
+            if (!decomposition_data.includes(decomposition_target)) {
+                decomposition_data.push(decomposition_target);
+            }
 
             let decomposition_html_string = "<span class=\"flexbox flexbox-vertical flexbox-wrap flexbox-center\">";
             function render_decomposition_row(decomposition_data) {
