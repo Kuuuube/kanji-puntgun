@@ -3,6 +3,7 @@ const DEFAULTS = {
     components: [],
     four_corners: {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1},
     skip: {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0},
+    deroo: {top: 0, bottom: 0},
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: {greater: 0, equal: 0, less: 0},
     composition_parts: [],
@@ -183,6 +184,26 @@ function prepare_skip_selection() {
     const skip_part_three_deviation_input = document.querySelector("#skip-part-3-input-deviation");
     skip_part_three_input.addEventListener("change", (e) => {selected_filters.skip.part_three = Number(e.target.value); find_possible_kanji();});
     skip_part_three_deviation_input.addEventListener("change", (e) => {selected_filters.skip.part_three_deviation = Number(e.target.value); find_possible_kanji();});
+}
+
+function prepare_deroo_selection() {
+    const deroo_top_container = document.querySelector("#deroo-top");
+    const deroo_boxttom_container = document.querySelector("#deroo-bottom");
+
+    let top_html_string = "";
+    for (const row of Object.values(DEROO_SVG_INFO["top"])) {
+        for (const [deroo_code, svg_string] of Object.entries(row)) {
+            top_html_string += "<span class=\"table-item deroo-id-" + deroo_code + "\">" + svg_string + "</span>";
+        }
+    }
+    let bottom_html_string = "";
+    for (const row of Object.values(DEROO_SVG_INFO["bottom"])) {
+        for (const [deroo_code, svg_string] of Object.entries(row)) {
+            bottom_html_string += "<span class=\"table-item deroo-id-" + deroo_code + "\">" + svg_string + "</span>";
+        }
+    }
+    deroo_boxttom_container.innerHTML = bottom_html_string;
+    deroo_top_container.innerHTML = top_html_string;
 }
 
 function prepare_partial_word() {
@@ -700,6 +721,7 @@ prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
 prepare_skip_selection();
+prepare_deroo_selection();
 prepare_partial_word();
 prepare_stroke_count();
 prepare_composition();
