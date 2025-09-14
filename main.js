@@ -670,6 +670,13 @@ function prepare_reset_buttons() {
     }
     document.querySelector("#skip-reset").addEventListener("click", reset_skip);
 
+    function reset_deroo(find = true) {
+        selected_filters.deroo = structuredClone(DEFAULTS.deroo);
+        deselect_table_items(document.querySelector("#deroo-container"));
+        if (find) { find_possible_kanji() };
+    }
+    document.querySelector("#deroo-reset").addEventListener("click", reset_deroo);
+
     function reset_partial_word(find = true) {
         selected_filters.word_parts = structuredClone(DEFAULTS.word_parts);
         document.querySelector("#word-part-1").value = "";
@@ -710,6 +717,7 @@ function prepare_reset_buttons() {
         reset_components(false);
         reset_four_corner(false);
         reset_skip(false);
+        reset_deroo(false);
         reset_partial_word(false);
         reset_stroke_count(false);
         reset_composition(false);
