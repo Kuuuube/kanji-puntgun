@@ -191,20 +191,24 @@ function prepare_deroo_selection() {
     const deroo_top_container = document.querySelector("#deroo-top");
     const deroo_bottom_container = document.querySelector("#deroo-bottom");
 
-    let top_html_string = "";
+    let top_html_strings = [];
     for (const row of Object.values(DEROO_SVG_INFO["top"])) {
+        let row_html_string = "";
         for (const [deroo_code, svg_string] of Object.entries(row)) {
-            top_html_string += "<span class=\"table-item deroo-id-" + deroo_code + "\">" + svg_string + "</span>";
+            row_html_string += "<span class=\"table-item deroo-id-" + deroo_code + "\">" + svg_string + "</span>";
         }
+        top_html_strings.push(row_html_string);
     }
-    let bottom_html_string = "";
+    let bottom_html_strings = [];
     for (const row of Object.values(DEROO_SVG_INFO["bottom"])) {
+        let row_html_string = "";
         for (const [deroo_code, svg_string] of Object.entries(row)) {
-            bottom_html_string += "<span class=\"table-item deroo-id-" + deroo_code + "\">" + svg_string + "</span>";
+            row_html_string += "<span class=\"table-item deroo-id-" + deroo_code + "\">" + svg_string + "</span>";
         }
+        bottom_html_strings.push(row_html_string);
     }
-    deroo_bottom_container.innerHTML = bottom_html_string;
-    deroo_top_container.innerHTML = top_html_string;
+    deroo_bottom_container.innerHTML = bottom_html_strings.join("<span class=\"vertical-separator\"></span>");
+    deroo_top_container.innerHTML = top_html_strings.join("<span class=\"vertical-separator\"></span>");
 
     deroo_container.addEventListener("click", (e) => {
         const deroo_id = get_class_includes(e.target.classList, "deroo-id-", 0);
