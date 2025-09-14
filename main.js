@@ -187,8 +187,9 @@ function prepare_skip_selection() {
 }
 
 function prepare_deroo_selection() {
+    const deroo_container = document.querySelector("#deroo-container");
     const deroo_top_container = document.querySelector("#deroo-top");
-    const deroo_boxttom_container = document.querySelector("#deroo-bottom");
+    const deroo_bottom_container = document.querySelector("#deroo-bottom");
 
     let top_html_string = "";
     for (const row of Object.values(DEROO_SVG_INFO["top"])) {
@@ -202,8 +203,34 @@ function prepare_deroo_selection() {
             bottom_html_string += "<span class=\"table-item deroo-id-" + deroo_code + "\">" + svg_string + "</span>";
         }
     }
-    deroo_boxttom_container.innerHTML = bottom_html_string;
+    deroo_bottom_container.innerHTML = bottom_html_string;
     deroo_top_container.innerHTML = top_html_string;
+
+    deroo_container.addEventListener("click", (e) => {
+        const deroo_id = get_class_includes(e.target.classList, "deroo-id-", "");
+        if (!deroo_id) { return; }
+        for (const target_siblings of e.target.parentNode.children) {
+            target_siblings.classList.remove(SELECTED_CLASS);
+        }
+
+        if (e.target.parentNode.id == "deroo-top") {
+            if (selected_filters.deroo.top == deroo_id) {
+                selected_filters.deroo.top = structuredClone(DEFAULTS.deroo.top);
+            } else {
+                selected_filters.deroo.top = deroo_id;
+                e.target.classList.add(SELECTED_CLASS);
+            }
+        } else if (e.target.parentNode.id == "deroo-bottom") {
+            if (selected_filters.deroo.bottom == deroo_id) {
+                selected_filters.deroo.bottom = structuredClone(DEFAULTS.deroo.bottom);
+            } else {
+                selected_filters.deroo.bottom = deroo_id;
+                e.target.classList.add(SELECTED_CLASS);
+            }
+        }
+
+        find_possible_kanji();
+    });
 }
 
 function prepare_partial_word() {

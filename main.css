@@ -459,7 +459,6 @@ div.left-right-header {
     border-radius: 50%;
 }
 
-.deroo-icon,
 .reset-button > .icon,
 .clear-text-button > .icon,
 .search-button > .icon,
@@ -513,6 +512,12 @@ a:hover {
     user-select: none;
     top: .25em;
     position: relative;
+}
+
+.deroo-icon {
+    pointer-events: none;
+    user-select: none;
+    filter: var(--reset-button-filter);
 }
 
 .icon {
