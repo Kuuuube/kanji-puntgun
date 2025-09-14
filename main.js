@@ -359,14 +359,14 @@ function prepare_decomposition() {
     });
 }
 
-function gray_out_unavailable(possible_radicals, possible_components, possible_four_corner, possible_skip, possible_cjkvi_components) {
+function gray_out_unavailable(remaining) {
     const radical_selection = document.querySelector("#radicals-selection");
     const radical_table_items = radical_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const radical_table_item of radical_table_items) {
         if (radical_table_item.classList.contains("stroke-count")) { continue; }
         let radical = Number(get_class_includes(radical_table_item.classList, "radical-id-", -1));
         radical_table_item.classList.remove(DISABLED_CLASS);
-        if (!possible_radicals.has(radical)) {
+        if (!remaining.radicals.has(radical)) {
             radical_table_item.classList.add(DISABLED_CLASS);
         }
     }
@@ -377,7 +377,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
         if (components_table_item.classList.contains("stroke-count")) { continue; }
         let component = components_table_item.textContent;
         components_table_item.classList.remove(DISABLED_CLASS);
-        if (!possible_components.has(component)) {
+        if (!remaining.components.has(component)) {
             components_table_item.classList.add(DISABLED_CLASS);
         }
     }
@@ -390,7 +390,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
         for (const shape_table_item of shape_table_items) {
             let four_corner_id = get_class_includes(shape_table_item.classList, "four-corner-id-", -1);
             shape_table_item.classList.remove(DISABLED_CLASS);
-            if (!possible_four_corner[current_corner].has(four_corner_id)) {
+            if (!remaining.four_corner[current_corner].has(four_corner_id)) {
                 shape_table_item.classList.add(DISABLED_CLASS);
             }
         }
@@ -401,7 +401,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     for (const skip_part_one_table_item of skip_part_one_table_items) {
         let skip_part_one_val = Number(get_class_includes(skip_part_one_table_item.classList, "skip-part-1-val-", -1));
         skip_part_one_table_item.classList.remove(DISABLED_CLASS);
-        if (!possible_skip.part_one.has(skip_part_one_val)) {
+        if (!remaining.skip.part_one.has(skip_part_one_val)) {
             skip_part_one_table_item.classList.add(DISABLED_CLASS);
         }
     }
@@ -411,7 +411,7 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
     for (const decomposition_table_item of decomposition_table_items) {
         const cjkvi_component = decomposition_table_item.textContent;
         decomposition_table_item.classList.remove(DISABLED_CLASS);
-        if (!possible_cjkvi_components.has(cjkvi_component)) {
+        if (!remaining.cjkvi_components.has(cjkvi_component)) {
             decomposition_table_item.classList.add(DISABLED_CLASS);
         }
     }
@@ -420,21 +420,23 @@ function gray_out_unavailable(possible_radicals, possible_components, possible_f
 function find_possible_kanji() {
     let possible_kanji = [];
 
-    let remaining_radicals = new Set([]);
-    let remaining_components = new Set([]);
-    let remaining_four_corner = {
-        top_left: new Set([]),
-        top_right: new Set([]),
-        bottom_left: new Set([]),
-        bottom_right: new Set([]),
-        extra: new Set([]),
-    };
-    let remaining_skip = {
-        part_one: new Set([]),
-        part_two: new Set([]),
-        part_three: new Set([]),
-    };
-    let remaining_cjkvi_components = new Set([]);
+    let remaining = {
+        radicals: new Set([]),
+        components: new Set([]),
+        four_corner: {
+            top_left: new Set([]),
+            top_right: new Set([]),
+            bottom_left: new Set([]),
+            bottom_right: new Set([]),
+            extra: new Set([]),
+        },
+        skip: {
+            part_one: new Set([]),
+            part_two: new Set([]),
+            part_three: new Set([]),
+        },
+        cjkvi_components: new Set([]),
+    }
 
     function check_selected_radical(test_radical) {
         if (selected_filters.radical === -1) { return true; }
@@ -541,33 +543,33 @@ function find_possible_kanji() {
         if (!check_word_parts_kanji(kanji)) { continue; }
         if (!check_composition_parts(kanji, kanji_values.cjkvi_components, kanji_values.cjkvi_components_recursive)) { continue; }
 
-        remaining_radicals.add(kanji_values.radical.id);
+        remaining.radicals.add(kanji_values.radical.id);
         if (kanji_values.components) {
-            kanji_values.components.forEach((x) => remaining_components.add(x));
+            kanji_values.components.forEach((x) => remaining.components.add(x));
         }
         if (kanji_values.four_corner) {
-            remaining_four_corner.top_left.add(kanji_values.four_corner.top_left);
-            remaining_four_corner.top_right.add(kanji_values.four_corner.top_right);
-            remaining_four_corner.bottom_left.add(kanji_values.four_corner.bottom_left);
-            remaining_four_corner.bottom_right.add(kanji_values.four_corner.bottom_right);
-            remaining_four_corner.extra.add(kanji_values.four_corner.extra);
+            remaining.four_corner.top_left.add(kanji_values.four_corner.top_left);
+            remaining.four_corner.top_right.add(kanji_values.four_corner.top_right);
+            remaining.four_corner.bottom_left.add(kanji_values.four_corner.bottom_left);
+            remaining.four_corner.bottom_right.add(kanji_values.four_corner.bottom_right);
+            remaining.four_corner.extra.add(kanji_values.four_corner.extra);
         }
         if (kanji_values.skip) {
-            remaining_skip.part_one.add(kanji_values.skip.part_one);
-            remaining_skip.part_two.add(kanji_values.skip.part_two);
-            remaining_skip.part_three.add(kanji_values.skip.part_three);
+            remaining.skip.part_one.add(kanji_values.skip.part_one);
+            remaining.skip.part_two.add(kanji_values.skip.part_two);
+            remaining.skip.part_three.add(kanji_values.skip.part_three);
         }
         if (kanji_values.cjkvi_components) {
-            kanji_values.cjkvi_components.forEach((x) => remaining_cjkvi_components.add(x));
-            kanji_values.cjkvi_components_recursive.forEach((x) => remaining_cjkvi_components.add(x));
-            remaining_cjkvi_components.add(kanji); // kanji can be included in the decomposition so they must be checked for
+            kanji_values.cjkvi_components.forEach((x) => remaining.cjkvi_components.add(x));
+            kanji_values.cjkvi_components_recursive.forEach((x) => remaining.cjkvi_components.add(x));
+            remaining.cjkvi_components.add(kanji); // kanji can be included in the decomposition so they must be checked for
         }
-        global_valid_cjkvi_components = remaining_cjkvi_components;
+        global_valid_cjkvi_components = remaining.cjkvi_components;
 
         possible_kanji.push(kanji);
     }
 
-    gray_out_unavailable(remaining_radicals, remaining_components, remaining_four_corner, remaining_skip, remaining_cjkvi_components);
+    gray_out_unavailable(remaining);
 
     possible_kanji.sort((a, b) => get_sorting_value(a) - get_sorting_value(b));
 
