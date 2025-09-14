@@ -470,6 +470,15 @@ function find_possible_kanji() {
         return true;
     }
 
+    function check_selected_deroo(test_deroo) {
+        if (!test_deroo && (selected_filters.deroo.top || selected_filters.deroo.bottom)) { return false; }
+        if (!test_deroo) { return true; }
+        if ((selected_filters.deroo.top && selected_filters.deroo.top != Number(test_deroo.top)) || (selected_filters.deroo.bottom && selected_filters.deroo.bottom != Number(test_deroo.bottom))) {
+            return false;
+        }
+        return true;
+    }
+
     function check_stroke_count(test_stroke_count) {
         if (selected_filters.stroke_count.equal + selected_filters.stroke_count.greater + selected_filters.stroke_count.less > 0) {
             if ((selected_filters.stroke_count.equal > 0 && test_stroke_count !== selected_filters.stroke_count.equal) ||
@@ -527,6 +536,7 @@ function find_possible_kanji() {
         if (!check_selected_components(kanji_values.components)) { continue; }
         if (!check_selected_four_corner(kanji_values.four_corner)) { continue; }
         if (!check_selected_skip(kanji_values.skip)) { continue; }
+        if (!check_selected_deroo(kanji_values.deroo)) { continue; }
         if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
         if (!check_word_parts_kanji(kanji)) { continue; }
         if (!check_composition_parts(kanji, kanji_values.cjkvi_components, kanji_values.cjkvi_components_recursive)) { continue; }
