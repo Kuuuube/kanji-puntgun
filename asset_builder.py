@@ -295,7 +295,7 @@ def parse_kanjidic_data():
         if deroo_code:
             deroo_code_string = deroo_code[0]
             kanji_data[character]["deroo"]["bottom"] = deroo_code_string[-2:] # last two chars
-            kanji_data[character]["deroo"]["top"] = deroo_code_string[:2] # everything before last two chars
+            kanji_data[character]["deroo"]["top"] = deroo_code_string[:-2] # everything before last two chars
         else:
             del kanji_data[character]["deroo"]
 
