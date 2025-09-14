@@ -347,9 +347,9 @@ def parse_kanjidic_data():
     dataset_info["totals"]["jouyou_count"] = len(kanji_lists["jouyou"])
     dataset_info["totals"]["jinmeiyou_count"] = len(kanji_lists["jinmeiyou"])
 
-def truncate_svg(svg_string):
-    # strip newlines, unnecessary whitespace, comments, xml def
-    return re.sub(r"(<!--.*?-->|<\?xml.*?\?>)", "", re.sub(r"\s+", " ", re.sub(r"(\n|\r)", "", svg_string)))
+def truncate_deroo_svg(svg_string):
+    # strip newlines, unnecessary whitespace, comments, xml def, add deroo class
+    return re.sub(r"<svg", "<svg class=\"deroo-icon icon\"", re.sub(r"(<!--.*?-->|<\?xml.*?\?>)", "", re.sub(r"\s+", " ", re.sub(r"(\n|\r)", "", svg_string))))
 
 def pack_deroo_svg_data():
     deroo_dir = static_assets_dir + "deroo_svgs"
@@ -358,7 +358,7 @@ def pack_deroo_svg_data():
         for file in files:
             path = os.path.join(root, file)
             if ".svg" in path:
-                svg_file = truncate_svg(open(path).read())
+                svg_file = truncate_deroo_svg(open(path).read())
 
                 deroo_section = re.search(r"(top|bottom)", path)[0]
                 deroo_row = re.search(r"row_\d+", path)[0]
