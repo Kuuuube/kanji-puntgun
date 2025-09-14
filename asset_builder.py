@@ -349,7 +349,7 @@ def parse_kanjidic_data():
 
 def truncate_deroo_svg(svg_string):
     # strip newlines, unnecessary whitespace, comments, xml def, add deroo class
-    return re.sub(r"<svg", "<svg class=\"deroo-icon icon\"", re.sub(r"(<!--.*?-->|<\?xml.*?\?>)", "", re.sub(r"\s+", " ", re.sub(r"(\n|\r)", "", svg_string))))
+    return re.sub(r"<svg", "<svg class=\"deroo-icon icon\"", re.sub(r"(<!--.*?-->|<\?xml.*?\?>|id=\".*?\")", "", re.sub(r"\s+", " ", re.sub(r"(\n|\r)", "", svg_string))))
 
 def pack_deroo_svg_data():
     deroo_dir = static_assets_dir + "deroo_svgs"
