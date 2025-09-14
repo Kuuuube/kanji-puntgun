@@ -518,6 +518,13 @@ a:hover {
     pointer-events: none;
     user-select: none;
     filter: var(--reset-button-filter);
+    position: relative;
+}
+
+#deroo-bottom {
+    .deroo-icon {
+        top: .25em;
+    }
 }
 
 .icon {
