@@ -13,9 +13,10 @@
      id="defs1" /><g
      id="g31-0"
      transform="translate(-1089.0866,563.72842)"><g
-       id="g30-4"
-       transform="translate(-0.49703701)"><g
-         id="g27-1"><circle
+       id="g1"
+       transform="translate(0,36.741398)"><g
+         id="g27-1"
+         transform="translate(-0.49703701,-2.2785262)"><circle
            style="fill:#000000;fill-opacity:1;stroke-width:5.63871;stroke-linecap:round"
            id="path1-5-7-7"
            cx="1141.8674"
@@ -27,7 +28,7 @@
            cy="-521.23309"
            r="7.2760396" /></g><g
          id="g27-3-3"
-         transform="translate(68.663508,-2.2785262)"><circle
+         transform="translate(68.166471,-2.2785262)"><circle
            style="fill:#000000;fill-opacity:1;stroke-width:5.63871;stroke-linecap:round"
            id="path1-5-7-0-6"
            cx="1141.8674"
@@ -38,6 +39,6 @@
            cx="1122.5527"
            cy="-521.23309"
            r="7.2760396" /></g></g><path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 1166.0448,-556.45237 v 78.19181"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1166.0447,-555.9636 v 138.62876"
        id="path26-1" /></g></svg>

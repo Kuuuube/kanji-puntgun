@@ -12,5 +12,5 @@
    xmlns:svg="http://www.w3.org/2000/svg"><defs
      id="defs1" /><path
      id="path15-5"
-     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-     d="M 45.263891,31.56866 59.308091,7.2760501 M 19.073491,59.65698 V 31.56866 H 134.84289 v 25.81087" /></svg>
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="M 39.271451,36.527702 55.715934,10.53055 M 7.2145093,75.15496 V 40.501297 H 146.77053 v 34.653662" /></svg>

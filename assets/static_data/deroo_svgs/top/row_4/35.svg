@@ -28,6 +28,6 @@
        cx="1769.1332"
        cy="132.1814"
        r="7.2760396" /><path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 1739.9,78.845832 h 120.1208 v 45.508338"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1730.2782,78.845833 h 139.3644 v 54.090447"
        id="path79-3" /></g></svg>

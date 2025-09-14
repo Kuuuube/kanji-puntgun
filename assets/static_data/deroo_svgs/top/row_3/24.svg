@@ -15,9 +15,9 @@
      transform="translate(-1512.5372,245.61334)"><circle
        style="fill:#000000;fill-opacity:1;stroke-width:5.63871;stroke-linecap:round"
        id="path1-05-2"
-       cx="1590.8807"
-       cy="-140.50887"
+       cx="1592.4659"
+       cy="-132.68079"
        r="7.2760396" /><path
        id="path61-3"
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 1527.8072,-159.96512 h 126.147 m -63.0735,-71.93062 v 71.93062 m -46.883,-46.3481 h 93.766 m -84.277,-32.02407 c 0,0 -2.684,35.42852 -28.4501,55.82675" /></g></svg>
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1525.7057,-154.50891 h 133.5207 m -66.7604,-76.45491 v 76.45491 m -42.8053,-49.26331 h 92.4288 m -89.2032,-34.03831 c 0,0 -2.8408,37.65689 -30.113,59.33814" /></g></svg>

@@ -11,7 +11,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"><defs
      id="defs1" /><g
-     id="layer1"><path
+     id="layer1"
+     transform="matrix(1.2075134,0,0,1.2381243,-14.829863,-1.6371138)"
+     style="stroke-width:0.817846"><path
        id="path9-3"
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:11.9014;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
        d="M 83.221141,31.62579 V 7.2760501 M 20.117241,60.28347 32.643141,31.62579 H 133.79914" /></g></svg>

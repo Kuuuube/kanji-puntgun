@@ -14,7 +14,7 @@
      id="g29-0"
      transform="translate(-891.70924,557.84507)"><g
        id="g28-7"
-       transform="translate(0.26227863)"><circle
+       transform="translate(0.26227955,38.690643)"><circle
          style="fill:#000000;fill-opacity:1;stroke-width:5.63871;stroke-linecap:round"
          id="path1-5-2"
          cx="941.59229"
@@ -25,6 +25,6 @@
          cx="995.21802"
          cy="-519.57751"
          r="7.2760396" /></g><path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 968.66743,-550.56902 v 72.11867"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 968.66737,-550.27673 v 138.49172"
        id="path25-2" /></g></svg>
