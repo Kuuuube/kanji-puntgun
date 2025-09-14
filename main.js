@@ -406,6 +406,25 @@ function gray_out_unavailable(remaining) {
         }
     }
 
+    const deroo_top_container = document.querySelector("#deroo-top");
+    const deroo_bottom_container = document.querySelector("#deroo-bottom");
+    const deroo_top_container_table_items = deroo_top_container.querySelectorAll("." + TABLE_ITEM_CLASS);
+    const deroo_bottom_container_table_items = deroo_bottom_container.querySelectorAll("." + TABLE_ITEM_CLASS);
+    for (const deroo_top_container_table_item of deroo_top_container_table_items) {
+        let deroo_id = Number(get_class_includes(deroo_top_container_table_item.classList, "deroo-id-", 0));
+        deroo_top_container_table_item.classList.remove(DISABLED_CLASS);
+        if (!remaining.deroo.top.has(deroo_id)) {
+            deroo_top_container_table_item.classList.add(DISABLED_CLASS);
+        }
+    }
+    for (const deroo_bottom_container_table_item of deroo_bottom_container_table_items) {
+        let deroo_id = Number(get_class_includes(deroo_bottom_container_table_item.classList, "deroo-id-", 0));
+        deroo_bottom_container_table_item.classList.remove(DISABLED_CLASS);
+        if (!remaining.deroo.bottom.has(deroo_id)) {
+            deroo_bottom_container_table_item.classList.add(DISABLED_CLASS);
+        }
+    }
+
     const decomposition_container = document.querySelector("#decomposition-container");
     const decomposition_table_items = decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const decomposition_table_item of decomposition_table_items) {
@@ -434,6 +453,10 @@ function find_possible_kanji() {
             part_one: new Set([]),
             part_two: new Set([]),
             part_three: new Set([]),
+        },
+        deroo: {
+            top: new Set([]),
+            bottom: new Set([]),
         },
         cjkvi_components: new Set([]),
     }
@@ -563,6 +586,10 @@ function find_possible_kanji() {
             kanji_values.cjkvi_components.forEach((x) => remaining.cjkvi_components.add(x));
             kanji_values.cjkvi_components_recursive.forEach((x) => remaining.cjkvi_components.add(x));
             remaining.cjkvi_components.add(kanji); // kanji can be included in the decomposition so they must be checked for
+        }
+        if (kanji_values.deroo) {
+            remaining.deroo.top.add(Number(kanji_values.deroo.top));
+            remaining.deroo.bottom.add(Number(kanji_values.deroo.bottom));
         }
         global_valid_cjkvi_components = remaining.cjkvi_components;
 
