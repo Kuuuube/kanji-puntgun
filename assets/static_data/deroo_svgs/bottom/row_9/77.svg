@@ -13,6 +13,6 @@
      id="defs1" /><g
      id="layer1"
      style="display:inline"><path
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="M 33.740691,81.159247 H 120.17569 V 146.64035 H 33.740691 Z"
+       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 7.2760501,39.212314 H 146.64033 V 146.64035 H 7.2760501 Z"
        id="path192-1" /></g></svg>

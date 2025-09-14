@@ -10,9 +10,7 @@
    xml:space="preserve"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"><defs
-     id="defs1" /><g
-     id="layer1"
-     style="display:inline"><path
-       id="path173-0"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 37.799841,143.99445 c 0,0 41.7134,-16.9333 63.938399,-84.666603 m -66.584199,0 h 83.608299 m -41.274999,-26.9875 c 0,0 -2.1167,25.9292 -37.0417,64.5583 0,0 47.0959,10.054203 67.733399,49.741703" /></g></svg>
+     id="defs1" /><path
+     id="path44-1"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.552;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="m 94.587361,9.2869227 c 0,0 -14.103356,43.5375253 -46.717343,79.5989233 0,0 42.171195,18.913214 70.530712,46.589234 m -8.02499,-81.302344 c 0,0 -9.61818,55.382434 -68.235171,89.684734 M 14.815268,52.384677 H 139.10111" /></svg>

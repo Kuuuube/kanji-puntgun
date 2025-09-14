@@ -17,8 +17,8 @@
        style="display:inline"
        transform="translate(-1955.5731,-1527.0549)"><path
          id="path190-5"
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 2032.5313,1673.6952 v -68.1003 m -60.6167,68.1003 v -41.1595 m 121.2334,41.1595 v -41.1595 m -121.2334,41.1595 h 121.2334" /><g
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 2032.5313,1673.6951 v -79.1365 m -69.6821,79.1365 v -47.8297 m 139.3642,47.8297 v -47.8297 m -139.3642,47.8297 h 139.3642" /><g
          id="g191-4"
          transform="translate(2.1996515)"><g
            id="g190-0"><circle

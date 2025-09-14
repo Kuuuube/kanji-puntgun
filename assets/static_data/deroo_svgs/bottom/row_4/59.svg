@@ -14,5 +14,5 @@
      id="layer1"
      style="display:inline"><path
        id="path144-2"
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 49.830291,78.914388 c 0,0 22.0766,49.765552 57.623299,67.726152 l 6.7353,-8.6061 M 92.860791,76.295148 c 0,0 -11.9737,35.920982 -53.1333,63.984392" /></g></svg>
+       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 28.244161,22.280221 c 0,0 39.60587,89.957789 103.377359,122.423919 l 12.08326,-15.55666 M 105.44176,17.545601 c 0,0 -21.481069,64.931899 -95.322227,115.660199" /></g></svg>

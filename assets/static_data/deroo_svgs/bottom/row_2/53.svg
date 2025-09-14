@@ -17,7 +17,7 @@
        style="display:inline"
        transform="translate(-1304.186,-890.95303)"><g
          id="g132-5"
-         transform="translate(6.3499957,0.26458333)"><circle
+         transform="translate(-6.3987493,-39.076334)"><circle
            style="display:inline;fill:#000000;fill-opacity:1;stroke-width:5.63871;stroke-linecap:round"
            id="path1-2-0"
            cx="1361.7129"
@@ -38,6 +38,6 @@
            cx="1376.265"
            cy="991.30005"
            r="7.2760396" /></g><path
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 1408.7777,964.62918 v 72.96452 l -17.9606,-6.7351"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 1421.5264,898.24234 v 136.91176 l -43.319,-12.6377"
          id="path132-8" /></g></g></svg>

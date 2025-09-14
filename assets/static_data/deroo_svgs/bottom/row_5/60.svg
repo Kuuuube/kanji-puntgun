@@ -13,6 +13,6 @@
      id="defs1" /><g
      id="layer1"
      style="display:inline"><path
-       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 95.575321,73.326447 c 0,0 -1.3417,41.563903 -37.23426,73.313903"
+       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 95.575321,70.331848 c 0,0 -1.3417,41.563902 -37.23426,73.313902"
        id="path145-8" /></g></svg>

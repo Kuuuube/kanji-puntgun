@@ -16,8 +16,8 @@
        id="g182-8"
        style="display:inline"
        transform="translate(-1092.2356,-1532.9347)"><path
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 1114.425,1679.575 h 109.5375"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:14.5521;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 1099.5955,1679.5752 h 139.2367"
          id="path178-5" /><g
          id="g181-7"
          transform="translate(2.38125,-0.66157185)"><circle
