@@ -207,7 +207,7 @@ function prepare_deroo_selection() {
     deroo_top_container.innerHTML = top_html_string;
 
     deroo_container.addEventListener("click", (e) => {
-        const deroo_id = get_class_includes(e.target.classList, "deroo-id-", "");
+        const deroo_id = get_class_includes(e.target.classList, "deroo-id-", 0);
         if (!deroo_id) { return; }
         for (const target_siblings of e.target.parentNode.children) {
             target_siblings.classList.remove(SELECTED_CLASS);
