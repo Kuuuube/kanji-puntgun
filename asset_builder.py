@@ -376,7 +376,7 @@ def pack_info_files():
     four_corner_info = open(static_assets_dir + "four_corner_info.json").read()
     radicals_info = open(static_assets_dir + "radicals_info.json").read()
     dataset_data = json.dumps(dataset_info, indent = 4)
-    deroo_svg_data = json.dumps(pack_deroo_svg_data(), indent = 4)
+    deroo_svg_data = json.dumps(pack_deroo_svg_data(), indent = 4, sort_keys = True)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
     with open(generated_assets_dir + "packed_info.js", "w", encoding = "utf8") as packed_info:
