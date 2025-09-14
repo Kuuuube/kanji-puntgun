@@ -217,14 +217,14 @@ function prepare_deroo_selection() {
             if (selected_filters.deroo.top == deroo_id) {
                 selected_filters.deroo.top = structuredClone(DEFAULTS.deroo.top);
             } else {
-                selected_filters.deroo.top = deroo_id;
+                selected_filters.deroo.top = Number(deroo_id);
                 e.target.classList.add(SELECTED_CLASS);
             }
         } else if (e.target.parentNode.id == "deroo-bottom") {
             if (selected_filters.deroo.bottom == deroo_id) {
                 selected_filters.deroo.bottom = structuredClone(DEFAULTS.deroo.bottom);
             } else {
-                selected_filters.deroo.bottom = deroo_id;
+                selected_filters.deroo.bottom = Number(deroo_id);
                 e.target.classList.add(SELECTED_CLASS);
             }
         }
