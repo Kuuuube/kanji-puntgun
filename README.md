@@ -34,6 +34,14 @@ Stroke count can be an imperfect measurement due to discrepancies in how charact
 
 ([More information](https://www.edrdg.org/wwwjdic/SKIP.html))
 
+### De Roo
+
+Identifies kanji by the extreme top or left top shape and the extreme bottom or right bottom shape.
+
+The dots show potential strokes which may or may not be present. Ignore ⻌ and 囗 when used as enclosures. When 門 is present as an enclosure, consider it for the top or left top but ignore it for the bottom or right bottom.
+
+([More Information](https://www.edrdg.org/wwwjdic/deroo.html))
+
 ### Partial Word
 
 Narrows down the search to kanji present in possible words.
