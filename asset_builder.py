@@ -60,6 +60,8 @@ dataset_info = {
     },
 }
 
+orphaned_components = {}
+
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         # convert sets into lists
@@ -343,6 +345,13 @@ def parse_kanjidic_data():
             if kanji in kanji_lists["jinmeiyou"]:
                 dataset_info[key]["jinmeiyou_count"] += 1
 
+    for cjkvi_key, cjkvi_value in cjkvi_data.items():
+        if cjkvi_key in valid_cjkvi_components and cjkvi_key not in kanji_data:
+            orphaned_components[cjkvi_key] = {
+                "cjkvi_components": cjkvi_value["composition_parts"],
+                "cjkvi_components_recursive": cjkvi_value["recursive_composition_parts"],
+            }
+
     dataset_info["totals"]["count"] = len(kanji_data)
     dataset_info["totals"]["jouyou_count"] = len(kanji_lists["jouyou"])
     dataset_info["totals"]["jinmeiyou_count"] = len(kanji_lists["jinmeiyou"])
@@ -377,6 +386,7 @@ def pack_info_files():
     radicals_info = open(static_assets_dir + "radicals_info.json").read()
     dataset_data = json.dumps(dataset_info, indent = 4)
     deroo_svg_data = json.dumps(pack_deroo_svg_data(), indent = 4, sort_keys = True)
+    orphaned_components_data = json.dumps(orphaned_components, indent = 4, ensure_ascii = False)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
     with open(generated_assets_dir + "packed_info.js", "w", encoding = "utf8") as packed_info:
@@ -385,6 +395,7 @@ def pack_info_files():
         packed_info.write("const RADICALS_INFO = " + radicals_info + "\n")
         packed_info.write("const DATASET_INFO = " + dataset_data + "\n")
         packed_info.write("const DEROO_SVG_INFO = " + deroo_svg_data + "\n")
+        packed_info.write("const ORPHANED_COMPONENTS_INFO = " + orphaned_components_data + "\n")
         # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
 
 
