@@ -327,9 +327,14 @@ function prepare_decomposition() {
         for (const decomposition_target of decomposition_targets) {
             const cjkvi_components = structuredClone(KANJI_DATA[decomposition_target]?.cjkvi_components ?? []);
             const cjkvi_components_recursive = structuredClone(KANJI_DATA[decomposition_target]?.cjkvi_components_recursive ?? []);
-            if (cjkvi_components.length + cjkvi_components_recursive.length === 0) { continue; }
+            if (cjkvi_components.length + ORPHANED_COMPONENTS_INFO[decomposition_target]?.cjkvi_components.length === 0) { continue; }
 
             let decomposition_data = cjkvi_components;
+            let decomposition_data_recursive = cjkvi_components_recursive;
+            if (ORPHANED_COMPONENTS_INFO[decomposition_target]) {
+                decomposition_data = structuredClone(ORPHANED_COMPONENTS_INFO[decomposition_target].cjkvi_components);
+                decomposition_data_recursive = structuredClone(ORPHANED_COMPONENTS_INFO[decomposition_target]?.cjkvi_components_recursive ?? []);
+            }
             if (!decomposition_data.includes(decomposition_target)) {
                 decomposition_data.push(decomposition_target);
             }
@@ -354,7 +359,7 @@ function prepare_decomposition() {
 
             // secondary and further below components
             decomposition_html_string += "</span>";
-            decomposition_html_string += render_decomposition_row(cjkvi_components_recursive);
+            decomposition_html_string += render_decomposition_row(decomposition_data_recursive);
 
             decomposition_html_string += "</span></span>";
             decomposition_table.push(decomposition_html_string);
