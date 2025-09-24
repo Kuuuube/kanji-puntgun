@@ -308,9 +308,10 @@ def parse_kanjidic_data():
 
         if character in cjkvi_data:
             cjkvi_composition = cjkvi_data[character]["composition_parts"]
+            cjkvi_composition_recursize = cjkvi_data[character]["recursive_composition_parts"]
             kanji_data[character]["cjkvi_components"] = cjkvi_composition
-            kanji_data[character]["cjkvi_components_recursive"] = cjkvi_data[character]["recursive_composition_parts"]
-            for valid_cjkvi_component in cjkvi_composition:
+            kanji_data[character]["cjkvi_components_recursive"] = cjkvi_composition_recursize
+            for valid_cjkvi_component in cjkvi_composition + cjkvi_composition_recursize:
                 valid_cjkvi_components.add(valid_cjkvi_component)
         else:
             del kanji_data[character]["cjkvi_components"]
