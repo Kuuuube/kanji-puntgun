@@ -349,8 +349,9 @@ def parse_kanjidic_data():
         if cjkvi_key in valid_cjkvi_components and cjkvi_key not in kanji_data:
             orphaned_components[cjkvi_key] = {
                 "cjkvi_components": cjkvi_value["composition_parts"],
-                "cjkvi_components_recursive": cjkvi_value["recursive_composition_parts"],
             }
+            if len(cjkvi_value["recursive_composition_parts"]) > 0:
+                orphaned_components[cjkvi_key]["cjkvi_components_recursive"] = cjkvi_value["recursive_composition_parts"]
 
     dataset_info["totals"]["count"] = len(kanji_data)
     dataset_info["totals"]["jouyou_count"] = len(kanji_lists["jouyou"])
