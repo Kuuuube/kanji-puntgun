@@ -251,6 +251,12 @@ function prepare_partial_word() {
             } else {
                 selected_filters.word_parts[word_part_id.replace("word-part-", "")] = value;
             }
+
+            word_part_input.classList.remove("invalid-input");
+            if (value.length > 1) {
+                word_part_input.classList.add("invalid-input");
+            }
+
             find_possible_kanji();
         });
     }

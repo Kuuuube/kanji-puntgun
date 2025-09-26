@@ -561,6 +561,11 @@ code {
     margin-bottom: 0;
 }
 
+.invalid-input {
+    border-color: var(--bs-form-invalid-border-color);
+    color: var(--bs-form-invalid-color);
+}
+
 @media (min-width: 600px) {
     .fake-icon {
         display: none;
