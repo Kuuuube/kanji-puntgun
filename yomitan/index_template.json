@@ -1,0 +1,9 @@
+{
+    "title": "Kanji Puntgun {{date}}",
+    "format": 3,
+    "revision": "{{date}}",
+    "sequenced": false,
+    "author": "yomitan-import",
+    "url": "https://kuuuube.github.io/kanji-puntgun",
+    "description": "Data used in the Kanji Puntgun kanji search."
+}

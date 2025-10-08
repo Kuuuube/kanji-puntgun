@@ -2,5 +2,6 @@ assets/data/
 assets/generated/
 assets/downloaded/
 dist/
+yomitan/kanji*
 
 __pycache__
