@@ -2,3 +2,5 @@ assets/data/
 assets/generated/
 assets/downloaded/
 dist/
+
+__pycache__
