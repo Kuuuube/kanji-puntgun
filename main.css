@@ -310,6 +310,14 @@ input, #header-input-mirror {
     flex-shrink: 0;
 }
 
+#docs-kanji-search-results {
+    max-width: max(max(50vw, 50vh), 500px);
+}
+
+#docs-kanji-search-results > * {
+    min-width: 200px;
+}
+
 #radicals-selection, #components-selection {
     text-align: left;
 }
@@ -564,6 +572,10 @@ code {
 .invalid-input {
     border-color: var(--bs-form-invalid-border-color);
     color: var(--bs-form-invalid-color);
+}
+
+.hidden {
+    display: none !important;
 }
 
 @media (min-width: 600px) {

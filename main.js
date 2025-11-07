@@ -806,6 +806,77 @@ function prepare_dataset_info() {
     }
 }
 
+function prepare_docs_kanji_search() {
+    const search_results_element = document.querySelector("#docs-kanji-search-results");
+    const search_results_radical = document.querySelector("#docs-kanji-search-radical");
+    const search_results_components = document.querySelector("#docs-kanji-search-components");
+    const search_results_four_corner = document.querySelector("#docs-kanji-search-four-corner");
+    const search_results_skip = document.querySelector("#docs-kanji-search-skip");
+    const search_results_deroo = document.querySelector("#docs-kanji-search-deroo");
+    const search_results_stroke_count = document.querySelector("#docs-kanji-search-stroke-count");
+    const search_results_decomposition = document.querySelector("#docs-kanji-search-decomposition");
+
+    const deroo_top_values = Object.values(DEROO_SVG_INFO.top).reduce((acc, x) => {return {...acc, ...x}}, {});
+    const deroo_bottom_values = Object.values(DEROO_SVG_INFO.bottom).reduce((acc, x) => {return {...acc, ...x}}, {});
+
+    document.querySelector("#docs-kanji-search").addEventListener("input", (e) => {
+        const search_target = [...e.target.value].slice(0, 1)[0]; // search 1 character maximum
+        const search_kanji_info = KANJI_DATA[search_target];
+        search_results_element.classList.add("hidden");
+        if (search_kanji_info) {
+            let not_found_text = "Not Found";
+            search_results_radical.innerHTML = not_found_text;
+            search_results_components.innerHTML = not_found_text;
+            search_results_four_corner.innerHTML = not_found_text;
+            search_results_skip.innerHTML = not_found_text;
+            search_results_deroo.innerHTML = not_found_text;
+            search_results_stroke_count.innerHTML = not_found_text;
+            search_results_decomposition.innerHTML = not_found_text;
+
+            if (search_kanji_info.radical) {
+                const radical_characters = search_kanji_info.radical.characters.map((x) => x.character + "(" + x.stroke_count + ")");
+                search_results_radical.innerHTML = search_kanji_info.radical.id + "<br>" + radical_characters.join(", ");
+            }
+
+            if (search_kanji_info.components) {
+                search_results_components.innerHTML = search_kanji_info.components.map((x) => x + "(" + COMPONENTS_INFO.find(y => y.display_component === x).stroke_count + ")").join(", ");
+            }
+
+            if (search_kanji_info.four_corner) {
+                const four_corner_ordered = Object.values(search_kanji_info.four_corner);
+                search_results_four_corner.innerHTML = four_corner_ordered.join("") + "<br>" + four_corner_ordered.map((x) => FOUR_CORNER_INFO[x].character).join(" ");
+            }
+
+            if (search_kanji_info.skip) {
+                const skip_ordered = Object.values(search_kanji_info.skip);
+                const skip_part_1_svg = document.querySelector(".skip-part-1-val-" + search_kanji_info.skip.part_one).outerHTML;
+                search_results_skip.innerHTML = skip_ordered.join("") + "<br>" + skip_part_1_svg + ", " + search_kanji_info.skip.part_two + ", " + search_kanji_info.skip.part_three;
+            }
+
+            if (search_kanji_info.deroo) {
+                const deroo_ordered = Object.values(search_kanji_info.deroo);
+                const deroo_svg_top = deroo_top_values[search_kanji_info.deroo.top.padStart(2, "0")];
+                const deroo_svg_bottom = deroo_bottom_values[search_kanji_info.deroo.bottom.padStart(2, "0")];
+                search_results_deroo.innerHTML = deroo_ordered.join("") + "<br>" + deroo_svg_top + ", " + deroo_svg_bottom;
+            }
+
+            if (search_kanji_info.cjkvi_components) {
+                let components_string = search_kanji_info.cjkvi_components.join(", ");
+                if (search_kanji_info.cjkvi_components_recursive && search_kanji_info.cjkvi_components_recursive.length > 0) {
+                    components_string += "<br>" + search_kanji_info.cjkvi_components_recursive.join(", ");
+                }
+                search_results_decomposition.innerHTML = components_string;
+            }
+
+            if (search_kanji_info.stroke_count) {
+                search_results_stroke_count.innerHTML = search_kanji_info.stroke_count;
+            }
+
+            search_results_element.classList.remove("hidden");
+        }
+    });
+}
+
 prepare_radicals_selection();
 prepare_components_selection();
 prepare_four_corners_selection();
@@ -821,4 +892,5 @@ prepare_no_select();
 prepare_reset_buttons();
 prepare_clear_text_button();
 prepare_dataset_info();
+prepare_docs_kanji_search();
 find_possible_kanji();
