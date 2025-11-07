@@ -849,7 +849,7 @@ function prepare_docs_kanji_search() {
 
             if (search_kanji_info.skip) {
                 const skip_ordered = Object.values(search_kanji_info.skip);
-                const skip_part_1_svg = document.querySelector(".skip-part-1-val-" + search_kanji_info.skip.part_one).outerHTML;
+                const skip_part_1_svg = "<span class=\"skip-icon-kanji-search\">" + document.querySelector(".skip-part-1-val-" + search_kanji_info.skip.part_one).outerHTML + "</span>";
                 search_results_skip.innerHTML = skip_ordered.join("") + "<br>" + skip_part_1_svg + ", " + search_kanji_info.skip.part_two + ", " + search_kanji_info.skip.part_three;
             }
 

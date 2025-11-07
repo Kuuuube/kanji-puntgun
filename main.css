@@ -574,6 +574,10 @@ code {
     margin-top: 1em;
 }
 
+.skip-icon-kanji-search {
+    pointer-events: none;
+}
+
 .invalid-input {
     border-color: var(--bs-form-invalid-border-color);
     color: var(--bs-form-invalid-color);
