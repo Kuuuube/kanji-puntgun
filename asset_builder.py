@@ -418,7 +418,7 @@ def pack_deroo_svg_data():
 
     return deroo_dict
 
-def truncate_voyager_svg(svg_string):
+def truncate_voyager_component_svg(svg_string):
     svg_string = re.sub(r"(\n|\r)+", "\n", svg_string)
     svg_string = re.sub(r"<g id=\"kvg:StrokeNumbers(.|\n)*?</g>", "", svg_string)
     svg_string = re.sub(r"id=\".*?\"", "", svg_string)
@@ -436,6 +436,9 @@ def truncate_voyager_svg(svg_string):
 
     return svg_string
 
+def truncate_voyager_region_svg(svg_string):
+    return re.sub(r"<svg", "<svg class=\"voyager-icon icon\"", re.sub(r"\s+", " ", re.sub(r"(\n|\r)", "", svg_string)))
+
 def pack_voyager_svg_data():
     voyager_dir = static_assets_dir + "voyager_svgs/"
     regions_dir = voyager_dir + "regions"
@@ -446,13 +449,13 @@ def pack_voyager_svg_data():
     regions_svg_filenames = sorted(filter(lambda x: ".svg" in x, os.listdir(regions_dir)), key = lambda x: float(re.sub(r"\.svg", "", x)))
     for filename in regions_svg_filenames:
         if ".svg" in filename:
-            svg_file = truncate_voyager_svg(open(os.path.join(regions_dir, filename)).read())
+            svg_file = truncate_voyager_region_svg(open(os.path.join(regions_dir, filename)).read())
             voyager_dict["regions"][re.sub(r"\.svg", "", filename)] = svg_file
 
     components_svg_filenames = sorted(filter(lambda x: ".svg" in x, os.listdir(components_dir)), key = lambda x: int(re.sub(r"\.svg", "", x)))
     for filename in components_svg_filenames:
         if ".svg" in filename:
-            svg_file = truncate_voyager_svg(open(os.path.join(components_dir, filename)).read())
+            svg_file = truncate_voyager_component_svg(open(os.path.join(components_dir, filename)).read())
             voyager_dict["components"][re.sub(r"\.svg", "", filename)] = svg_file
 
     return voyager_dict
