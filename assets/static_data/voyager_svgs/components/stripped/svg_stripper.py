@@ -1,11 +1,14 @@
 import re
 import os
 
+raws_path = "../raw/"
+
 def strip_svg(svg_filename):
-    svg_string = open(svg_filename).read()
+    svg_string = open(raws_path + svg_filename).read()
 
     valid_paths = re.findall(r"\[id\$=(s\d+)\]", svg_string)
-    svg_string = re.sub(r"<path id=\"kvg.*?-(?!(" + "\"|".join(valid_paths) + r"\"))(.|\n|\r)*?/>", "", svg_string)
+    regex_string = "<path id=\"kvg.*?-(?!(?:" + "\"|".join(valid_paths) + r"\"))s\d+\" (.|\n|\r)*?/>"
+    svg_string = re.sub(regex_string, "", svg_string)
 
     svg_string = re.sub(r"(\n|\r)+", "\n", svg_string)
     svg_string = re.sub(r"<g id=\"kvg:StrokeNumbers(.|\n)*?</g>", "", svg_string)
@@ -31,8 +34,8 @@ def strip_svg(svg_filename):
     with open(svg_filename, "w") as output_svg:
         output_svg.write(svg_string)
 
-dir_files = os.listdir("../raw/")
+dir_files = os.listdir(raws_path)
 for dir_file in dir_files:
     if ".svg" in dir_file and "_stripped" not in dir_file:
-        print("Processing:", dir_file)
-        strip_svg("../raw/" + dir_file)
+        # print("Processing:", dir_file)
+        strip_svg(dir_file)
