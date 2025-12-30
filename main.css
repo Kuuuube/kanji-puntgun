@@ -292,6 +292,11 @@ input, #header-input-mirror {
     justify-content: space-around;
 }
 
+.flexbox-horizontal-even {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 .flexbox-center {
     justify-content: center;
     align-items: center;
@@ -349,6 +354,15 @@ input, #header-input-mirror {
     background-color: var(--bs-gray-700);
     user-select: none;
     pointer-events: none;
+}
+
+.stroke-count-flexbox {
+    display: flex;
+    justify-content: center;
+}
+
+.stroke-count-flexbox > div {
+    margin: 0 1em;
 }
 
 .table-item {
