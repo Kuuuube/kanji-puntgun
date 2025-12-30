@@ -586,6 +586,11 @@ code {
     min-height: 3.1rem;
 }
 
+#voyager-tier-1-components,
+#voyager-tier-2-components {
+    min-height: 3.5rem;
+}
+
 .docs-header {
     margin-bottom: 0;
 }

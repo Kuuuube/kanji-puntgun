@@ -239,18 +239,48 @@ function prepare_deroo_selection() {
 }
 
 function prepare_voyager_selection() {
-    let tier_1_region_selection = document.querySelector("#voyager-tier-1-regions");
-    let tier_1_component_selection = document.querySelector("#voyager-tier-1-components");
-    let tier_2_region_selection = document.querySelector("#voyager-tier-2-regions");
-    let tier_2_component_selection = document.querySelector("#voyager-tier-2-components");
+    const voyager_container = document.querySelector("#voyager-container");
+    const tier_1_region_selection = document.querySelector("#voyager-tier-1-regions");
+    const tier_1_component_selection = document.querySelector("#voyager-tier-1-components");
+    const tier_2_region_selection = document.querySelector("#voyager-tier-2-regions");
+    const tier_2_component_selection = document.querySelector("#voyager-tier-2-components");
+
+    let region_svg_info_sorted = Object.entries(VOYAGER_SVG_INFO["regions"]);
+    region_svg_info_sorted.sort((a, b) => parseFloat(a) > parseFloat(b));
 
     let region_html_string = "";
-    for (const region_svg of Object.values(VOYAGER_SVG_INFO["regions"])) {
-        region_html_string += "<span class=\"table-item icon-wrapper\">" + region_svg + "</span>";
+    for (const [region_id, region_svg] of region_svg_info_sorted) {
+        region_html_string += "<span class=\"table-item icon-wrapper voyager-id-" + region_id + "\">" + region_svg + "</span>";
     }
+
+    voyager_container.addEventListener("click", (e) => {
+        const voyager_id = get_class_includes(e.target.classList, "voyager-id-", 0);
+        if (!voyager_id) { return; }
+        for (const target_siblings of e.target.parentNode.children) {
+            target_siblings.classList.remove(SELECTED_CLASS);
+        }
+
+        if (e.target.parentNode.id == "voyager-tier-1-regions") {
+            if (selected_filters.voyager.region_1 == voyager_id) {
+                selected_filters.voyager.region_1 = structuredClone(DEFAULTS.voyager.region_1);
+            } else {
+                selected_filters.voyager.region_1 = voyager_id;
+                e.target.classList.add(SELECTED_CLASS);
+            }
+        } else if (e.target.parentNode.id == "voyager-tier-2-regions") {
+            if (selected_filters.voyager.region_2 == voyager_id) {
+                selected_filters.voyager.region_2 = structuredClone(DEFAULTS.voyager.region_2);
+            } else {
+                selected_filters.voyager.region_2 = voyager_id;
+                e.target.classList.add(SELECTED_CLASS);
+            }
+        }
+
+        find_possible_kanji();
+    });
+
     tier_1_region_selection.innerHTML = region_html_string;
     tier_2_region_selection.innerHTML = region_html_string;
-
 }
 
 function prepare_partial_word() {
