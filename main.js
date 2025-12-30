@@ -4,6 +4,7 @@ const DEFAULTS = {
     four_corners: {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1},
     skip: {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0},
     deroo: {top: 0, bottom: 0},
+    voyager: {region_1: -1, component_1: -1, region_2: -1, component_2: -1},
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: {greater: 0, equal: 0, less: 0},
     composition_parts: [],
@@ -235,6 +236,21 @@ function prepare_deroo_selection() {
 
         find_possible_kanji();
     });
+}
+
+function prepare_voyager_selection() {
+    let tier_1_region_selection = document.querySelector("#voyager-tier-1-regions");
+    let tier_1_component_selection = document.querySelector("#voyager-tier-1-components");
+    let tier_2_region_selection = document.querySelector("#voyager-tier-2-regions");
+    let tier_2_component_selection = document.querySelector("#voyager-tier-2-components");
+
+    let region_html_string = "";
+    for (const region_svg of Object.values(VOYAGER_SVG_INFO["regions"])) {
+        region_html_string += "<span class=\"table-item icon-wrapper\">" + region_svg + "</span>";
+    }
+    tier_1_region_selection.innerHTML = region_html_string;
+    tier_2_region_selection.innerHTML = region_html_string;
+
 }
 
 function prepare_partial_word() {
@@ -885,6 +901,7 @@ prepare_components_selection();
 prepare_four_corners_selection();
 prepare_skip_selection();
 prepare_deroo_selection();
+prepare_voyager_selection();
 prepare_partial_word();
 prepare_stroke_count();
 prepare_composition();

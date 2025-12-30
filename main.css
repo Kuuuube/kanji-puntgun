@@ -549,6 +549,13 @@ a:hover {
     }
 }
 
+.voyager-icon {
+    background-color: var(--svg-light-background);
+    border: 1px solid var(--bs-border-color);
+    pointer-events: none;
+    user-select: none;
+}
+
 .icon {
     height: 1em;
     width: 1em;
