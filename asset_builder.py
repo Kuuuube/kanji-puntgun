@@ -419,6 +419,22 @@ def pack_deroo_svg_data():
 
     return deroo_dict
 
+def pack_voyager_region_components_info():
+    region_components_dict = {}
+    voyager_data_lines = open(static_assets_dir + "voyager_kanji_data.csv").readlines()
+    del voyager_data_lines[0] # remove header
+    for voyager_data_line in voyager_data_lines:
+        line_split = voyager_data_line.split(",")
+        region_id = line_split[1]
+        component_id = line_split[2]
+
+        if region_id not in region_components_dict:
+            region_components_dict[region_id] = [component_id]
+        elif component_id not in region_components_dict[region_id]:
+            region_components_dict[region_id].append(component_id)
+
+    return region_components_dict
+
 def truncate_voyager_component_svg(svg_string):
     svg_string = re.sub(r"(\n|\r)+", "\n", svg_string)
     svg_string = re.sub(r"<g id=\"kvg:StrokeNumbers(.|\n)*?</g>", "", svg_string)
@@ -467,6 +483,7 @@ def pack_info_files():
     radicals_info = open(static_assets_dir + "radicals_info.json").read()
     dataset_data = json.dumps(dataset_info, indent = 4)
     deroo_svg_data = json.dumps(pack_deroo_svg_data(), indent = 4, sort_keys = True)
+    voyager_region_components_info = json.dumps(pack_voyager_region_components_info(), indent = 4, sort_keys = False)
     voyager_svg_data = json.dumps(pack_voyager_svg_data(), indent = 4, sort_keys = False)
     orphaned_components_data = json.dumps(orphaned_components, indent = 4, ensure_ascii = False)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
@@ -477,6 +494,7 @@ def pack_info_files():
         packed_info.write("const RADICALS_INFO = " + radicals_info + "\n")
         packed_info.write("const DATASET_INFO = " + dataset_data + "\n")
         packed_info.write("const DEROO_SVG_INFO = " + deroo_svg_data + "\n")
+        packed_info.write("const VOYAGER_REGION_COMPONENTS_INFO = " + voyager_region_components_info + "\n")
         packed_info.write("const VOYAGER_SVG_INFO = " + voyager_svg_data + "\n")
         packed_info.write("const ORPHANED_COMPONENTS_INFO = " + orphaned_components_data + "\n")
         # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
