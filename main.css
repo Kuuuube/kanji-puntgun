@@ -556,6 +556,10 @@ a:hover {
     user-select: none;
 }
 
+.voyager-component-icon {
+    filter: var(--reset-button-filter);
+}
+
 .icon {
     height: 1em;
     width: 1em;
