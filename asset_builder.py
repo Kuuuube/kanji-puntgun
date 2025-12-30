@@ -418,12 +418,52 @@ def pack_deroo_svg_data():
 
     return deroo_dict
 
+def truncate_voyager_svg(svg_string):
+    svg_string = re.sub(r"(\n|\r)+", "\n", svg_string)
+    svg_string = re.sub(r"<g id=\"kvg:StrokeNumbers(.|\n)*?</g>", "", svg_string)
+    svg_string = re.sub(r"id=\".*?\"", "", svg_string)
+    svg_string = re.sub(r"kvg.*?=\".*?\"", "", svg_string)
+    svg_string = re.sub(r"<!DOCTYPE(.|\n)*?]>", "", svg_string)
+    svg_string = re.sub(r"<!--(.|\n)*?-->", "", svg_string)
+    svg_string = re.sub(r"<style>(.|\n)*?</style>", "", svg_string)
+    svg_string = re.sub(r"<\?xml.*?\?>", "", svg_string)
+    svg_string = re.sub(r"(^|\n)\s*", "", svg_string)
+    svg_string = re.sub(r"\s*>", ">", svg_string)
+    svg_string = re.sub(r"\s*/>", "/>", svg_string)
+    svg_string = re.sub(r"\s+", " ", svg_string)
+
+    svg_string = re.sub(r"<svg", "<svg class=\"voyager-icon icon\"", svg_string)
+
+    return svg_string
+
+def pack_voyager_svg_data():
+    voyager_dir = static_assets_dir + "voyager_svgs/"
+    regions_dir = voyager_dir + "regions"
+    components_dir = voyager_dir + "components"
+
+    voyager_dict = {"regions": {}, "components": {}}
+
+    regions_svg_filenames = sorted(filter(lambda x: ".svg" in x, os.listdir(regions_dir)), key = lambda x: float(re.sub(r"\.svg", "", x)))
+    for filename in regions_svg_filenames:
+        if ".svg" in filename:
+            svg_file = truncate_voyager_svg(open(os.path.join(regions_dir, filename)).read())
+            voyager_dict["regions"][re.sub(r"\.svg", "", filename)] = svg_file
+
+    components_svg_filenames = sorted(filter(lambda x: ".svg" in x, os.listdir(components_dir)), key = lambda x: int(re.sub(r"\.svg", "", x)))
+    for filename in components_svg_filenames:
+        if ".svg" in filename:
+            svg_file = truncate_voyager_svg(open(os.path.join(components_dir, filename)).read())
+            voyager_dict["components"][re.sub(r"\.svg", "", filename)] = svg_file
+
+    return voyager_dict
+
 def pack_info_files():
     components_info = open(static_assets_dir + "components_info.json").read()
     four_corner_info = open(static_assets_dir + "four_corner_info.json").read()
     radicals_info = open(static_assets_dir + "radicals_info.json").read()
     dataset_data = json.dumps(dataset_info, indent = 4)
     deroo_svg_data = json.dumps(pack_deroo_svg_data(), indent = 4, sort_keys = True)
+    voyager_svg_data = json.dumps(pack_voyager_svg_data(), indent = 4, sort_keys = False)
     orphaned_components_data = json.dumps(orphaned_components, indent = 4, ensure_ascii = False)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
@@ -433,6 +473,7 @@ def pack_info_files():
         packed_info.write("const RADICALS_INFO = " + radicals_info + "\n")
         packed_info.write("const DATASET_INFO = " + dataset_data + "\n")
         packed_info.write("const DEROO_SVG_INFO = " + deroo_svg_data + "\n")
+        packed_info.write("const VOYAGER_SVG_INFO = " + voyager_svg_data + "\n")
         packed_info.write("const ORPHANED_COMPONENTS_INFO = " + orphaned_components_data + "\n")
         # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
 
