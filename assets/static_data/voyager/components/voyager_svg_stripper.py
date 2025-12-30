@@ -11,6 +11,7 @@ def strip_svg(svg_filename):
     svg = re.sub(r"<!DOCTYPE(.|\n)*?]>", "", svg)
     svg = re.sub(r"<!--(.|\n)*?-->", "", svg)
     svg = re.sub(r"<style>(.|\n)*?</style>", "", svg)
+    svg = re.sub(r"<\?xml.*?\?>", "", svg)
     svg = re.sub(r"(^|\n)\s*", "", svg)
     svg = re.sub(r"\s*>", ">", svg)
     svg = re.sub(r"\s*/>", "/>", svg)
