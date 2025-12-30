@@ -436,10 +436,13 @@ def pack_voyager_region_components_info():
     return region_components_dict
 
 def truncate_voyager_component_svg(svg_string):
+    valid_paths = re.findall(r"\[id\$=(s\d+)\]", svg_string)
+    svg_string = re.sub(r"<path id=\"kvg.*?-(?!(" + "\"|".join(valid_paths) + r"\"))(.|\n|\r)*?/>", "", svg_string)
+
     svg_string = re.sub(r"(\n|\r)+", "\n", svg_string)
     svg_string = re.sub(r"<g id=\"kvg:StrokeNumbers(.|\n)*?</g>", "", svg_string)
     svg_string = re.sub(r"id=\".*?\"", "", svg_string)
-    svg_string = re.sub(r"kvg.*?=\".*?\"", "", svg_string)
+    svg_string = re.sub(r"(id=\")?kvg.*?=\".*?\"", "", svg_string)
     svg_string = re.sub(r"<!DOCTYPE(.|\n)*?]>", "", svg_string)
     svg_string = re.sub(r"<!--(.|\n)*?-->", "", svg_string)
     svg_string = re.sub(r"<style>(.|\n)*?</style>", "", svg_string)
