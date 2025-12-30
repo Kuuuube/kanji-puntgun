@@ -206,6 +206,7 @@ def parse_ucs_strokes():
 def parse_voyager_data():
     voyager_data_lines = open(static_assets_dir + "voyager_kanji_data.csv").readlines()
     voyager_data_dict = {}
+    del voyager_data_lines[0] # remove header
     for voyager_data_line in voyager_data_lines:
         line_split = voyager_data_line.split(",")
         region_id = line_split[1]
