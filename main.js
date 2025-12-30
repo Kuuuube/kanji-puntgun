@@ -4,7 +4,7 @@ const DEFAULTS = {
     four_corners: {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1},
     skip: {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0},
     deroo: {top: 0, bottom: 0},
-    voyager: {region_one: -1, component_one: -1, region_two: -1, component_two: -1},
+    voyager: {region_one: 0, component_one: 0, region_two: 0, component_two: 0},
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: {greater: 0, equal: 0, less: 0},
     composition_parts: [],
@@ -519,6 +519,12 @@ function find_possible_kanji() {
             top: new Set([]),
             bottom: new Set([]),
         },
+        voyager: {
+            region_one: new Set([]),
+            component_one: new Set([]),
+            region_two: new Set([]),
+            component_two: new Set([]),
+        },
         cjkvi_components: new Set([]),
     }
 
@@ -560,6 +566,19 @@ function find_possible_kanji() {
         if (!test_deroo && (selected_filters.deroo.top || selected_filters.deroo.bottom)) { return false; }
         if (!test_deroo) { return true; }
         if ((selected_filters.deroo.top && selected_filters.deroo.top != Number(test_deroo.top)) || (selected_filters.deroo.bottom && selected_filters.deroo.bottom != Number(test_deroo.bottom))) {
+            return false;
+        }
+        return true;
+    }
+
+    function check_selected_voyager(test_voyager) {
+        if (!test_voyager && (selected_filters.voyager.region_one || selected_filters.voyager.region_two || selected_filters.voyager.component_one || selected_filters.voyager.component_two)) {
+            return false;
+        }
+        if ((selected_filters.voyager.region_one && !test_voyager.regions.includes(selected_filters.voyager.region_one)) ||
+            (selected_filters.voyager.region_two && !test_voyager.regions.includes(selected_filters.voyager.region_two)) ||
+            (selected_filters.voyager.component_one && !test_voyager.components.includes(selected_filters.voyager.component_one)) ||
+            (selected_filters.voyager.component_two && !test_voyager.components.includes(selected_filters.voyager.component_two))) {
             return false;
         }
         return true;
@@ -623,6 +642,7 @@ function find_possible_kanji() {
         if (!check_selected_four_corner(kanji_values.four_corner)) { continue; }
         if (!check_selected_skip(kanji_values.skip)) { continue; }
         if (!check_selected_deroo(kanji_values.deroo)) { continue; }
+        if (!check_selected_voyager(kanji_values.voyager)) { continue; }
         if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
         if (!check_word_parts_kanji(kanji)) { continue; }
         if (!check_composition_parts(kanji, kanji_values.cjkvi_components, kanji_values.cjkvi_components_recursive)) { continue; }
@@ -651,6 +671,12 @@ function find_possible_kanji() {
         if (kanji_values.deroo) {
             remaining.deroo.top.add(Number(kanji_values.deroo.top));
             remaining.deroo.bottom.add(Number(kanji_values.deroo.bottom));
+        }
+        if (kanji_values.voyager) {
+            remaining.voyager.region_one.add(...kanji_values.voyager.regions)
+            remaining.voyager.component_one.add(...kanji_values.voyager.components)
+            remaining.voyager.region_two.add(...kanji_values.voyager.regions)
+            remaining.voyager.component_two.add(...kanji_values.voyager.components)
         }
         global_valid_cjkvi_components = remaining.cjkvi_components;
 
