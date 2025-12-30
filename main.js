@@ -4,7 +4,7 @@ const DEFAULTS = {
     four_corners: {top_left: -1, top_right: -1, bottom_left: -1, bottom_right: -1, extra: -1},
     skip: {part_one: -1, part_two: 0, part_two_deviation: 0, part_three: 0, part_three_deviation: 0},
     deroo: {top: 0, bottom: 0},
-    voyager: {region_1: -1, component_1: -1, region_2: -1, component_2: -1},
+    voyager: {region_one: -1, component_one: -1, region_two: -1, component_two: -1},
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: {greater: 0, equal: 0, less: 0},
     composition_parts: [],
@@ -240,10 +240,10 @@ function prepare_deroo_selection() {
 
 function prepare_voyager_selection() {
     const voyager_container = document.querySelector("#voyager-container");
-    const tier_1_region_selection = document.querySelector("#voyager-tier-1-regions");
-    const tier_1_component_selection = document.querySelector("#voyager-tier-1-components");
-    const tier_2_region_selection = document.querySelector("#voyager-tier-2-regions");
-    const tier_2_component_selection = document.querySelector("#voyager-tier-2-components");
+    const tier_one_region_selection = document.querySelector("#voyager-tier-one-regions");
+    const tier_one_component_selection = document.querySelector("#voyager-tier-one-components");
+    const tier_two_region_selection = document.querySelector("#voyager-tier-two-regions");
+    const tier_two_component_selection = document.querySelector("#voyager-tier-two-components");
 
     let region_svg_info_sorted = Object.entries(VOYAGER_SVG_INFO["regions"]);
     region_svg_info_sorted.sort((a, b) => parseFloat(a) > parseFloat(b));
@@ -260,18 +260,18 @@ function prepare_voyager_selection() {
             target_siblings.classList.remove(SELECTED_CLASS);
         }
 
-        if (e.target.parentNode.id == "voyager-tier-1-regions") {
-            if (selected_filters.voyager.region_1 == voyager_id) {
-                selected_filters.voyager.region_1 = structuredClone(DEFAULTS.voyager.region_1);
+        if (e.target.parentNode.id == "voyager-tier-one-regions") {
+            if (selected_filters.voyager.region_one == voyager_id) {
+                selected_filters.voyager.region_one = structuredClone(DEFAULTS.voyager.region_one);
             } else {
-                selected_filters.voyager.region_1 = voyager_id;
+                selected_filters.voyager.region_one = voyager_id;
                 e.target.classList.add(SELECTED_CLASS);
             }
-        } else if (e.target.parentNode.id == "voyager-tier-2-regions") {
-            if (selected_filters.voyager.region_2 == voyager_id) {
-                selected_filters.voyager.region_2 = structuredClone(DEFAULTS.voyager.region_2);
+        } else if (e.target.parentNode.id == "voyager-tier-two-regions") {
+            if (selected_filters.voyager.region_two == voyager_id) {
+                selected_filters.voyager.region_two = structuredClone(DEFAULTS.voyager.region_two);
             } else {
-                selected_filters.voyager.region_2 = voyager_id;
+                selected_filters.voyager.region_two = voyager_id;
                 e.target.classList.add(SELECTED_CLASS);
             }
         }
@@ -279,8 +279,8 @@ function prepare_voyager_selection() {
         find_possible_kanji();
     });
 
-    tier_1_region_selection.innerHTML = region_html_string;
-    tier_2_region_selection.innerHTML = region_html_string;
+    tier_one_region_selection.innerHTML = region_html_string;
+    tier_two_region_selection.innerHTML = region_html_string;
 }
 
 function prepare_partial_word() {
