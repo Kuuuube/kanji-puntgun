@@ -50,6 +50,11 @@ dataset_info = {
         "jouyou_count": 0,
         "jinmeiyou_count": 0,
     },
+    "voyager": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
     "frequency": {
         "count": 0,
         "jouyou_count": 0,
@@ -198,6 +203,26 @@ def parse_ucs_strokes():
 
     return ucs_strokes_dict
 
+def parse_voyager_data():
+    voyager_data_lines = open(static_assets_dir + "voyager_kanji_data.csv").readlines()
+    voyager_data_dict = {}
+    for voyager_data_line in voyager_data_lines:
+        line_split = voyager_data_line.split(",")
+        region_id = line_split[1]
+        component_id = line_split[2]
+        kanji = line_split[5]
+
+        if kanji not in voyager_data_dict:
+            voyager_data_dict[kanji] = {
+                "regions": [region_id],
+                "components": [component_id],
+            }
+        else:
+            voyager_data_dict[kanji]["regions"].append(region_id)
+            voyager_data_dict[kanji]["components"].append(component_id)
+
+    return voyager_data_dict
+
 def parse_kanjidic_data():
     radicals_info_dict = {}
 
@@ -227,6 +252,10 @@ def parse_kanjidic_data():
             "top": -1,
             "bottom": -1,
         },
+        "voyager": {
+            "regions": [],
+            "components": [],
+        },
         "frequency": -1,
     }
 
@@ -248,6 +277,8 @@ def parse_kanjidic_data():
     cjkvi_data = parse_cjkvi()
 
     valid_cjkvi_components = set([])
+
+    voyager_data = parse_voyager_data()
 
     kanjidic = open(data_assets_dir + "kanjidic2.xml").read().replace("\n", "").replace("\r", "")
     for character_data in re.findall("<character>.*?</character>", kanjidic):
@@ -315,6 +346,11 @@ def parse_kanjidic_data():
                 valid_cjkvi_components.add(valid_cjkvi_component)
         else:
             del kanji_data[character]["cjkvi_components"]
+
+        if character in voyager_data:
+            kanji_data[character]["voyager"] = voyager_data[character]
+        else:
+            del kanji_data[character]["voyager"]
 
     components_dict = generate_components_data()
     for component, component_info in components_dict.items():
