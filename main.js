@@ -272,6 +272,7 @@ function prepare_voyager_selection() {
 
         if (e.target.parentNode.id == "voyager-tier-one-regions") {
             tier_one_component_selection.innerHTML = "";
+            selected_filters.voyager.component_one = structuredClone(DEFAULTS.voyager.component_one);
             if (selected_filters.voyager.region_one == voyager_region_id) {
                 selected_filters.voyager.region_one = structuredClone(DEFAULTS.voyager.region_one);
             } else {
@@ -281,12 +282,40 @@ function prepare_voyager_selection() {
             }
         } else if (e.target.parentNode.id == "voyager-tier-two-regions") {
             tier_two_component_selection.innerHTML = "";
+            selected_filters.voyager.component_two = structuredClone(DEFAULTS.voyager.component_one);
             if (selected_filters.voyager.region_two == voyager_region_id) {
                 selected_filters.voyager.region_two = structuredClone(DEFAULTS.voyager.region_two);
             } else {
                 selected_filters.voyager.region_two = voyager_region_id;
                 e.target.classList.add(SELECTED_CLASS);
                 tier_two_component_selection.innerHTML = get_voyager_components_svgs(voyager_region_id);
+            }
+        }
+
+        find_possible_kanji();
+    });
+
+    voyager_container.addEventListener("click", (e) => {
+        const voyager_component_id = get_class_includes(e.target.classList, "voyager-component-id-", 0);
+        console.log(e.target.classList);
+        if (!voyager_component_id) { return; }
+        for (const target_siblings of e.target.parentNode.children) {
+            target_siblings.classList.remove(SELECTED_CLASS);
+        }
+
+        if (e.target.parentNode.id == "voyager-tier-one-components") {
+            if (selected_filters.voyager.component_one == voyager_component_id) {
+                selected_filters.voyager.component_one = structuredClone(DEFAULTS.voyager.component_one);
+            } else {
+                selected_filters.voyager.component_one = voyager_component_id;
+                e.target.classList.add(SELECTED_CLASS);
+            }
+        } else if (e.target.parentNode.id == "voyager-tier-two-components") {
+            if (selected_filters.voyager.component_two == voyager_component_id) {
+                selected_filters.voyager.component_two = structuredClone(DEFAULTS.voyager.component_two);
+            } else {
+                selected_filters.voyager.component_two = voyager_component_id;
+                e.target.classList.add(SELECTED_CLASS);
             }
         }
 
