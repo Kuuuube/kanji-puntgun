@@ -39,10 +39,20 @@ def align_right_bottom(xmin, xmax, ymin, ymax, scaled_stroke_width):
 
     return (origin_x, origin_y, width, height)
 
+def align_center(xmin, xmax, ymin, ymax, scaled_stroke_width):
+    width_height = max(xmax - xmin, ymax - ymin) + scaled_stroke_width
+    origin_x = xmin - (width_height - (xmax - xmin) - scaled_stroke_width) / 2 - scaled_stroke_width / 2
+    origin_y = ymin - (width_height - (ymax - ymin) - scaled_stroke_width) / 2 - scaled_stroke_width / 2
+    height = width_height
+    width = width_height
+
+    return (origin_x, origin_y, width, height)
+
 def scale_svg(svg_string, svg_filename):
     svg_id = int(svg_filename.replace(".svg", ""))
-    svg_alignment_top_left = list(range(1, 80 + 1)) + list(range(190, 248 + 1)) + list(range(300, 307 + 1))
-    svg_alignment_bottom_right = list(range(81, 189 + 1)) + list(range(249, 299 + 1)) + list(range(308, 315 + 1))
+    svg_alignment_top_left = list(range(1, 80 + 1)) + list(range(190, 248 + 1))
+    svg_alignment_bottom_right = list(range(81, 189 + 1)) + list(range(249, 299 + 1))
+    svg_alignment_center = list(range(300, 322 + 1))
     stroke_width = 8.5
     expected_width_height = 109
     expected_width_height_stroked = 109 - stroke_width
@@ -61,6 +71,8 @@ def scale_svg(svg_string, svg_filename):
         (origin_x, origin_y, width, height) = align_left_top(xmin, xmax, ymin, ymax, scaled_stroke_width)
     elif svg_id in svg_alignment_bottom_right:
         (origin_x, origin_y, width, height) = align_right_bottom(xmin, xmax, ymin, ymax, scaled_stroke_width)
+    elif svg_id in svg_alignment_center:
+        (origin_x, origin_y, width, height) = align_center(xmin, xmax, ymin, ymax, scaled_stroke_width)
     else:
         print("WARNING: Could not find alignment for " + str(svg_id))
 
