@@ -3,5 +3,6 @@ assets/generated/
 assets/downloaded/
 dist/
 yomitan/kanji*
+temp/
 
 __pycache__
