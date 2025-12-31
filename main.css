@@ -558,6 +558,8 @@ a:hover {
 
 .voyager-component-icon {
     filter: var(--reset-button-filter);
+    pointer-events: none;
+    user-select: none;
 }
 
 .icon {
