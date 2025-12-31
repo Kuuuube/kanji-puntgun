@@ -528,6 +528,43 @@ function gray_out_unavailable(remaining) {
         }
     }
 
+    const voyager_tier_one_region_selection = document.querySelector("#voyager-tier-one-regions");
+    const voyager_tier_one_component_selection = document.querySelector("#voyager-tier-one-components");
+    const voyager_tier_two_region_selection = document.querySelector("#voyager-tier-two-regions");
+    const voyager_tier_two_component_selection = document.querySelector("#voyager-tier-two-components");
+    const voyager_tier_one_region_table_items = voyager_tier_one_region_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
+    const voyager_tier_one_component_table_items = voyager_tier_one_component_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
+    const voyager_tier_two_region_table_items = voyager_tier_two_region_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
+    const voyager_tier_two_component_table_items = voyager_tier_two_component_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
+    for (const voyager_tier_one_region_table_item of voyager_tier_one_region_table_items) {
+        const tier_one_region_id = get_class_includes(voyager_tier_one_region_table_item.classList, "voyager-region-id-", 0);
+        voyager_tier_one_region_table_item.classList.remove(DISABLED_CLASS);
+        if (!remaining.voyager.region_one.has(tier_one_region_id) || selected_filters.voyager.region_two == tier_one_region_id) {
+            voyager_tier_one_region_table_item.classList.add(DISABLED_CLASS);
+        }
+    }
+    for (const voyager_tier_two_region_table_item of voyager_tier_two_region_table_items) {
+        const tier_two_region_id = get_class_includes(voyager_tier_two_region_table_item.classList, "voyager-region-id-", 0);
+        voyager_tier_two_region_table_item.classList.remove(DISABLED_CLASS);
+        if (!remaining.voyager.region_two.has(tier_two_region_id) || selected_filters.voyager.region_one == tier_two_region_id) {
+            voyager_tier_two_region_table_item.classList.add(DISABLED_CLASS);
+        }
+    }
+    for (const voyager_tier_one_component_table_item of voyager_tier_one_component_table_items) {
+        const tier_one_component_id = get_class_includes(voyager_tier_one_component_table_item.classList, "voyager-component-id-", 0);
+        voyager_tier_one_component_table_item.classList.remove(DISABLED_CLASS);
+        if (!remaining.voyager.component_one.has(tier_one_component_id)) {
+            voyager_tier_one_component_table_item.classList.add(DISABLED_CLASS);
+        }
+    }
+    for (const voyager_tier_two_component_table_item of voyager_tier_two_component_table_items) {
+        const tier_two_component_id = get_class_includes(voyager_tier_two_component_table_item.classList, "voyager-component-id-", 0);
+        voyager_tier_two_component_table_item.classList.remove(DISABLED_CLASS);
+        if (!remaining.voyager.component_two.has(tier_two_component_id)) {
+            voyager_tier_two_component_table_item.classList.add(DISABLED_CLASS);
+        }
+    }
+
     const decomposition_container = document.querySelector("#decomposition-container");
     const decomposition_table_items = decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const decomposition_table_item of decomposition_table_items) {
@@ -715,10 +752,14 @@ function find_possible_kanji() {
             remaining.deroo.bottom.add(Number(kanji_values.deroo.bottom));
         }
         if (kanji_values.voyager) {
-            remaining.voyager.region_one.add(...kanji_values.voyager.regions)
-            remaining.voyager.component_one.add(...kanji_values.voyager.components)
-            remaining.voyager.region_two.add(...kanji_values.voyager.regions)
-            remaining.voyager.component_two.add(...kanji_values.voyager.components)
+            kanji_values.voyager.regions.forEach((x) => {
+                remaining.voyager.region_one.add(x);
+                remaining.voyager.region_two.add(x);
+            });
+            kanji_values.voyager.components.forEach((x) => {
+                remaining.voyager.component_one.add(x);
+                remaining.voyager.component_two.add(x);
+            });
         }
         global_valid_cjkvi_components = remaining.cjkvi_components;
 
