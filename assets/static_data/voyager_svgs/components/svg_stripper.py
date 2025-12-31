@@ -52,7 +52,7 @@ def scale_svg(svg_string, svg_filename):
     svg_id = int(svg_filename.replace(".svg", ""))
     svg_alignment_top_left = list(range(1, 80 + 1)) + list(range(190, 248 + 1))
     svg_alignment_bottom_right = list(range(81, 189 + 1)) + list(range(249, 299 + 1))
-    svg_alignment_center = list(range(300, 322 + 1))
+    svg_alignment_center = list(range(300, 323 + 1))
     stroke_width = 8.5
     expected_width_height = 109
     expected_width_height_stroked = 109 - stroke_width
@@ -64,7 +64,6 @@ def scale_svg(svg_string, svg_filename):
 
     scale_factor = min(expected_width_height_stroked / (xmax - xmin), expected_width_height_stroked / (ymax - ymin))
     scaled_stroke_width = stroke_width / scale_factor
-    expected_width_height_scale_stroked = 109 + scaled_stroke_width / 2
 
     (origin_x, origin_y, width, height) = (0, 0, expected_width_height, expected_width_height)
     if svg_id in svg_alignment_top_left:
