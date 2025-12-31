@@ -805,6 +805,7 @@ function prepare_header_results_selector() {
     const header_input = document.querySelector("#header-input");
     kanji_results.addEventListener("click", (e) => {
         if ([...e.target.textContent].length > 1) { return; }
+        if (e.target.classList.contains("no-click-select")) { return; }
         if (e.target.textContent === kanji_results_ellipsis_char) {
             if (e.target.id === "kanji-results-ellipsis-start") {
                 kanji_results_index -= KANJI_RESULTS_LIMIT;
