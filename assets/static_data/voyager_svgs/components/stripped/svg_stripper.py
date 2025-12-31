@@ -45,7 +45,7 @@ def scale_svg(svg_string, svg_filename):
 
     (origin_x, origin_y, width, height) = align_left(xmin, xmax, ymin, ymax, scaled_stroke_width)
 
-    svg_string = re.sub(r'viewBox="\d+ \d+ \d+ \d+"', "viewBox=\"" + str(origin_x) + " " + str(origin_y) + " " + str(max(width, height)) + " " + str(max(width, height)) + "\"", svg_string)
+    svg_string = re.sub(r'viewBox="\d+ \d+ \d+ \d+"', "viewBox=\"" + str(origin_x) + " " + str(origin_y) + " " + str(width) + " " + str(height) + "\"", svg_string)
 
     svg_string = re.sub(r"stroke-width:\d+(.\d+)?", "stroke-width:" + str(scaled_stroke_width), svg_string)
 
