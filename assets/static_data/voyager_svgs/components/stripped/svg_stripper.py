@@ -27,6 +27,15 @@ def align_left(xmin, xmax, ymin, ymax, scaled_stroke_width):
     width = xmax - origin_x + scaled_stroke_width / 2
     height = ymax - origin_y + scaled_stroke_width / 2
 
+    return (origin_x, origin_y, max(width, height), max(width, height))
+
+def align_right(xmin, xmax, ymin, ymax, scaled_stroke_width):
+    max_width_height = max(xmax - xmin, ymax - ymin) + scaled_stroke_width
+    origin_x = xmax - max_width_height + scaled_stroke_width / 2
+    origin_y = ymax - max_width_height + scaled_stroke_width / 2
+    height = max_width_height
+    width = max_width_height
+
     return (origin_x, origin_y, width, height)
 
 def scale_svg(svg_string, svg_filename):
@@ -43,7 +52,7 @@ def scale_svg(svg_string, svg_filename):
     scaled_stroke_width = stroke_width / scale_factor
     expected_width_height_scale_stroked = 109 + scaled_stroke_width / 2
 
-    (origin_x, origin_y, width, height) = align_left(xmin, xmax, ymin, ymax, scaled_stroke_width)
+    (origin_x, origin_y, width, height) = align_right(xmin, xmax, ymin, ymax, scaled_stroke_width)
 
     svg_string = re.sub(r'viewBox="\d+ \d+ \d+ \d+"', "viewBox=\"" + str(origin_x) + " " + str(origin_y) + " " + str(width) + " " + str(height) + "\"", svg_string)
 
