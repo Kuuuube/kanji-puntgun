@@ -65,7 +65,7 @@ Only one character may be input in each input box. Both kanji and hiragana are a
 
 Only show kanji with stroke counts greater than, equal to, and/or less than the specified numbers.
 
-## Composition/Decomposition
+### Composition/Decomposition
 
 Similar to the Components option but uses composition data containing thousands of unique kanji parts to filter kanji rather than a select few hundred key parts.
 
