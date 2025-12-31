@@ -42,6 +42,15 @@ The dots show potential strokes which may or may not be present. Ignore ⻌ and 
 
 ([More Information](https://www.edrdg.org/wwwjdic/deroo.html))
 
+### Voyager
+
+Identifies kanji by selecting regions (similar to SKIP) and the component within the shaded part of that region.
+
+Kanji that dont appear to fit in any region are likely a part of the solid region. The solid region does not contain any selectable components.
+
+([More Information](https://christopherball.github.io/linguistics/kanjiVoyager/))
+
+
 ### Partial Word
 
 Narrows down the search to kanji present in possible words.
