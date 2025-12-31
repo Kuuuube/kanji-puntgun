@@ -441,7 +441,7 @@ def truncate_voyager_region_svg(svg_string):
 def pack_voyager_svg_data():
     voyager_dir = static_assets_dir + "voyager_svgs/"
     regions_dir = voyager_dir + "regions"
-    components_dir = voyager_dir + "components"
+    components_dir = voyager_dir + "components/fixed"
 
     voyager_dict = {"regions": {}, "components": {}}
 
