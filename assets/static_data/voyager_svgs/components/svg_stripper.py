@@ -2,7 +2,8 @@ import re
 import os
 from svgpathtools import svg2paths
 
-raws_path = "../raw/"
+raws_path = "raw/"
+fixed_path = "fixed/"
 temp_dir = "temp/"
 os.makedirs(temp_dir, exist_ok = True)
 
@@ -21,7 +22,7 @@ def get_bbox(svg_file):
 
     return (xmin, xmax, ymin, ymax)
 
-def align_left(xmin, xmax, ymin, ymax, scaled_stroke_width):
+def align_left_top(xmin, xmax, ymin, ymax, scaled_stroke_width):
     origin_x = xmin - scaled_stroke_width / 2
     origin_y = ymin - scaled_stroke_width / 2
     width = xmax - origin_x + scaled_stroke_width / 2
@@ -29,7 +30,7 @@ def align_left(xmin, xmax, ymin, ymax, scaled_stroke_width):
 
     return (origin_x, origin_y, max(width, height), max(width, height))
 
-def align_right(xmin, xmax, ymin, ymax, scaled_stroke_width):
+def align_right_bottom(xmin, xmax, ymin, ymax, scaled_stroke_width):
     max_width_height = max(xmax - xmin, ymax - ymin) + scaled_stroke_width
     origin_x = xmax - max_width_height + scaled_stroke_width / 2
     origin_y = ymax - max_width_height + scaled_stroke_width / 2
@@ -39,6 +40,9 @@ def align_right(xmin, xmax, ymin, ymax, scaled_stroke_width):
     return (origin_x, origin_y, width, height)
 
 def scale_svg(svg_string, svg_filename):
+    svg_id = int(svg_filename.replace(".svg", ""))
+    svg_alignment_top_left = list(range(1, 80 + 1)) + list(range(190, 248 + 1)) + list(range(300, 307 + 1))
+    svg_alignment_bottom_right = list(range(81, 189 + 1)) + list(range(249, 299 + 1)) + list(range(308, 315 + 1))
     stroke_width = 8.5
     expected_width_height = 109
     expected_width_height_stroked = 109 - stroke_width
@@ -52,7 +56,13 @@ def scale_svg(svg_string, svg_filename):
     scaled_stroke_width = stroke_width / scale_factor
     expected_width_height_scale_stroked = 109 + scaled_stroke_width / 2
 
-    (origin_x, origin_y, width, height) = align_right(xmin, xmax, ymin, ymax, scaled_stroke_width)
+    (origin_x, origin_y, width, height) = (0, 0, expected_width_height, expected_width_height)
+    if svg_id in svg_alignment_top_left:
+        (origin_x, origin_y, width, height) = align_left_top(xmin, xmax, ymin, ymax, scaled_stroke_width)
+    elif svg_id in svg_alignment_bottom_right:
+        (origin_x, origin_y, width, height) = align_right_bottom(xmin, xmax, ymin, ymax, scaled_stroke_width)
+    else:
+        print("WARNING: Could not find alignment for " + str(svg_id))
 
     svg_string = re.sub(r'viewBox="\d+ \d+ \d+ \d+"', "viewBox=\"" + str(origin_x) + " " + str(origin_y) + " " + str(width) + " " + str(height) + "\"", svg_string)
 
@@ -88,11 +98,11 @@ def strip_svg(svg_filename):
 
     svg_string = scale_svg(svg_string, svg_filename)
 
-    with open(svg_filename, "w") as output_svg:
+    with open(fixed_path + svg_filename, "w") as output_svg:
         output_svg.write(svg_string)
 
 dir_files = os.listdir(raws_path)
 for dir_file in dir_files:
-    if ".svg" in dir_file and "_stripped" not in dir_file:
+    if ".svg" in dir_file:
         # print("Processing:", dir_file)
         strip_svg(dir_file)
