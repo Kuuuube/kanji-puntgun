@@ -297,7 +297,6 @@ function prepare_voyager_selection() {
 
     voyager_container.addEventListener("click", (e) => {
         const voyager_component_id = get_class_includes(e.target.classList, "voyager-component-id-", 0);
-        console.log(e.target.classList);
         if (!voyager_component_id) { return; }
         for (const target_siblings of e.target.parentNode.children) {
             target_siblings.classList.remove(SELECTED_CLASS);
