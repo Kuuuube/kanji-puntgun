@@ -327,10 +327,13 @@ input, #header-input-mirror {
     text-align: left;
 }
 
-.vertical-separator {
+hr, .vertical-separator {
     border: 1px solid var(--bs-border-color);
-    margin: var(--radicals-components-padding);
+}
+
+.vertical-separator {
     width: 0;
+    margin: var(--radicals-components-padding);
 }
 
 #kanji-results {
