@@ -155,6 +155,7 @@ def parse_cjkvi():
             "raw_compositions": compositions,
             "composition_parts": dict([]),
             "recursive_composition_parts": dict([]),
+            "composition_constructions": dict([]),
         }
 
         for composition in compositions:
@@ -168,14 +169,18 @@ def parse_cjkvi():
             working_composition = re.sub(r"\[.*?\]", "", working_composition)
 
             composition_parts_only = re.sub("[" + unicode_description_characters + circled_number_characters + "]", "", working_composition)
+            composition_construction_only = re.sub("[^" + unicode_description_characters + "]", "", working_composition)
             for composition_part in composition_parts_only:
                 cjkvi_dict[character]["composition_parts"][composition_part] = None
 
                 if composition_part not in cjkvi_unique_components:
                     cjkvi_unique_components.add(composition_part)
 
+            cjkvi_dict[character]["composition_constructions"][composition_construction_only] = None
+
     for character, value in cjkvi_dict.items():
         cjkvi_dict[character]["composition_parts"] = list(cjkvi_dict[character]["composition_parts"])
+        cjkvi_dict[character]["composition_constructions"] = list(cjkvi_dict[character]["composition_constructions"])
         for recursive_composition_part in recursive_cjkvi_parts_parser(cjkvi_dict, cjkvi_dict[character]["composition_parts"]):
             if recursive_composition_part in cjkvi_dict[character]["composition_parts"]:
                 continue
@@ -249,6 +254,7 @@ def parse_kanjidic_data():
         "components": [],
         "cjkvi_components": [],
         "cjkvi_components_recursive": [],
+        "cjkvi_constructions": [],
         "deroo": {
             "top": -1,
             "bottom": -1,
@@ -340,10 +346,12 @@ def parse_kanjidic_data():
 
         if character in cjkvi_data:
             cjkvi_composition = cjkvi_data[character]["composition_parts"]
-            cjkvi_composition_recursize = cjkvi_data[character]["recursive_composition_parts"]
+            cjkvi_composition_recursive = cjkvi_data[character]["recursive_composition_parts"]
+            cjkvi_constructions = cjkvi_data[character]["composition_constructions"]
             kanji_data[character]["cjkvi_components"] = cjkvi_composition
-            kanji_data[character]["cjkvi_components_recursive"] = cjkvi_composition_recursize
-            for valid_cjkvi_component in cjkvi_composition + cjkvi_composition_recursize:
+            kanji_data[character]["cjkvi_components_recursive"] = cjkvi_composition_recursive
+            kanji_data[character]["cjkvi_constructions"] = cjkvi_constructions
+            for valid_cjkvi_component in cjkvi_composition + cjkvi_composition_recursive:
                 valid_cjkvi_components.add(valid_cjkvi_component)
         else:
             del kanji_data[character]["cjkvi_components"]
@@ -375,7 +383,7 @@ def parse_kanjidic_data():
     kanji_lists = json.loads(open(static_assets_dir + "kanji_lists.json", encoding = "utf8").read())
     for kanji, kanji_info in kanji_data.items():
         for key, value in kanji_info.items():
-            if key in ["cjkvi_components_recursive"]:
+            if key in ["cjkvi_components_recursive", "cjkvi_constructions"]:
                 continue
             dataset_info[key]["count"] += 1
             if kanji in kanji_lists["jouyou"]:
