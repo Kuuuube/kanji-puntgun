@@ -468,7 +468,7 @@ function prepare_construction() {
     const construction_select_container = document.querySelector("#construction-selection-container");
     const construction_items_container = document.querySelector("#construction-items-container");
 
-    for (const radio_button of document.querySelectorAll("input[name=\"construction-match-type\"]")) {
+    for (const radio_button of construction_match_type_select.querySelectorAll("input[name=\"construction-match-type\"]")) {
         radio_button.addEventListener("change", (e) => {
             selected_filters.construction.match_type = e.target.value;
         });
