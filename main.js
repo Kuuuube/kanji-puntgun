@@ -464,11 +464,24 @@ function prepare_decomposition() {
 
 function prepare_construction() {
     const construction_select_container = document.querySelector("#construction-selection-container");
+    const construction_items_container = document.querySelector("#construction-items-container");
     let construction_selection_html_string = "";
     for (const [construction_id, construction_svg] of Object.entries(CONSTRUCTION_SVG_INFO)) {
         construction_selection_html_string += "<span class=\"table-item icon-wrapper construction-id-" + construction_id + "\">" + construction_svg + "</span>";
     }
     construction_select_container.innerHTML = construction_selection_html_string;
+
+    construction_select_container.addEventListener("click", (e) => {
+        const construction_id = get_class_includes(e.target.classList, "construction-id-", 0);
+        if (!construction_id) { return; }
+        construction_items_container.innerHTML += "<span class=\"table-item icon-wrapper selected construction-id-" + construction_id + "\">" + CONSTRUCTION_SVG_INFO[construction_id] + "</span>";
+    });
+
+    construction_items_container.addEventListener("click", (e) => {
+        const construction_id = get_class_includes(e.target.classList, "construction-id-", 0);
+        if (!construction_id) { return; }
+        e.target.remove();
+    });
 }
 
 function gray_out_unavailable(remaining) {
