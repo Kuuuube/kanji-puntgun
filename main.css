@@ -632,6 +632,10 @@ code {
     min-height: 3.5rem;
 }
 
+#construction-items-container {
+    min-height: 1.75rem;
+}
+
 .docs-header {
     margin-bottom: 0;
 }
