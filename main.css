@@ -549,6 +549,21 @@ a:hover {
     position: relative;
 }
 
+#four-corners-top-right > .four-corner-id-5,
+#four-corners-top-right > .four-corner-id-7 {
+    transform: scaleX(-1);
+}
+#four-corners-bottom-left > .four-corner-id-5,
+#four-corners-bottom-left > .four-corner-id-7 {
+    transform: scaleY(-1);
+}
+#four-corners-bottom-right > .four-corner-id-5,
+#four-corners-bottom-right > .four-corner-id-7,
+#four-corners-extra > .four-corner-id-5,
+#four-corners-extra > .four-corner-id-7 {
+    transform: scaleX(-1) scaleY(-1);
+}
+
 .deroo-icon {
     pointer-events: none;
     user-select: none;
