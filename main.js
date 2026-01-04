@@ -8,7 +8,7 @@ const DEFAULTS = {
     word_parts: {"1": "", "2": "", "3": "", "4": ""},
     stroke_count: {greater: 0, equal: 0, less: 0},
     composition_parts: [],
-    construction: [],
+    construction: {match_type: "contains", selected_parts: []},
 }
 const KANJI_RESULTS_LIMIT = 250;
 const MAX_FREQUENCY_VALUE = 5000;
@@ -464,8 +464,16 @@ function prepare_decomposition() {
 }
 
 function prepare_construction() {
+    const construction_match_type_select = document.querySelector("#construction-match-type-select");
     const construction_select_container = document.querySelector("#construction-selection-container");
     const construction_items_container = document.querySelector("#construction-items-container");
+
+    for (const radio_button of document.querySelectorAll("input[name=\"construction-match-type\"]")) {
+        radio_button.addEventListener("change", (e) => {
+            selected_filters.construction.match_type = e.target.value;
+        });
+    }
+
     let construction_selection_html_string = "";
     for (const [construction_id, construction_svg] of Object.entries(CONSTRUCTION_SVG_INFO)) {
         construction_selection_html_string += "<span class=\"table-item icon-wrapper construction-id-" + construction_id + "\">" + construction_svg + "</span>";
@@ -475,11 +483,11 @@ function prepare_construction() {
     construction_select_container.addEventListener("click", (e) => {
         const construction_id = get_class_includes(e.target.classList, "construction-id-", 0);
         if (!construction_id) { return; }
-        if ((construction_id === "0" && selected_filters.construction.length > 0) || (selected_filters.construction.length > 0 && selected_filters.construction[0] === "0")) { return; }
+        if ((construction_id === "0" && selected_filters.construction.selected_parts.length > 0) || (selected_filters.construction.selected_parts.length > 0 && selected_filters.construction.selected_parts[0] === "0")) { return; }
 
         construction_items_container.innerHTML += "<span class=\"table-item icon-wrapper selected construction-id-" + construction_id + "\">" + CONSTRUCTION_SVG_INFO[construction_id] + "</span>";
 
-        selected_filters.construction.push(construction_id);
+        selected_filters.construction.selected_parts.push(construction_id);
         find_possible_kanji();
     });
 
@@ -488,11 +496,11 @@ function prepare_construction() {
         if (!construction_id) { return; }
         const parent = e.target.parentNode; // must grab parent before removing target
         e.target.remove();
-        selected_filters.construction = structuredClone(DEFAULTS.construction);
+        selected_filters.construction.selected_parts = structuredClone(DEFAULTS.construction.selected_parts);
         for (const target_sibling of parent.children) {
             const sibling_id = get_class_includes(target_sibling.classList, "construction-id-", 0);
             if (sibling_id) {
-                selected_filters.construction.push(sibling_id);
+                selected_filters.construction.selected_parts.push(sibling_id);
             }
         }
     });
