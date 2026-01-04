@@ -131,7 +131,7 @@ def recursive_cjkvi_parts_parser(cjkvi_dict, composition_parts):
     return parts_collector
 
 def parse_cjkvi():
-    unicode_description_characters = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿"
+    unicode_description_characters = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯"
     circled_number_characters = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
 
     stroke_counts = parse_ucs_strokes()
