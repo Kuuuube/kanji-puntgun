@@ -467,6 +467,19 @@ def pack_voyager_svg_data():
 
     return voyager_dict
 
+def pack_construction_svg_data():
+    construction_dir = static_assets_dir + "construction_svgs"
+    construction_dict = {}
+    construction_svg_filenames = sorted(filter(lambda x: ".svg" in x, os.listdir(construction_dir)), key = lambda x: int(re.sub(r"\.svg", "", x)))
+    for construction_svg in construction_svg_filenames:
+        path = os.path.join(construction_dir, construction_svg)
+        if ".svg" in construction_svg:
+            svg_file = open(path).read()
+            construction_number = re.search(r"\d+(?=\.svg)", path)[0]
+            construction_dict[construction_number] = svg_file
+
+    return construction_dict
+
 def pack_info_files():
     components_info = open(static_assets_dir + "components_info.json").read()
     four_corner_info = open(static_assets_dir + "four_corner_info.json").read()
@@ -475,6 +488,7 @@ def pack_info_files():
     deroo_svg_data = json.dumps(pack_deroo_svg_data(), indent = 4, sort_keys = True)
     voyager_region_components_info = json.dumps(pack_voyager_region_components_info(), indent = 4, sort_keys = False)
     voyager_svg_data = json.dumps(pack_voyager_svg_data(), indent = 4, sort_keys = False)
+    construction_svg_data = json.dumps(pack_construction_svg_data(), indent = 4, sort_keys = False)
     orphaned_components_data = json.dumps(orphaned_components, indent = 4, ensure_ascii = False)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
@@ -486,6 +500,7 @@ def pack_info_files():
         packed_info.write("const DEROO_SVG_INFO = " + deroo_svg_data + "\n")
         packed_info.write("const VOYAGER_REGION_COMPONENTS_INFO = " + voyager_region_components_info + "\n")
         packed_info.write("const VOYAGER_SVG_INFO = " + voyager_svg_data + "\n")
+        packed_info.write("const CONSTRUCTION_SVG_INFO = " + construction_svg_data + "\n")
         packed_info.write("const ORPHANED_COMPONENTS_INFO = " + orphaned_components_data + "\n")
         # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
 
