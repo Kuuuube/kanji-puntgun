@@ -462,6 +462,15 @@ function prepare_decomposition() {
     });
 }
 
+function prepare_construction() {
+    const construction_select_container = document.querySelector("#construction-selection-container");
+    let construction_selection_html_string = "";
+    for (const [construction_id, construction_svg] of Object.entries(CONSTRUCTION_SVG_INFO)) {
+        construction_selection_html_string += "<span class=\"table-item icon-wrapper construction-id-" + construction_id + "\">" + construction_svg + "</span>";
+    }
+    construction_select_container.innerHTML = construction_selection_html_string;
+}
+
 function gray_out_unavailable(remaining) {
     const radical_selection = document.querySelector("#radicals-selection");
     const radical_table_items = radical_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
@@ -1064,6 +1073,7 @@ prepare_partial_word();
 prepare_stroke_count();
 prepare_composition();
 prepare_decomposition();
+prepare_construction();
 prepare_jisho_search();
 prepare_header_results_selector();
 prepare_no_select();
