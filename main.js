@@ -975,6 +975,16 @@ function prepare_reset_buttons() {
     }
     document.querySelector("#decomposition-reset").addEventListener("click", reset_decomposition);
 
+    function reset_construction(find = true) {
+        document.querySelector("#construction-items-container").innerHTML = "";
+        const construction_match_type_select = document.querySelector("#construction-match-type-select");
+        for (const radio_button of construction_match_type_select.querySelectorAll("input[name=\"construction-match-type\"]")) {
+            radio_button.checked = radio_button.value === DEFAULTS.construction.match_type;
+        }
+        selected_filters.construction = structuredClone(DEFAULTS.construction);
+    }
+    document.querySelector("#construction-reset").addEventListener("click", reset_construction);
+
     function reset_all() {
         reset_radicals(false);
         reset_components(false);
@@ -986,6 +996,7 @@ function prepare_reset_buttons() {
         reset_stroke_count(false);
         reset_composition(false);
         reset_decomposition(); // resetting decomposition doesn't change any kanji finding data
+        reset_construction(false);
         find_possible_kanji();
     }
     document.querySelector("#reset-all").addEventListener("click", reset_all);
