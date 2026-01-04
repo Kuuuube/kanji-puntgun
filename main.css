@@ -386,7 +386,7 @@ hr, .vertical-separator {
     align-content: center;
 }
 
-.table-item:not(.stroke-count), [id*=four-corners-], #skip-part-1 {
+.table-item:not(.stroke-count), [id*=four-corners-] {
     cursor: pointer;
     transition: background-color var(--fast-fade), filter var(--fast-fade);
 }
