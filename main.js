@@ -1205,7 +1205,6 @@ function prepare_docs_kanji_search() {
             }
 
             if (search_kanji_info.cjkvi_constructions) {
-                console.log(search_kanji_info.cjkvi_constructions);
                 const construction_parts = search_kanji_info.cjkvi_constructions.map(
                     (construction) => {
                         if (construction.length === 0) {
