@@ -25,6 +25,7 @@ let kanji_results_ellipsis_char = "⋯";
 let kanji_results_index = 0;
 
 let global_valid_cjkvi_components = new Set([]);
+let global_valid_cjkvi_constructions = new Set([]);
 
 function prevent_double_triple_click_select(e) {
     if (e.detail > 1 && e.button === 0) {
@@ -468,6 +469,10 @@ function prepare_construction() {
     const construction_select_container = document.querySelector("#construction-selection-container");
     const construction_items_container = document.querySelector("#construction-items-container");
 
+    for (const [_, kanji_values] of Object.entries(KANJI_DATA)) {
+        kanji_values.cjkvi_constructions.forEach((x) => global_valid_cjkvi_constructions.add(x));
+    }
+
     for (const radio_button of construction_match_type_select.querySelectorAll("input[name=\"construction-match-type\"]")) {
         radio_button.addEventListener("change", (e) => {
             selected_filters.construction.match_type = e.target.value;
@@ -641,8 +646,11 @@ function gray_out_unavailable(remaining) {
                     break;
                 }
                 case "exact": {
-                    // shim since exact match data isnt available here
-                    found_match = true;
+                    for (const cjkvi_construction of global_valid_cjkvi_constructions) {
+                        if (cjkvi_construction === selected_construction_parts + construction_part) {
+                            found_match = true;
+                        }
+                    }
                     break;
                 }
                 case "starts": {
@@ -652,8 +660,10 @@ function gray_out_unavailable(remaining) {
                     break;
                 }
                 case "ends": {
-                    if (remaining_construction.endsWith(selected_construction_parts + construction_part)) {
-                        found_match = true;
+                    for (const cjkvi_construction of global_valid_cjkvi_constructions) {
+                        if (cjkvi_construction.endsWith(selected_construction_parts + construction_part)) {
+                            found_match = true;
+                        }
                     }
                     break;
                 }
