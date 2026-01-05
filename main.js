@@ -620,6 +620,50 @@ function gray_out_unavailable(remaining) {
             decomposition_table_item.classList.add(DISABLED_CLASS);
         }
     }
+
+    const construction_select_container = document.querySelector("#construction-selection-container");
+    const construction_table_items = construction_select_container.querySelectorAll("." + TABLE_ITEM_CLASS);
+    const selected_construction_parts = selected_filters.construction.selected_parts.map((x) => CONSTRUCTION_INFO[x]).join("");
+    for (const construction_table_item of construction_table_items) {
+        construction_table_item.classList.remove(DISABLED_CLASS);
+        if (selected_filters.construction.selected_parts.length === 0) { continue; }
+
+        const construction_part_id = get_class_includes(construction_table_item.classList, "construction-id-", 0);
+        const construction_part = CONSTRUCTION_INFO[construction_part_id];
+        let found_match = false;
+        for (const remaining_construction of remaining.cjkvi_constructions) {
+            if ((construction_part_id === "0" && selected_filters.construction.selected_parts.length > 0) || (selected_filters.construction.selected_parts.length > 0 && selected_filters.construction.selected_parts[0] === "0")) { break; }
+            switch (selected_filters.construction.match_type) {
+                case "contains": {
+                    if (remaining_construction.includes(selected_construction_parts + construction_part)) {
+                        found_match = true;
+                    }
+                    break;
+                }
+                case "exact": {
+                    // shim since exact match data isnt available here
+                    found_match = true;
+                    break;
+                }
+                case "starts": {
+                    if (remaining_construction.startsWith(selected_construction_parts + construction_part)) {
+                        found_match = true;
+                    }
+                    break;
+                }
+                case "ends": {
+                    if (remaining_construction.endsWith(selected_construction_parts + construction_part)) {
+                        found_match = true;
+                    }
+                    break;
+                }
+            }
+        }
+        if (!found_match) {
+            construction_table_item.classList.add(DISABLED_CLASS);
+        }
+    }
+
 }
 
 function find_possible_kanji() {
