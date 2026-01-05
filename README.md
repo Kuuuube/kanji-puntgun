@@ -50,7 +50,6 @@ Kanji that dont appear to fit in any region are likely a part of the solid regio
 
 ([More Information](https://christopherball.github.io/linguistics/kanjiVoyager/))
 
-
 ### Partial Word
 
 Narrows down the search to kanji present in possible words.
@@ -74,3 +73,22 @@ Input any character into the Decomposition input box then select one of the deco
 The first row shows primary decomposition results and the second row shows secondary and further results. Primary results will typically be characters with a higher stroke count.
 
 Selected parts will appear under Composition. To remove a part, click or tap it under Composition.
+
+### Construction
+
+Construction filters kanji by the splits between composition components. The construction of a character goes top left to bottom right. Some characters have multiple different possible constructions.
+
+To add a construction part, click or tap the list of parts. To remove a part, click or tap the highlighted part under the list of parts.
+
+If a character cannot be split into any construction parts, the first construction part is used. No other parts can be selected while this part is.
+
+To get a feel for how characters are split, try searching some of these using the kanji search: `化` `弼` `囜` `巫` `凷` `冏` `釁` `慶` `瘝`.
+
+Four methods for matching construction parts are provided:
+
+|          |                                                                                                                                     |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------|
+| Contains | Matches the selected parts anywhere in a character, the character may have more construction parts.                                 |
+| Exact    | Requires an exact full match between the selected parts and the character's construction.                                           |
+| Start    | Matches the selected parts to the start of the character's construction, the character may have more construction parts at the end. |
+| End      | Matches the selected parts to the end of the character's construction, the character may have more construction parts at the start. |
