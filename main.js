@@ -764,10 +764,7 @@ function find_possible_kanji() {
 
     function check_construction_parts(cjkvi_constructions) {
         if (selected_filters.construction.selected_parts.length === 0) { return true; }
-        let selected_parts = "";
-        for (const part of selected_filters.construction.selected_parts) {
-            selected_parts += CONSTRUCTION_INFO[part];
-        }
+        let selected_parts = selected_filters.construction.selected_parts.map((x) => CONSTRUCTION_INFO[x]).join("");
         let match_type = selected_filters.construction.match_type;
         if (selected_parts.length === 0) {
             match_type = "exact";
