@@ -1139,6 +1139,7 @@ function prepare_docs_kanji_search() {
     const search_results_voyager = document.querySelector("#docs-kanji-search-voyager");
     const search_results_stroke_count = document.querySelector("#docs-kanji-search-stroke-count");
     const search_results_decomposition = document.querySelector("#docs-kanji-search-decomposition");
+    const search_results_construction = document.querySelector("#docs-kanji-search-construction");
 
     const deroo_top_values = Object.values(DEROO_SVG_INFO.top).reduce((acc, x) => {return {...acc, ...x}}, {});
     const deroo_bottom_values = Object.values(DEROO_SVG_INFO.bottom).reduce((acc, x) => {return {...acc, ...x}}, {});
@@ -1158,6 +1159,7 @@ function prepare_docs_kanji_search() {
             search_results_voyager.innerHTML = not_found_text;
             search_results_stroke_count.innerHTML = not_found_text;
             search_results_decomposition.innerHTML = not_found_text;
+            search_results_construction.innerHTML = not_found_text;
 
             if (search_kanji_info.radical) {
                 const radical_characters = search_kanji_info.radical.characters.map((x) => x.character + "(" + x.stroke_count + ")");
@@ -1200,6 +1202,19 @@ function prepare_docs_kanji_search() {
                     components_string += "<br>" + search_kanji_info.cjkvi_components_recursive.join(", ");
                 }
                 search_results_decomposition.innerHTML = components_string;
+            }
+
+            if (search_kanji_info.cjkvi_constructions) {
+                console.log(search_kanji_info.cjkvi_constructions);
+                const construction_parts = search_kanji_info.cjkvi_constructions.map(
+                    (construction) => {
+                        if (construction.length === 0) {
+                            return CONSTRUCTION_SVG_INFO["0"];
+                        }
+                        return [...construction].map((construction_character) => CONSTRUCTION_SVG_INFO[CONSTRUCTION_INFO[construction_character]]).join("")
+                    }
+                );
+                search_results_construction.innerHTML = construction_parts.join(", ");
             }
 
             if (search_kanji_info.stroke_count) {
