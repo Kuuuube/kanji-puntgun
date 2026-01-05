@@ -45,6 +45,11 @@ dataset_info = {
         "jouyou_count": 0,
         "jinmeiyou_count": 0,
     },
+    "cjkvi_constructions": {
+        "count": 0,
+        "jouyou_count": 0,
+        "jinmeiyou_count": 0,
+    },
     "deroo": {
         "count": 0,
         "jouyou_count": 0,
@@ -383,7 +388,7 @@ def parse_kanjidic_data():
     kanji_lists = json.loads(open(static_assets_dir + "kanji_lists.json", encoding = "utf8").read())
     for kanji, kanji_info in kanji_data.items():
         for key, value in kanji_info.items():
-            if key in ["cjkvi_components_recursive", "cjkvi_constructions"]:
+            if key in ["cjkvi_components_recursive"]:
                 continue
             dataset_info[key]["count"] += 1
             if kanji in kanji_lists["jouyou"]:
