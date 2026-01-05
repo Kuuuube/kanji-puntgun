@@ -1083,6 +1083,7 @@ function prepare_reset_buttons() {
             radio_button.checked = radio_button.value === DEFAULTS.construction.match_type;
         }
         selected_filters.construction = structuredClone(DEFAULTS.construction);
+        if (find) { find_possible_kanji() };
     }
     document.querySelector("#construction-reset").addEventListener("click", reset_construction);
 
