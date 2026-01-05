@@ -629,10 +629,15 @@ function gray_out_unavailable(remaining) {
 
         const construction_part_id = get_class_includes(construction_table_item.classList, "construction-id-", 0);
         const construction_part = CONSTRUCTION_INFO[construction_part_id];
+
         let found_match = false;
+        let match_type = selected_filters.construction.match_type;
+        if (construction_part_id === "0") {
+            match_type = "exact";
+        }
         for (const remaining_construction of remaining.cjkvi_constructions) {
             if ((construction_part_id === "0" && selected_filters.construction.selected_parts.length > 0) || (selected_filters.construction.selected_parts.length > 0 && selected_filters.construction.selected_parts[0] === "0")) { break; }
-            switch (selected_filters.construction.match_type) {
+            switch (match_type) {
                 case "contains": {
                     if (remaining_construction.includes(selected_construction_parts + construction_part)) {
                         found_match = true;
