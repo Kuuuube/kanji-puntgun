@@ -1147,7 +1147,7 @@ function prepare_docs_kanji_search() {
     document.querySelector("#docs-kanji-search").addEventListener("input", (e) => {
         const search_target = [...e.target.value].slice(0, 1)[0]; // search 1 character maximum
         const search_kanji_info = KANJI_DATA[search_target];
-        e.target.value.length > 1 || (!search_kanji_info && e.target.value.length !== 0) ? e.target.classList.add("invalid-input") : e.target.classList.remove("invalid-input");
+        [...e.target.value].length > 1 || (!search_kanji_info && e.target.value.length !== 0) ? e.target.classList.add("invalid-input") : e.target.classList.remove("invalid-input");
         search_results_element.classList.add("hidden");
         if (search_kanji_info) {
             let not_found_text = "Not Found";
