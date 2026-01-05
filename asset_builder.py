@@ -489,6 +489,7 @@ def pack_info_files():
     voyager_region_components_info = json.dumps(pack_voyager_region_components_info(), indent = 4, sort_keys = False)
     voyager_svg_data = json.dumps(pack_voyager_svg_data(), indent = 4, sort_keys = False)
     construction_svg_data = json.dumps(pack_construction_svg_data(), indent = 4, sort_keys = False)
+    construction_info = open(static_assets_dir + "construction_info.json").read()
     orphaned_components_data = json.dumps(orphaned_components, indent = 4, ensure_ascii = False)
     # cjkvi_components_info_string = json.dumps(cjkvi_components_info, ensure_ascii = False, indent = 4)
 
@@ -501,6 +502,7 @@ def pack_info_files():
         packed_info.write("const VOYAGER_REGION_COMPONENTS_INFO = " + voyager_region_components_info + "\n")
         packed_info.write("const VOYAGER_SVG_INFO = " + voyager_svg_data + "\n")
         packed_info.write("const CONSTRUCTION_SVG_INFO = " + construction_svg_data + "\n")
+        packed_info.write("const CONSTRUCTION_INFO = " + construction_info + "\n")
         packed_info.write("const ORPHANED_COMPONENTS_INFO = " + orphaned_components_data + "\n")
         # packed_info.write("const CJKVI_COMPONENTS_INFO = " + cjkvi_components_info_string + "\n")
 
