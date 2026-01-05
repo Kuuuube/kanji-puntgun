@@ -378,6 +378,11 @@ def parse_kanjidic_data():
         for component_kanji in component_info["kanji"]:
             kanji_data[component_kanji]["components"].append(component)
 
+    components_patch_dict = json.loads(open(static_assets_dir + "components_patch.json").read())
+    for kanji, components in components_patch_dict.items():
+        for component in components:
+            kanji_data[kanji]["components"].append(component)
+
     for kanji in kanji_data:
         if len(kanji_data[kanji]["components"]) == 0:
             del kanji_data[kanji]["components"]
