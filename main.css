@@ -554,6 +554,11 @@ a:hover {
     position: relative;
 }
 
+.construction-example-icon {
+    top: .25em;
+    position: relative;
+}
+
 #four-corners-top-right > .four-corner-id-5,
 #four-corners-top-right > .four-corner-id-7 {
     transform: scaleX(-1);
@@ -661,6 +666,17 @@ code {
 
 .hidden {
     display: none !important;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border-color: var(--bs-gray-600);
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 1em;
 }
 
 @media (min-width: 600px) {
