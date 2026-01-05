@@ -1213,7 +1213,7 @@ function prepare_docs_kanji_search() {
                         return [...construction].map((construction_character) => CONSTRUCTION_SVG_INFO[CONSTRUCTION_INFO[construction_character]]).join("")
                     }
                 );
-                search_results_construction.innerHTML = construction_parts.join(", ");
+                search_results_construction.innerHTML = search_kanji_info.cjkvi_raw_constructions.join(", ") + "<br>" + construction_parts.join(", ");
             }
 
             if (search_kanji_info.stroke_count) {

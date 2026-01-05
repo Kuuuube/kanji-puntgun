@@ -158,6 +158,7 @@ def parse_cjkvi():
         cjkvi_dict[character] = {
             "unicode": unicode_id,
             "raw_compositions": compositions,
+            "mostly_raw_compositions": dict([]),
             "composition_parts": dict([]),
             "recursive_composition_parts": dict([]),
             "composition_constructions": dict([]),
@@ -173,6 +174,8 @@ def parse_cjkvi():
                 cjkvi_dict[character]["tag"] = tag
             working_composition = re.sub(r"\[.*?\]", "", working_composition)
 
+            cjkvi_dict[character]["mostly_raw_compositions"][working_composition] = None
+
             composition_parts_only = re.sub("[" + unicode_description_characters + circled_number_characters + "]", "", working_composition)
             composition_construction_only = re.sub("[^" + unicode_description_characters + "]", "", working_composition)
             for composition_part in composition_parts_only:
@@ -185,6 +188,7 @@ def parse_cjkvi():
 
     for character, value in cjkvi_dict.items():
         cjkvi_dict[character]["composition_parts"] = list(cjkvi_dict[character]["composition_parts"])
+        cjkvi_dict[character]["mostly_raw_compositions"] = list(cjkvi_dict[character]["mostly_raw_compositions"])
         cjkvi_dict[character]["composition_constructions"] = list(cjkvi_dict[character]["composition_constructions"])
         for recursive_composition_part in recursive_cjkvi_parts_parser(cjkvi_dict, cjkvi_dict[character]["composition_parts"]):
             if recursive_composition_part in cjkvi_dict[character]["composition_parts"]:
@@ -260,7 +264,7 @@ def parse_kanjidic_data():
         "cjkvi_components": [],
         "cjkvi_components_recursive": [],
         "cjkvi_constructions": [],
-        # "cjkvi_raw_constructions": [],
+        "cjkvi_raw_constructions": [],
         "deroo": {
             "top": -1,
             "bottom": -1,
@@ -354,11 +358,11 @@ def parse_kanjidic_data():
             cjkvi_composition = cjkvi_data[character]["composition_parts"]
             cjkvi_composition_recursive = cjkvi_data[character]["recursive_composition_parts"]
             cjkvi_constructions = cjkvi_data[character]["composition_constructions"]
-            # cjkvi_raw_constructions = cjkvi_data[character]["raw_compositions"]
+            cjkvi_raw_constructions = cjkvi_data[character]["mostly_raw_compositions"]
             kanji_data[character]["cjkvi_components"] = cjkvi_composition
             kanji_data[character]["cjkvi_components_recursive"] = cjkvi_composition_recursive
             kanji_data[character]["cjkvi_constructions"] = cjkvi_constructions
-            # kanji_data[character]["cjkvi_raw_constructions"] = cjkvi_raw_constructions
+            kanji_data[character]["cjkvi_raw_constructions"] = cjkvi_raw_constructions
             for valid_cjkvi_component in cjkvi_composition + cjkvi_composition_recursive:
                 valid_cjkvi_components.add(valid_cjkvi_component)
         else:
