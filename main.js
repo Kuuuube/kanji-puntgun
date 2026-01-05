@@ -906,10 +906,11 @@ function find_possible_kanji() {
             kanji_values.cjkvi_constructions.forEach((x) => remaining.cjkvi_constructions.add(x));
         }
 
-        global_valid_cjkvi_components = remaining.cjkvi_components;
 
         possible_kanji.push(kanji);
     }
+
+    global_valid_cjkvi_components = remaining.cjkvi_components;
 
     gray_out_unavailable(remaining);
 
