@@ -25,7 +25,6 @@ let kanji_results_ellipsis_char = "⋯";
 let kanji_results_index = 0;
 
 let global_valid_cjkvi_components = new Set([]);
-let global_valid_cjkvi_constructions = new Set([]);
 
 function prevent_double_triple_click_select(e) {
     if (e.detail > 1 && e.button === 0) {
@@ -469,10 +468,6 @@ function prepare_construction() {
     const construction_select_container = document.querySelector("#construction-selection-container");
     const construction_items_container = document.querySelector("#construction-items-container");
 
-    for (const [_, kanji_values] of Object.entries(KANJI_DATA)) {
-        kanji_values.cjkvi_constructions.forEach((x) => global_valid_cjkvi_constructions.add(x));
-    }
-
     for (const radio_button of construction_match_type_select.querySelectorAll("input[name=\"construction-match-type\"]")) {
         radio_button.addEventListener("change", (e) => {
             selected_filters.construction.match_type = e.target.value;
@@ -631,7 +626,6 @@ function gray_out_unavailable(remaining) {
     const selected_construction_parts = selected_filters.construction.selected_parts.map((x) => CONSTRUCTION_INFO[x]).join("");
     for (const construction_table_item of construction_table_items) {
         construction_table_item.classList.remove(DISABLED_CLASS);
-        if (selected_filters.construction.selected_parts.length === 0) { continue; }
 
         const construction_part_id = get_class_includes(construction_table_item.classList, "construction-id-", 0);
         const construction_part = CONSTRUCTION_INFO[construction_part_id];
@@ -646,10 +640,8 @@ function gray_out_unavailable(remaining) {
                     break;
                 }
                 case "exact": {
-                    for (const cjkvi_construction of global_valid_cjkvi_constructions) {
-                        if (cjkvi_construction === selected_construction_parts + construction_part) {
-                            found_match = true;
-                        }
+                    if (remaining_construction === selected_construction_parts + construction_part) {
+                        found_match = true;
                     }
                     break;
                 }
@@ -660,10 +652,8 @@ function gray_out_unavailable(remaining) {
                     break;
                 }
                 case "ends": {
-                    for (const cjkvi_construction of global_valid_cjkvi_constructions) {
-                        if (cjkvi_construction.endsWith(selected_construction_parts + construction_part)) {
-                            found_match = true;
-                        }
+                    if (remaining_construction.endsWith(selected_construction_parts + construction_part)) {
+                        found_match = true;
                     }
                     break;
                 }
@@ -855,6 +845,8 @@ function find_possible_kanji() {
         return false;
     }
 
+    let valid_cjkvi_constructions = new Set([]);
+
     for (const [kanji, kanji_values] of Object.entries(KANJI_DATA)) {
         if (!check_selected_radical(kanji_values.radical.id)) { continue; }
         if (!check_selected_components(kanji_values.components)) { continue; }
@@ -865,6 +857,12 @@ function find_possible_kanji() {
         if (!check_stroke_count(kanji_values.stroke_count)) { continue; }
         if (!check_word_parts_kanji(kanji)) { continue; }
         if (!check_composition_parts(kanji, kanji_values.cjkvi_components, kanji_values.cjkvi_components_recursive)) { continue; }
+
+        // must record constructions before filtering constructions out
+        // construction must be the very last filter step
+        if (kanji_values.cjkvi_constructions) {
+            kanji_values.cjkvi_constructions.forEach((x) => valid_cjkvi_constructions.add(x));
+        }
         if (!check_construction_parts(kanji_values.cjkvi_constructions)) { continue; }
 
         remaining.radicals.add(kanji_values.radical.id);
@@ -902,13 +900,11 @@ function find_possible_kanji() {
             kanji_values.cjkvi_components_recursive.forEach((x) => remaining.cjkvi_components.add(x));
             remaining.cjkvi_components.add(kanji); // kanji can be included in the decomposition so they must be checked for
         }
-        if (kanji_values.cjkvi_constructions) {
-            kanji_values.cjkvi_constructions.forEach((x) => remaining.cjkvi_constructions.add(x));
-        }
-
 
         possible_kanji.push(kanji);
     }
+
+    remaining.cjkvi_constructions = valid_cjkvi_constructions;
 
     global_valid_cjkvi_components = remaining.cjkvi_components;
 
