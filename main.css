@@ -650,6 +650,11 @@ code {
     margin-bottom: 0;
 }
 
+.docs-summary-button {
+    cursor: pointer;
+    user-select: none;
+}
+
 .kanji-search-header {
     margin-bottom: 0;
     margin-top: 1em;
