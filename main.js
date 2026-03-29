@@ -179,7 +179,12 @@ function prepare_four_corners_selection() {
         for (let j = 0; j < 10; j++) {
             let four_corners_item = document.createElement('span');
             four_corners_item.className = TABLE_ITEM_CLASS + " four-corner-id-" + j;
-            four_corners_item.textContent = FOUR_CORNER_INFO[j].character;
+
+            // disallow popup dictionaries such as Yomitan from scanning characters
+            // it can be very annoying for mobile users if it is allowed to scan
+            let shadow = four_corners_item.attachShadow({ mode: 'closed' });
+            shadow.innerHTML = FOUR_CORNER_INFO[j].character;
+
             four_corners_element_children.push(four_corners_item);
         }
         four_corners_element.replaceChildren(...four_corners_element_children);
