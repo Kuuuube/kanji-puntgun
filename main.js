@@ -116,7 +116,11 @@ function prepare_radicals_selection() {
 
         let radical_character_element = document.createElement("span");
         radical_character_element.className = TABLE_ITEM_CLASS + " radical-id-" + radical_character.radical_id;
-        radical_character_element.textContent = radical_character.character;
+
+        // disallow popup dictionaries such as Yomitan from scanning characters
+        // it can be very annoying for mobile users if it is allowed to scan
+        let shadow = radical_character_element.attachShadow({ mode: 'closed' });
+        shadow.innerHTML = radical_character.character;
 
         current_radical_group_element.append(radical_character_element);
     }
