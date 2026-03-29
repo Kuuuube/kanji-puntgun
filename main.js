@@ -91,7 +91,8 @@ function prepare_radicals_selection() {
     const radicals_selection = document.querySelector("#radicals-selection");
 
     let current_stroke_count = 0;
-    let radicals_selection_innerHTML_string = "";
+    let radicals_selection_inner_elements = [];
+    let current_radical_group_element = document.createElement("div");
     let radical_characters = RADICALS_INFO;
     radical_characters.sort((a, b) => a.stroke_count - b.stroke_count);
 
@@ -99,13 +100,27 @@ function prepare_radicals_selection() {
         if (radical_character.stroke_count !== current_stroke_count) {
             current_stroke_count = radical_character.stroke_count;
             if (radical_character.stroke_count !== 0) {
-                radicals_selection_innerHTML_string += "</div><div id=\"radical-count-" + current_stroke_count + "\"><span class=\"stroke-count " + TABLE_ITEM_CLASS + "\">" + current_stroke_count + "</span>";
+                current_radical_group_element = document.createElement("div");
+                current_radical_group_element.id = "radical-count-" + current_stroke_count;
+
+                let stroke_count_label = document.createElement("span");
+                stroke_count_label.className = "stroke-count " + TABLE_ITEM_CLASS;
+                stroke_count_label.textContent = current_stroke_count;
+
+                current_radical_group_element.append(stroke_count_label);
+
+                // magic ref that gets mutated as `current_radical_group_element` even after being pushed into this array
+                radicals_selection_inner_elements.push(current_radical_group_element);
             }
         }
-        radicals_selection_innerHTML_string += "<span class=\"" + TABLE_ITEM_CLASS + " radical-id-" + radical_character.radical_id + "\">" + radical_character.character + "</span>";
+
+        let radical_character_element = document.createElement("span");
+        radical_character_element.className = TABLE_ITEM_CLASS + " radical-id-" + radical_character.radical_id;
+        radical_character_element.textContent = radical_character.character;
+
+        current_radical_group_element.append(radical_character_element);
     }
-    radicals_selection_innerHTML_string += "</span>"
-    radicals_selection.innerHTML = radicals_selection_innerHTML_string;
+    radicals_selection.replaceChildren(...radicals_selection_inner_elements);
 
     radicals_selection.addEventListener("click", (e) => {
         e.preventDefault();
