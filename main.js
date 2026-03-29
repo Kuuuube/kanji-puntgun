@@ -77,8 +77,12 @@ function prepare_components_selection() {
         }
 
         let component_character_element = document.createElement("span");
-        component_character_element.className = TABLE_ITEM_CLASS + " component-align-" + component_character.align;
-        component_character_element.textContent = component_character.display_component;
+        component_character_element.className = TABLE_ITEM_CLASS + " component-align-" + component_character.align + " display-component-" + component_character.display_component;
+
+        // disallow popup dictionaries such as Yomitan from scanning characters
+        // it can be very annoying for mobile users if it is allowed to scan
+        let shadow = component_character_element.attachShadow({ mode: 'closed' });
+        shadow.innerHTML = component_character.display_component;
 
         current_compenent_group_element.append(component_character_element);
     }
@@ -88,7 +92,7 @@ function prepare_components_selection() {
         e.preventDefault();
         e.stopImmediatePropagation();
 
-        const component = e.target.textContent;
+        const component = get_class_includes(e.target.classList, "display-component-", "");
         if ([...component].length > 1) { return; }
         if (selected_filters.components.indexOf(component) == -1) {
             selected_filters.components.push(component);
@@ -558,7 +562,7 @@ function gray_out_unavailable(remaining) {
     const components_table_items = components_selection.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const components_table_item of components_table_items) {
         if (components_table_item.classList.contains("stroke-count")) { continue; }
-        let component = components_table_item.textContent;
+        let component = get_class_includes(components_table_item.classList, "display-component-", "");
         components_table_item.classList.remove(DISABLED_CLASS);
         if (!remaining.components.has(component)) {
             components_table_item.classList.add(DISABLED_CLASS);
