@@ -175,9 +175,15 @@ function prepare_four_corners_selection() {
     const four_corners_ids = ["four-corners-top-left", "four-corners-top-right", "four-corners-bottom-left", "four-corners-bottom-right", "four-corners-extra"];
     for (let i = 0; i < four_corners_ids.length; i++) {
         const four_corners_element = document.querySelector("#" + four_corners_ids[i]);
+        let four_corners_element_children = [];
         for (let j = 0; j < 10; j++) {
-            four_corners_element.innerHTML += "<span class=\"" + TABLE_ITEM_CLASS + " four-corner-id-" + j + "\">" + FOUR_CORNER_INFO[j].character + "</span>";
+            let four_corners_item = document.createElement('span');
+            four_corners_item.className = TABLE_ITEM_CLASS + " four-corner-id-" + j;
+            four_corners_item.textContent = FOUR_CORNER_INFO[j].character;
+            four_corners_element_children.push(four_corners_item);
         }
+        four_corners_element.replaceChildren(...four_corners_element_children);
+
         four_corners_element.addEventListener("click", (e) => {
             let corner_selection = get_class_includes(e.target.classList, "four-corner-id-", -1);
             if (corner_selection === -1) { return; }
