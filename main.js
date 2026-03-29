@@ -54,20 +54,35 @@ function prepare_components_selection() {
     const components_selection = document.querySelector("#components-selection");
 
     let current_stroke_count = 0;
-    let components_selection_innerHTML_string = "";
+    let compenents_selection_inner_elements = [];
+    let current_compenent_group_element = document.createElement("div");
     let component_characters = COMPONENTS_INFO;
     component_characters.sort((a, b) => a.stroke_count - b.stroke_count);
     for (const component_character of component_characters) {
         if (component_character.stroke_count !== current_stroke_count) {
             current_stroke_count = component_character.stroke_count;
             if (component_character.stroke_count !== 0) {
-                components_selection_innerHTML_string += "</div><div id=\"component-count-" + current_stroke_count + "\"><span class=\"stroke-count " + TABLE_ITEM_CLASS + "\">" + current_stroke_count + "</span>";
+                current_compenent_group_element = document.createElement("div");
+                current_compenent_group_element.id = "component-count-" + current_stroke_count;
+
+                let stroke_count_label = document.createElement("span");
+                stroke_count_label.className = "stroke-count " + TABLE_ITEM_CLASS;
+                stroke_count_label.textContent = current_stroke_count;
+
+                current_compenent_group_element.append(stroke_count_label);
+
+                // magic ref that gets mutated as `current_compenent_group_element` even after being pushed into this array
+                compenents_selection_inner_elements.push(current_compenent_group_element);
             }
         }
-        components_selection_innerHTML_string += "<span class=\"" + TABLE_ITEM_CLASS + " component-align-" + component_character.align + "\">" + component_character.display_component + "</span>";
+
+        let component_character_element = document.createElement("span");
+        component_character_element.className = TABLE_ITEM_CLASS + " component-align-" + component_character.align;
+        component_character_element.textContent = component_character.display_component;
+
+        current_compenent_group_element.append(component_character_element);
     }
-    components_selection_innerHTML_string += "</span>"
-    components_selection.innerHTML = components_selection_innerHTML_string;
+    components_selection.replaceChildren(...compenents_selection_inner_elements);
 
     components_selection.addEventListener("click", (e) => {
         e.preventDefault();
