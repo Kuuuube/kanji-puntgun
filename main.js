@@ -92,8 +92,8 @@ function prepare_components_selection() {
         e.preventDefault();
         e.stopImmediatePropagation();
 
-        const component = get_class_includes(e.target.classList, "display-component-", "");
-        if ([...component].length > 1) { return; }
+        const component = get_class_includes(e.target.classList, "display-component-", null);
+        if (!component || [...component].length > 1) { return; }
         if (selected_filters.components.indexOf(component) == -1) {
             selected_filters.components.push(component);
             e.target.classList.add(SELECTED_CLASS);
