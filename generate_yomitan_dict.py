@@ -8,7 +8,43 @@ import asset_builder
 
 kanji_data_json = json.loads(open(asset_builder.generated_assets_dir + "kanji_data.json").read())
 
+tags = [
+    {
+        "key": "radical",
+        "name": "Radical",
+    },
+    {
+        "key": "components",
+        "name": "Components",
+    },
+    {
+        "key": "four_corner",
+        "name": "Four Corner",
+    },
+    {
+        "key": "skip",
+        "name": "SKIP Code",
+    },
+    {
+        "key": "deroo",
+        "name": "De Roo",
+    },
+    {
+        "key": "stroke_count",
+        "name": "Stroke Count",
+    },
+    {
+        "key": "cjkvi_components",
+        "name": "Decomposition",
+    },
+    {
+        "key": "cjkvi_components_recursive",
+        "name": "Decomposition Secondary",
+    },
+]
+
 output_kanji_bank = []
+output_tag_bank = [[x["key"], "class", i, x["name"], 0] for i, x in enumerate(tags)]
 
 for kanji, kanji_values in kanji_data_json.items():
     output_kanji_bank_entry = [
@@ -37,3 +73,6 @@ with zipfile.ZipFile("./yomitan/kanji_puntgun_dict.zip", "w") as dict_zip:
 
     kanji_bank = json.dumps(output_kanji_bank, ensure_ascii = False, indent = 4)
     dict_zip.writestr("kanji_bank_1.json", kanji_bank)
+
+    tag_bank = json.dumps(output_tag_bank, ensure_ascii = False, indent = 4)
+    dict_zip.writestr("tag_bank_1.json", tag_bank)
