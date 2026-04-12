@@ -72,7 +72,7 @@ for kanji, kanji_values in kanji_data_json.items():
             "cjkvi_components_recursive": "".join(kanji_values["cjkvi_components_recursive"]) if "cjkvi_components_recursive" in kanji_values else "",
             "deroo": "".join(kanji_values["deroo"].values()) if "deroo" in kanji_values else "",
             "four_corner": "".join(kanji_values["four_corner"].values()) if "four_corner" in kanji_values else "",
-            "skip": "".join(list(map(str, kanji_values["skip"].values()))) if "skip" in kanji_values else "",
+            "skip": ", ".join(list(map(str, kanji_values["skip"].values()))) if "skip" in kanji_values else "",
             "radical": str(kanji_values["radical"]["id"]) + "(" + "".join([element["character"] + ")" for element in kanji_values["radical"]["characters"]]) if "radical" in kanji_values else "",
             "voyager": ", ".join(map(str, kanji_values["voyager"]["regions"])) + " : " + ", ".join(map(str, kanji_values["voyager"]["components"])) if "voyager" in kanji_values else "",
             "cjkvi_constructions": ", ".join(kanji_values["cjkvi_constructions"]) if "cjkvi_constructions" in kanji_values else "",
