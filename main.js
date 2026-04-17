@@ -999,13 +999,26 @@ function find_possible_kanji() {
 function render_kanji_results(kanji_list, ellide_end, ellide_start) {
     const result_item_class = TABLE_ITEM_CLASS;
     const kanji_results_element = document.querySelector("#kanji-results");
-    kanji_results_element.innerHTML = kanji_list.length ? "<span class=\"" + result_item_class + "\">" + kanji_list.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
-    if (ellide_end) {
-        kanji_results_element.innerHTML += "<span id=\"kanji-results-ellipsis-end\" class=\"" + result_item_class + "\">" + kanji_results_ellipsis_char + "</span>";
-    }
+    kanji_results_element.innerHTML = "";
+
     if (ellide_start) {
-        kanji_results_element.innerHTML = "<span id=\"kanji-results-ellipsis-start\" class=\"" + result_item_class + "\">" + kanji_results_ellipsis_char + "</span>" + kanji_results_element.innerHTML;
+        let elide_start_element = document.createElement("span");
+        elide_start_element.id = "kanji-results-ellipsis-start";
+        elide_start_element.className = result_item_class;
+        elide_start_element.textContent = kanji_results_ellipsis_char;
+        kanji_results_element.appendChild(elide_start_element);
     }
+
+    kanji_results_element.innerHTML += kanji_list.length ? "<span class=\"" + result_item_class + "\">" + kanji_list.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
+
+    if (ellide_end) {
+        let elide_end_element = document.createElement("span");
+        elide_end_element.id = "kanji-results-ellipsis-end";
+        elide_end_element.className = result_item_class;
+        elide_end_element.textContent = kanji_results_ellipsis_char;
+        kanji_results_element.appendChild(elide_end_element);
+    }
+
     kanji_results_element.scrollLeft = 0;
 }
 
