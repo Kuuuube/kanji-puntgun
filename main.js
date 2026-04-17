@@ -434,12 +434,12 @@ function prepare_composition() {
     const composition_selection_container = document.querySelector("#composition-selection-container");
     const decomposition_container = document.querySelector("#decomposition-container");
     decomposition_container.addEventListener("click", (e) => {
-        const composition_component = e.target.textContent;
-        if ([...composition_component].length > 1) { return; }
-        if (composition_selection_container.textContent.includes(composition_component)) { return; }
+        const composition_component = get_class_includes(e.target.classList, "decomposition-component-", null);
+        if (!composition_component || [...composition_component].length > 1) { return; }
+        if (selected_filters.composition_parts.includes(composition_component)) { return; }
 
         for (const table_item of decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS)) {
-            if (table_item.textContent === composition_component) {
+            if (get_class_includes(table_item.classList, "decomposition-component-", null) === composition_component) {
                 table_item.classList.add(DECOMPOSITION_DISABLED_CLASS);
             }
         }
@@ -462,7 +462,7 @@ function prepare_composition() {
         if (e.target.classList.contains(SELECTED_CLASS)) { e.target.remove(); }
         selected_filters.composition_parts.splice(selected_filters.composition_parts.indexOf(composition_component), 1);
         for (const table_item of decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS)) {
-            if (table_item.textContent === composition_component) {
+            if (get_class_includes(table_item.classList, "decomposition-component-", null) === composition_component) {
                 table_item.classList.remove(DECOMPOSITION_DISABLED_CLASS);
             }
         }
@@ -491,9 +491,10 @@ function prepare_decomposition() {
                 decomposition_data.push(decomposition_target);
             }
 
-            let decomposition_html_string = "<span class=\"flexbox flexbox-vertical flexbox-wrap flexbox-center\">";
+            let decomposition_html_container = document.createElement("span");
+            decomposition_html_container.className = "flexbox flexbox-vertical flexbox-wrap flexbox-center";
             function render_decomposition_row(decomposition_data) {
-                let html_string = "<span>";
+                let base_span = document.createElement("span");
                 for (const decomposition_item of decomposition_data) {
                     let current_item_classes = [TABLE_ITEM_CLASS];
                     if (selected_filters.composition_parts.includes(decomposition_item)) {
@@ -502,21 +503,37 @@ function prepare_decomposition() {
                     if (!global_valid_cjkvi_components.has(decomposition_item)) {
                         current_item_classes.push(DISABLED_CLASS);
                     }
-                    html_string += "<span class=\"" + current_item_classes.join(" ") + "\">" + decomposition_item + "</span>"
+                    let decomposition_item_span = document.createElement("span");
+                    decomposition_item_span.className = current_item_classes.join(" ") + " decomposition-component-" + decomposition_item;
+
+                    // disallow popup dictionaries such as Yomitan from scanning characters
+                    // it can be very annoying for mobile users if it is allowed to scan
+                    let shadow = decomposition_item_span.attachShadow({ mode: 'closed' });
+                    shadow.innerHTML = decomposition_item;
+
+                    base_span.appendChild(decomposition_item_span);
                 }
-                return html_string;
+                return base_span;
             }
             // primary composition items and target kanji itself
-            decomposition_html_string += render_decomposition_row(decomposition_data);
+            decomposition_html_container.appendChild(render_decomposition_row(decomposition_data));
 
             // secondary and further below components
-            decomposition_html_string += "</span>";
-            decomposition_html_string += render_decomposition_row(decomposition_data_recursive);
+            decomposition_html_container.appendChild(render_decomposition_row(decomposition_data_recursive));
 
-            decomposition_html_string += "</span></span>";
-            decomposition_table.push(decomposition_html_string);
+            decomposition_table.push(decomposition_html_container);
         }
-        document.querySelector("#decomposition-container").innerHTML = decomposition_table.join("<span class=\"vertical-separator\"></span>");
+
+        const decomposition_container = document.querySelector("#decomposition-container");
+        decomposition_container.innerHTML = "";
+        for (const [i, decomposition_html_container] of decomposition_table.entries()) {
+            if (i != 0) {
+                let vertical_separator = document.createElement("span");
+                vertical_separator.className = "vertical-separator";
+                decomposition_container.appendChild(vertical_separator);
+            }
+            decomposition_container.appendChild(decomposition_html_container);
+        }
     });
 }
 
@@ -671,7 +688,7 @@ function gray_out_unavailable(remaining) {
     const decomposition_container = document.querySelector("#decomposition-container");
     const decomposition_table_items = decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS);
     for (const decomposition_table_item of decomposition_table_items) {
-        const cjkvi_component = decomposition_table_item.textContent;
+        const cjkvi_component = get_class_includes(decomposition_table_item.classList, "decomposition-component-", null);
         decomposition_table_item.classList.remove(DISABLED_CLASS);
         if (!remaining.cjkvi_components.has(cjkvi_component)) {
             decomposition_table_item.classList.add(DISABLED_CLASS);
