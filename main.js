@@ -443,14 +443,22 @@ function prepare_composition() {
                 table_item.classList.add(DECOMPOSITION_DISABLED_CLASS);
             }
         }
-        document.querySelector("#composition-selection-container").innerHTML += "<span class=\"" + TABLE_ITEM_CLASS + " selected\">" + composition_component + "</span>";
+        let composition_table_item = document.createElement("span");
+        composition_table_item.className = TABLE_ITEM_CLASS + " selected composition-component-" + composition_component;
+
+        // disallow popup dictionaries such as Yomitan from scanning characters
+        // it can be very annoying for mobile users if it is allowed to scan
+        let shadow = composition_table_item.attachShadow({ mode: 'closed' });
+        shadow.innerHTML = composition_component;
+
+        document.querySelector("#composition-selection-container").appendChild(composition_table_item);
         selected_filters.composition_parts.push(composition_component);
 
         find_possible_kanji();
     });
     composition_selection_container.addEventListener("click", (e) => {
-        const composition_component = e.target.textContent;
-        if ([...composition_component].length > 1) { return; }
+        const composition_component = get_class_includes(e.target.classList, "composition-component-", null);
+        if (!composition_component || [...composition_component].length > 1) { return; }
         if (e.target.classList.contains(SELECTED_CLASS)) { e.target.remove(); }
         selected_filters.composition_parts.splice(selected_filters.composition_parts.indexOf(composition_component), 1);
         for (const table_item of decomposition_container.querySelectorAll("." + TABLE_ITEM_CLASS)) {
