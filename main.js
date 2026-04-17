@@ -1009,7 +1009,18 @@ function render_kanji_results(kanji_list, ellide_end, ellide_start) {
         kanji_results_element.appendChild(elide_start_element);
     }
 
-    kanji_results_element.innerHTML += kanji_list.length ? "<span class=\"" + result_item_class + "\">" + kanji_list.join("</span><span class=\"" + result_item_class + "\">") + "</span>" : "<span class=\"" + result_item_class + "\">&nbsp;</span>";
+    for (const kanji_result of kanji_list) {
+        let kanji_result_element = document.createElement("span");
+        kanji_result_element.className = result_item_class;
+        kanji_result_element.textContent = kanji_result;
+        kanji_results_element.appendChild(kanji_result_element);
+    }
+    if (kanji_list.length == 0) {
+        let placeholder_element = document.createElement("span");
+        placeholder_element.className = result_item_class;
+        placeholder_element.innerHTML = "&nbsp;";
+        kanji_results_element.appendChild(placeholder_element);
+    }
 
     if (ellide_end) {
         let elide_end_element = document.createElement("span");
