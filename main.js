@@ -1011,8 +1011,13 @@ function render_kanji_results(kanji_list, ellide_end, ellide_start) {
 
     for (const kanji_result of kanji_list) {
         let kanji_result_element = document.createElement("span");
-        kanji_result_element.className = result_item_class;
-        kanji_result_element.textContent = kanji_result;
+        kanji_result_element.className = result_item_class + " kanji-result-" + kanji_result;
+
+        // disallow popup dictionaries such as Yomitan from scanning characters
+        // it can be very annoying for mobile users if it is allowed to scan
+        let shadow = kanji_result_element.attachShadow({ mode: 'closed' });
+        shadow.innerHTML = kanji_result;
+
         kanji_results_element.appendChild(kanji_result_element);
     }
     if (kanji_list.length == 0) {
@@ -1049,7 +1054,8 @@ function prepare_header_results_selector() {
     const kanji_results = document.querySelector("#kanji-results");
     const header_input = document.querySelector("#header-input");
     kanji_results.addEventListener("click", (e) => {
-        if ([...e.target.textContent].length > 1) { return; }
+        const kanji_result = get_class_includes(e.target.classList, "kanji-result-", null);
+        if (!kanji_result || [...kanji_result].length > 1) { return; }
         if (e.target.classList.contains("no-click-select")) { return; }
         if (e.target.textContent === kanji_results_ellipsis_char) {
             if (e.target.id === "kanji-results-ellipsis-start") {
@@ -1062,7 +1068,7 @@ function prepare_header_results_selector() {
         }
 
         const cursor_index = header_input.selectionStart;
-        header_input.value = header_input.value.slice(0, cursor_index) + e.target.textContent + header_input.value.slice(cursor_index);
+        header_input.value = header_input.value.slice(0, cursor_index) + kanji_result + header_input.value.slice(cursor_index);
 
         e.target.classList.add("clicked");
         setTimeout(() => {
