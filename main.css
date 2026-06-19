@@ -457,6 +457,10 @@ hr, .vertical-separator {
     max-width: max(max(50vw, 50vh), 500px);
 }
 
+#header-input {
+    width: 100%;
+}
+
 #header-input-mirror {
     /* disallow header-input-mirror div from bullying header-input's width when overflowing */
     width: 0;
