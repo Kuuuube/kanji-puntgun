@@ -445,7 +445,6 @@ hr, .vertical-separator {
 }
 
 #header-input, #header-input-mirror {
-    width: 100%;
     flex: 1;
     line-height: 1.45;
     padding-top: 0;
@@ -456,6 +455,11 @@ hr, .vertical-separator {
     overflow-x: scroll;
     min-width: 300px;
     max-width: max(max(50vw, 50vh), 500px);
+}
+
+#header-input-mirror {
+    /* disallow header-input-mirror div from bullying header-input's width when overflowing */
+    width: 0;
 }
 
 #header-search-flexbox {
